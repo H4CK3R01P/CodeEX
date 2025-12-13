@@ -47,10 +47,13 @@ function AppContent() {
 
   const handleProfileSelect = (profileType: ProfileType) => {
     setUserData({ ...userData, profileType });
-    // Industry users go to industry type selection, others go to domain selection
+    // Route based on profile type
     if (profileType === 'industry') {
       setCurrentStep('industry-type');
+    } else if (profileType === 'professional') {
+      setCurrentStep('professional-domain');
     } else {
+      // Student goes to regular domain selection
       setCurrentStep('domain');
     }
   };
@@ -62,6 +65,16 @@ function AppContent() {
 
   const handleIndustryTypeSelect = (industryType: IndustryType) => {
     setUserData({ ...userData, industryType });
+    setCurrentStep('dashboard');
+  };
+
+  const handleProfessionalDomainSelect = (professionalDomain: ProfessionalDomain) => {
+    setUserData({ ...userData, professionalDomain });
+    setCurrentStep('professional-role');
+  };
+
+  const handleProfessionalRoleSelect = (currentRole: string, targetRole: string) => {
+    setUserData({ ...userData, currentRole, targetRole });
     setCurrentStep('dashboard');
   };
 
