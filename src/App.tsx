@@ -111,7 +111,11 @@ function AppContent() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <Dashboard userData={userData} />
+            {userData.profileType === 'industry' ? (
+              <IndustryDashboard userData={userData} />
+            ) : (
+              <Dashboard userData={userData} />
+            )}
           </motion.div>
         )}
       </AnimatePresence>
