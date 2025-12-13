@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 import { Button } from '../../ui/button';
@@ -9,15 +10,22 @@ import {
   TrendingUp,
   CheckCircle,
   Play,
-  Star
+  Star,
+  Trophy,
+  Filter
 } from 'lucide-react';
 import { UserData } from '../../../App';
+import { toast } from 'sonner';
 
 interface RealWorldPracticeProps {
   userData: UserData;
 }
 
 export function RealWorldPractice({ userData }: RealWorldPracticeProps) {
+  const [filterDifficulty, setFilterDifficulty] = useState<string>('all');
+  const [startedTasks, setStartedTasks] = useState<number[]>([]);
+  const [completedTasks, setCompletedTasks] = useState<number[]>([]);
+
   const practiceTasks = [
     {
       id: 1,
@@ -65,7 +73,7 @@ export function RealWorldPractice({ userData }: RealWorldPracticeProps) {
     }
   ];
 
-  const completedTasks = [
+  const completedTasksList = [
     { title: 'API Rate Limiting Implementation', score: 95, date: '2 days ago' },
     { title: 'Database Query Optimization', score: 88, date: '5 days ago' },
     { title: 'CI/CD Pipeline Setup', score: 92, date: '1 week ago' }
@@ -78,6 +86,31 @@ export function RealWorldPractice({ userData }: RealWorldPracticeProps) {
       case 'Beginner': return 'text-green-400 bg-green-500/20 border-green-500/30';
       default: return 'text-gray-400 bg-gray-500/20 border-gray-500/30';
     }
+  };
+
+  const filteredTasks = filterDifficulty === 'all'
+    ? practiceTasks
+    : practiceTasks.filter(task => task.difficulty === filterDifficulty);
+
+  const handleStartTask = (taskId: number, taskTitle: string) => {
+    if (completedTasks.includes(taskId)) {
+      toast.info('Task already completed!');
+      return;
+    }
+    if (startedTasks.includes(taskId)) {
+      toast.info('Resuming task...');
+    } else {
+      setStartedTasks([...startedTasks, taskId]);
+      toast.success(`Started: ${taskTitle}`, {
+        description: 'Good luck! Take your time to complete it well.'
+      });
+    }
+  };
+
+  const handleViewLeaderboard = () => {
+    toast.info('Opening leaderboard...', {
+      description: 'See how you rank against other professionals'
+    });
   };
 
   return (
@@ -95,10 +128,29 @@ export function RealWorldPractice({ userData }: RealWorldPracticeProps) {
               Industry-style tasks for {userData.professionalDomain?.split('-').join(' ')}
             </p>
           </div>
-          <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+          <Button 
+            className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+            onClick={handleViewLeaderboard}
+          >
             <Star className="w-4 h-4 mr-2" />
             View Leaderboard
           </Button>
+        </div>
+
+        {/* Filter Bar */}
+        <div className="flex items-center gap-2 mt-4">
+          <Filter className="w-4 h-4 text-muted-foreground" />
+          <span className="text-sm text-muted-foreground">Difficulty:</span>
+          {['all', 'Beginner', 'Intermediate', 'Advanced'].map((difficulty) => (
+            <Button
+              key={difficulty}
+              size="sm"
+              variant={filterDifficulty === difficulty ? 'default' : 'outline'}
+              onClick={() => setFilterDifficulty(difficulty)}
+            >
+              {difficulty === 'all' ? 'All' : difficulty}
+            </Button>
+          ))}
         </div>
       </motion.div>
 
@@ -160,61 +212,99 @@ export function RealWorldPractice({ userData }: RealWorldPracticeProps) {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Briefcase className="w-5 h-5 text-blue-400" />
-                Available Tasks
+                Available Tasks ({filteredTasks.length})
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {practiceTasks.map((task, index) => (
-                <motion.div
-                  key={task.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: index * 0.1 }}
-                  className="p-4 rounded-lg bg-muted/50 border border-border hover:border-primary/50 transition-all"
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <h4 className="font-semibold text-foreground">{task.title}</h4>
-                        <Badge className={getDifficultyColor(task.difficulty)}>
-                          {task.difficulty}
-                        </Badge>
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-3">{task.description}</p>
-                      
-                      <div className="flex flex-wrap gap-2 mb-3">
-                        {task.skills.map((skill) => (
-                          <Badge key={skill} variant="outline" className="text-xs">
-                            {skill}
+              {filteredTasks.length === 0 && (
+                <div className="text-center py-8 text-muted-foreground">
+                  No tasks match the selected filter
+                </div>
+              )}
+              {filteredTasks.map((task, index) => {
+                const isStarted = startedTasks.includes(task.id);
+                const isCompleted = completedTasks.includes(task.id);
+                
+                return (
+                  <motion.div
+                    key={task.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    className="p-4 rounded-lg bg-muted/50 border border-border hover:border-primary/50 transition-all"
+                  >
+                    <div className="flex items-start justify-between mb-3">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-2 mb-2">
+                          <h4 className="font-semibold text-foreground">{task.title}</h4>
+                          <Badge className={getDifficultyColor(task.difficulty)}>
+                            {task.difficulty}
                           </Badge>
-                        ))}
-                      </div>
+                          {isStarted && !isCompleted && (
+                            <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">
+                              In Progress
+                            </Badge>
+                          )}
+                          {isCompleted && (
+                            <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+                              Completed
+                            </Badge>
+                          )}
+                        </div>
+                        <p className="text-sm text-muted-foreground mb-3">{task.description}</p>
+                        
+                        <div className="flex flex-wrap gap-2 mb-3">
+                          {task.skills.map((skill) => (
+                            <Badge key={skill} variant="outline" className="text-xs">
+                              {skill}
+                            </Badge>
+                          ))}
+                        </div>
 
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-4 h-4" />
-                          {task.duration}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Code className="w-4 h-4" />
-                          {task.type}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Star className="w-4 h-4 text-yellow-400" />
-                          {task.points} points
-                        </span>
-                        <span className="text-purple-400">
-                          {task.completionRate}% completion rate
-                        </span>
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-4 h-4" />
+                            {task.duration}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Code className="w-4 h-4" />
+                            {task.type}
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Star className="w-4 h-4 text-yellow-400" />
+                            {task.points} points
+                          </span>
+                          <span className="text-purple-400">
+                            {task.completionRate}% completion rate
+                          </span>
+                        </div>
                       </div>
+                      <Button 
+                        className="ml-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                        onClick={() => handleStartTask(task.id, task.title)}
+                        disabled={isCompleted}
+                      >
+                        {isCompleted ? (
+                          <>
+                            <CheckCircle className="w-4 h-4 mr-2" />
+                            Completed
+                          </>
+                        ) : isStarted ? (
+                          <>
+                            <Play className="w-4 h-4 mr-2" />
+                            Resume
+                          </>
+                        ) : (
+                          <>
+                            <Play className="w-4 h-4 mr-2" />
+                            Start
+                          </>
+                        )}
+                      </Button>
                     </div>
-                    <Button className="ml-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
-                      <Play className="w-4 h-4 mr-2" />
-                      Start
-                    </Button>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                );
+              })}
             </CardContent>
           </Card>
         </div>
@@ -230,7 +320,7 @@ export function RealWorldPractice({ userData }: RealWorldPracticeProps) {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              {completedTasks.map((task, index) => (
+              {completedTasksList.map((task, index) => (
                 <div
                   key={index}
                   className="p-3 rounded-lg bg-muted/50 border border-border"
@@ -256,7 +346,11 @@ export function RealWorldPractice({ userData }: RealWorldPracticeProps) {
               <p className="text-sm text-muted-foreground mb-4">
                 Based on your skill gaps, we recommend "Microservices Migration Plan" to strengthen system design.
               </p>
-              <Button size="sm" className="w-full">
+              <Button 
+                size="sm" 
+                className="w-full"
+                onClick={() => handleStartTask(1, 'Microservices Migration Plan')}
+              >
                 Start Task
               </Button>
             </CardContent>
@@ -272,14 +366,14 @@ export function RealWorldPractice({ userData }: RealWorldPracticeProps) {
                 <div>
                   <div className="flex justify-between text-sm mb-2">
                     <span>Today's Progress</span>
-                    <span className="text-orange-400 font-medium">1 / 2 tasks</span>
+                    <span className="text-orange-400 font-medium">{startedTasks.length} / 2 tasks</span>
                   </div>
                   <div className="h-2 bg-gray-800 rounded-full overflow-hidden">
-                    <div className="h-full bg-gradient-to-r from-orange-500 to-red-500" style={{ width: '50%' }} />
+                    <div className="h-full bg-gradient-to-r from-orange-500 to-red-500" style={{ width: `${(startedTasks.length / 2) * 100}%` }} />
                   </div>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  Complete 1 more task to maintain your streak!
+                  {startedTasks.length < 2 ? `Complete ${2 - startedTasks.length} more task(s) to maintain your streak!` : 'Great job! Daily goal achieved! 🎉'}
                 </p>
               </div>
             </CardContent>
