@@ -124,10 +124,38 @@ export function SkillGapAnalyzer({ userData }: SkillGapAnalyzerProps) {
               Bridge the gap between {userData.currentRole} and {userData.targetRole}
             </p>
           </div>
-          <Button className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
-            <Zap className="w-4 h-4 mr-2" />
-            Generate Report
-          </Button>
+          <div className="flex gap-2">
+            <Button 
+              variant="outline"
+              onClick={() => handleGenerateReport()}
+            >
+              <Download className="w-4 h-4 mr-2" />
+              Download Report
+            </Button>
+            <Button 
+              className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+              onClick={() => handleGenerateReport()}
+            >
+              <Zap className="w-4 h-4 mr-2" />
+              Generate Report
+            </Button>
+          </div>
+        </div>
+
+        {/* Filter Bar */}
+        <div className="flex items-center gap-2">
+          <Filter className="w-4 h-4 text-muted-foreground" />
+          <span className="text-sm text-muted-foreground">Filter by priority:</span>
+          {['all', 'high', 'medium', 'low'].map((priority) => (
+            <Button
+              key={priority}
+              size="sm"
+              variant={filterPriority === priority ? 'default' : 'outline'}
+              onClick={() => setFilterPriority(priority)}
+            >
+              {priority.charAt(0).toUpperCase() + priority.slice(1)}
+            </Button>
+          ))}
         </div>
       </motion.div>
 
