@@ -131,6 +131,10 @@ function getActualBackgroundColor(element: HTMLElement): string | null {
 function enforceElementContrast(element: HTMLElement): void {
   if (shouldSkipElement(element)) return;
   
+  // Skip if already enforced (prevent infinite loops)
+  if (element.hasAttribute('data-contrast-checked')) return;
+  element.setAttribute('data-contrast-checked', 'true');
+  
   // Only process text-containing elements
   const hasTextContent = element.childNodes && Array.from(element.childNodes).some(
     node => node.nodeType === Node.TEXT_NODE && node.textContent?.trim()
@@ -163,10 +167,6 @@ function enforceElementContrast(element: HTMLElement): void {
     element.style.color = textColor;
     element.setAttribute('data-contrast-enforced', 'true');
     element.setAttribute('data-contrast-ratio', currentContrast.toFixed(2));
-    
-    if (process.env.NODE_ENV === 'development') {
-      console.log(`Contrast enforced on ${element.tagName}.${element.className}: ${currentContrast.toFixed(2)}:1 -> ${textColor}`);
-    }
   }
 }
 
