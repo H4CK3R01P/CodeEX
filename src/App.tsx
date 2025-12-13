@@ -151,6 +151,36 @@ function AppContent() {
             />
           </motion.div>
         )}
+        {currentStep === 'professional-domain' && (
+          <motion.div
+            key="professional-domain"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <ProfessionalDomainSelection 
+              onSelect={handleProfessionalDomainSelect}
+              onBack={() => setCurrentStep('profile')}
+              userName={userData.name}
+            />
+          </motion.div>
+        )}
+        {currentStep === 'professional-role' && (
+          <motion.div
+            key="professional-role"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <ProfessionalRoleSelection 
+              onSelect={handleProfessionalRoleSelect}
+              onBack={() => setCurrentStep('professional-domain')}
+              userName={userData.name}
+            />
+          </motion.div>
+        )}
         {currentStep === 'dashboard' && (
           <motion.div
             key="dashboard"
@@ -160,6 +190,8 @@ function AppContent() {
           >
             {userData.profileType === 'industry' ? (
               <IndustryDashboard userData={userData} />
+            ) : userData.profileType === 'professional' ? (
+              <ProfessionalDashboard userData={userData} />
             ) : (
               <Dashboard userData={userData} />
             )}
