@@ -1,10 +1,18 @@
 /**
  * ============================================================================
- * AUTOMATIC TEXT CONTRAST ENFORCER
- * Strictly enforces WCAG AA contrast (4.5:1) across ALL components
- * Overrides ALL hardcoded colors without exceptions
+ * CRITICAL BUG PREVENTION: UNREADABLE TEXT ENFORCEMENT
+ * 
+ * POLICY: Any unreadable text is a CRITICAL BUG
+ * 
+ * This system uses maximum CSS specificity to PREVENT any component,
+ * card, or section from defining text colors that fail WCAG AA (4.5:1).
+ * 
+ * NO EXCEPTIONS ALLOWED.
  * ============================================================================
  */
+
+/* Use CSS @layer to ensure these rules have maximum priority */
+@layer contrast-enforcement {
 
 /* ============================================================================
    SECTION 1: GRADIENT BACKGROUNDS - FORCE WHITE TEXT
