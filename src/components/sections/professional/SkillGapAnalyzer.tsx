@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'motion/react';
 import { Card, CardContent, CardHeader, CardTitle } from '../../ui/card';
 import { Button } from '../../ui/button';
@@ -11,15 +12,21 @@ import {
   ArrowRight,
   BarChart3,
   Users,
-  Zap
+  Zap,
+  Filter,
+  Download
 } from 'lucide-react';
 import { UserData } from '../../../App';
+import { toast } from 'sonner';
 
 interface SkillGapAnalyzerProps {
   userData: UserData;
 }
 
 export function SkillGapAnalyzer({ userData }: SkillGapAnalyzerProps) {
+  const [filterPriority, setFilterPriority] = useState<string>('all');
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+  
   // Mock skill data based on domain
   const skillGaps = [
     {
