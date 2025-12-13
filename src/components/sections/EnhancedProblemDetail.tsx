@@ -654,6 +654,18 @@ export function EnhancedProblemDetail({ problem, onBack, domainId }: EnhancedPro
                         </Card>
                       </TabsContent>
 
+                      <TabsContent value="console" className="h-full mt-4">
+                        <Card className="h-full bg-gray-900/30 border border-gray-800">
+                          <CardContent className="p-4 h-full">
+                            <ScrollArea className="h-full">
+                              <pre className="text-sm text-gray-300 font-mono whitespace-pre-wrap">
+                                {consoleOutput || 'Run your code to see console output...\n\nYou can use console.log() or print() to debug your code.'}
+                              </pre>
+                            </ScrollArea>
+                          </CardContent>
+                        </Card>
+                      </TabsContent>
+
                       <TabsContent value="testResult" className="h-full mt-4">
                         {submissionResult ? (
                           <Card className={`h-full ${
