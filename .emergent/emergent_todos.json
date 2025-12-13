@@ -1,11 +1,11 @@
 [
   {
     "content": "Check backend service status and logs",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Test backend API endpoints (health, auth, data)",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Verify frontend-backend integration",
