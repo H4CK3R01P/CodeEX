@@ -568,7 +568,7 @@ export function EnhancedProblemDetail({ problem, onBack, domainId }: EnhancedPro
               <ResizablePanelGroup direction="vertical">
                 {/* Top: Code Editor */}
                 <ResizablePanel defaultSize={60} minSize={30}>
-                  <div className="h-full flex flex-col">
+                  <div className="h-full w-full">
                     <CodeEditor
                       defaultCode={problem.starterCode || ''}
                       language={selectedLanguage}
@@ -576,6 +576,7 @@ export function EnhancedProblemDetail({ problem, onBack, domainId }: EnhancedPro
                       onSubmit={handleSubmit}
                       showSubmit={true}
                       onChange={(code) => setCurrentCode(code)}
+                      height="100%"
                     />
                   </div>
                 </ResizablePanel>
