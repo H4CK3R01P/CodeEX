@@ -4,6 +4,7 @@ import { OTPVerification } from './components/OTPVerification';
 import { ProfileSelection } from './components/ProfileSelection';
 import { DomainSelection } from './components/DomainSelection';
 import { Dashboard } from './components/Dashboard';
+import { IndustryDashboard } from './components/industry/IndustryDashboard';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Toaster } from './components/ui/sonner';
 import { StatusIndicator } from './components/StatusIndicator';
