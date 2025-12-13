@@ -195,6 +195,50 @@
       radial-gradient(circle at 40% 90%, rgba(249, 115, 22, 0.1) 0%, transparent 50%);
     background-attachment: fixed;
   }
+
+  /* ============================================================
+     AUTOMATIC TEXT CONTRAST ENFORCEMENT
+     Override any hardcoded colors that reduce readability
+     ============================================================ */
+  
+  /* Force proper contrast on ALL gradient backgrounds */
+  [class*="bg-gradient"] *:not(svg):not([class*="border"]):not([class*="bg-"]) {
+    color: #ffffff !important;
+  }
+
+  /* Force proper contrast on dark colored backgrounds */
+  .bg-blue-500 *, .bg-blue-600 *, .bg-blue-700 *, .bg-blue-800 *, .bg-blue-900 *,
+  .bg-indigo-500 *, .bg-indigo-600 *, .bg-indigo-700 *, .bg-indigo-800 *, .bg-indigo-900 *,
+  .bg-purple-500 *, .bg-purple-600 *, .bg-purple-700 *, .bg-purple-800 *, .bg-purple-900 *,
+  .bg-violet-500 *, .bg-violet-600 *, .bg-violet-700 *, .bg-violet-800 *, .bg-violet-900 *,
+  .bg-pink-500 *, .bg-pink-600 *, .bg-pink-700 *, .bg-pink-800 *, .bg-pink-900 *,
+  .bg-red-500 *, .bg-red-600 *, .bg-red-700 *, .bg-red-800 *, .bg-red-900 *,
+  .bg-orange-500 *, .bg-orange-600 *, .bg-orange-700 *, .bg-orange-800 *, .bg-orange-900 *,
+  .bg-yellow-600 *, .bg-yellow-700 *, .bg-yellow-800 *, .bg-yellow-900 *,
+  .bg-green-500 *, .bg-green-600 *, .bg-green-700 *, .bg-green-800 *, .bg-green-900 *,
+  .bg-emerald-500 *, .bg-emerald-600 *, .bg-emerald-700 *, .bg-emerald-800 *, .bg-emerald-900 *,
+  .bg-teal-500 *, .bg-teal-600 *, .bg-teal-700 *, .bg-teal-800 *, .bg-teal-900 *,
+  .bg-cyan-500 *, .bg-cyan-600 *, .bg-cyan-700 *, .bg-cyan-800 *, .bg-cyan-900 *,
+  .bg-gray-600 *, .bg-gray-700 *, .bg-gray-800 *, .bg-gray-900 *,
+  .bg-primary *:not([class*="border"]):not([class*="bg-"]):not(svg) {
+    color: #ffffff !important;
+  }
+
+  /* Force proper contrast on light backgrounds */
+  .bg-white *, .bg-gray-50 *, .bg-gray-100 *, .bg-gray-200 *,
+  .bg-blue-50 *, .bg-blue-100 *, .bg-blue-200 *,
+  .bg-purple-50 *, .bg-purple-100 *, .bg-purple-200 *,
+  .bg-green-50 *, .bg-green-100 *, .bg-green-200 *,
+  .bg-yellow-50 *, .bg-yellow-100 *, .bg-yellow-200 *,
+  .bg-red-50 *, .bg-red-100 *, .bg-red-200 *,
+  .bg-orange-50 *, .bg-orange-100 *, .bg-orange-200 * {
+    color: #0a0a0f !important;
+  }
+
+  /* Exception: Allow SVG icons and borders to keep their colors */
+  svg, [class*="border"], [class*="bg-"] {
+    color: inherit;
+  }
 }
 
 /**
