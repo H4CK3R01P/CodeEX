@@ -116,6 +116,21 @@ function AppContent() {
             />
           </motion.div>
         )}
+        {currentStep === 'industry-type' && (
+          <motion.div
+            key="industry-type"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <IndustryTypeSelection 
+              onSelect={handleIndustryTypeSelect}
+              onBack={() => setCurrentStep('profile')}
+              organizationName={userData.name}
+            />
+          </motion.div>
+        )}
         {currentStep === 'dashboard' && (
           <motion.div
             key="dashboard"
