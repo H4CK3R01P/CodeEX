@@ -1,42 +1,42 @@
 [
   {
     "content": "Create IndustryDashboard main component with sidebar navigation",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Build Workspace Home with KPI cards and quick actions",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Create Assessments workspace with test creation interface",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Build Evaluation workspace with candidate review system",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Create Learning & Upskilling workspace",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Build Team & Employee Management workspace",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Create Campus Hiring workspace",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Build Analytics Dashboard with charts",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Create Settings pages",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Update routing to use new Industry Dashboard",
-    "status": "pending"
+    "status": "completed"
   }
 ]
