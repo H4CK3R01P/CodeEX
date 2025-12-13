@@ -563,132 +563,182 @@ export function EnhancedProblemDetail({ problem, onBack, domainId }: EnhancedPro
 
             <ResizableHandle />
 
-            <ResizablePanel defaultSize={50} minSize={30}>
-              <div className="h-full flex flex-col">
-                <Tabs value={activeTab === 'result' || activeTab === 'console' ? activeTab : 'console'} 
-                      onValueChange={setActiveTab} 
-                      className="flex-1 flex flex-col p-4">
-                  <TabsList className="bg-gray-800/50 mb-4">
-                    <TabsTrigger value="console">
-                      <Code className="h-4 w-4 mr-2" />
-                      Console
-                    </TabsTrigger>
-                    <TabsTrigger value="result">
-                      <CheckCircle2 className="h-4 w-4 mr-2" />
-                      Result
-                    </TabsTrigger>
-                  </TabsList>
+            {/* Right Panel: Code Editor + Console (Vertical Split) */}
+            <ResizablePanel defaultSize={60} minSize={40}>
+              <ResizablePanelGroup direction="vertical">
+                {/* Top: Code Editor */}
+                <ResizablePanel defaultSize={60} minSize={30}>
+                  <div className="h-full flex flex-col">
+                    <CodeEditor
+                      defaultCode={problem.starterCode || ''}
+                      language={selectedLanguage}
+                      onRun={handleRunCode}
+                      onSubmit={handleSubmit}
+                      showSubmit={true}
+                      onChange={(code) => setCurrentCode(code)}
+                    />
+                  </div>
+                </ResizablePanel>
 
-                  <div className="flex-1 overflow-hidden">
-                    <TabsContent value="console" className="h-full mt-0">
-                      <Card className="h-full bg-gray-900/30">
-                        <CardContent className="p-4 h-full">
-                          <ScrollArea className="h-full">
-                            <pre className="text-sm text-gray-300 font-mono whitespace-pre-wrap">
-                              {consoleOutput || 'Run your code to see output...'}
-                            </pre>
-                          </ScrollArea>
-                        </CardContent>
-                      </Card>
-                    </TabsContent>
+                <ResizableHandle />
 
-                    <TabsContent value="result" className="h-full mt-0">
-                      {submissionResult ? (
-                        <Card className={`h-full ${
-                          submissionResult.status === 'accepted' 
-                            ? 'border-green-500/50 bg-green-900/10' 
-                            : 'border-red-500/50 bg-red-900/10'
-                        }`}>
-                          <CardHeader>
-                            <CardTitle className="flex items-center gap-2">
-                              {submissionResult.status === 'accepted' ? (
+                {/* Bottom: Test Cases + Console + Result */}
+                <ResizablePanel defaultSize={40} minSize={20}>
+                  <Tabs 
+                    value={submissionResult ? 'testResult' : 'testcase'} 
+                    onValueChange={setActiveTab} 
+                    className="h-full flex flex-col"
+                  >
+                    <TabsList className="mx-4 mt-2 bg-gray-800/50">
+                      <TabsTrigger value="testcase">Testcase</TabsTrigger>
+                      <TabsTrigger value="testResult">Test Result</TabsTrigger>
+                    </TabsList>
+
+                    <div className="flex-1 overflow-hidden px-4 pb-4">
+                      <TabsContent value="testcase" className="h-full mt-4">
+                        <Card className="h-full bg-gray-900/30 border border-gray-800">
+                          <CardContent className="p-4 h-full">
+                            <ScrollArea className="h-full">
+                              {problem.examples.map((example, idx) => (
+                                <div key={idx} className="mb-4 p-3 bg-gray-800/50 rounded-lg border border-gray-700">
+                                  <p className="text-sm text-purple-400 mb-2 font-semibold">Case {idx + 1}</p>
+                                  <div className="space-y-2 text-sm">
+                                    <div>
+                                      <span className="text-gray-400">nums = </span>
+                                      <code className="text-green-400">{example.input}</code>
+                                    </div>
+                                    <div>
+                                      <span className="text-gray-400">Output = </span>
+                                      <code className="text-blue-400">{example.output}</code>
+                                    </div>
+                                    {example.explanation && (
+                                      <div className="text-gray-400 text-xs mt-2 pt-2 border-t border-gray-700">
+                                        <span className="text-cyan-400">Explanation:</span> {example.explanation}
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              ))}
+                              {problem.testCases && problem.testCases.length > 0 && (
                                 <>
-                                  <CheckCircle2 className="h-6 w-6 text-green-500" />
-                                  <span className="text-green-500">Accepted</span>
-                                </>
-                              ) : (
-                                <>
-                                  <XCircle className="h-6 w-6 text-red-500" />
-                                  <span className="text-red-500">
-                                    {submissionResult.status.replace('_', ' ').toUpperCase()}
-                                  </span>
+                                  {problem.testCases.slice(0, 3).map((testCase, idx) => (
+                                    <div key={`test-${idx}`} className="mb-4 p-3 bg-gray-800/50 rounded-lg border border-gray-700">
+                                      <p className="text-sm text-purple-400 mb-2 font-semibold">Case {problem.examples.length + idx + 1}</p>
+                                      <div className="space-y-2 text-sm">
+                                        <div>
+                                          <span className="text-gray-400">Input = </span>
+                                          <code className="text-green-400">{testCase.input}</code>
+                                        </div>
+                                        <div>
+                                          <span className="text-gray-400">Expected = </span>
+                                          <code className="text-blue-400">{testCase.expectedOutput}</code>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  ))}
                                 </>
                               )}
-                            </CardTitle>
-                          </CardHeader>
-                          <CardContent className="space-y-4">
-                            <div className="grid grid-cols-2 gap-4">
-                              <div>
-                                <p className="text-sm text-gray-400">Test Cases</p>
-                                <p className="text-lg">
-                                  {submissionResult.testCasesPassed}/{submissionResult.totalTestCases} passed
-                                </p>
-                              </div>
-                              <div>
-                                <p className="text-sm text-gray-400">Runtime</p>
-                                <p className="text-lg">{submissionResult.runtime}</p>
-                              </div>
-                              <div>
-                                <p className="text-sm text-gray-400">Memory</p>
-                                <p className="text-lg">{submissionResult.memory}</p>
-                              </div>
-                            </div>
+                            </ScrollArea>
+                          </CardContent>
+                        </Card>
+                      </TabsContent>
 
-                            {submissionResult.error && (
-                              <div className="p-3 bg-red-900/20 border border-red-500/30 rounded-lg">
-                                <p className="text-sm text-red-400">{submissionResult.error}</p>
-                              </div>
-                            )}
-
-                            {submissionResult.failedTestCase && (
-                              <div className="space-y-3">
-                                <h4 className="text-red-400">Failed Test Case:</h4>
-                                <div className="space-y-2 text-sm">
-                                  <div className="p-3 bg-gray-800/50 rounded">
-                                    <p className="text-gray-400 mb-1">Input:</p>
-                                    <code className="text-green-400">{submissionResult.failedTestCase.input}</code>
-                                  </div>
-                                  <div className="p-3 bg-gray-800/50 rounded">
-                                    <p className="text-gray-400 mb-1">Expected Output:</p>
-                                    <code className="text-blue-400">{submissionResult.failedTestCase.expectedOutput}</code>
-                                  </div>
-                                  <div className="p-3 bg-gray-800/50 rounded">
-                                    <p className="text-gray-400 mb-1">Your Output:</p>
-                                    <code className="text-red-400">{submissionResult.failedTestCase.actualOutput}</code>
-                                  </div>
-                                  {submissionResult.failedTestCase.explanation && (
-                                    <div className="p-3 bg-cyan-900/20 border border-cyan-500/30 rounded">
-                                      <p className="text-cyan-400 mb-1">Explanation:</p>
-                                      <p className="text-gray-300 text-xs">{submissionResult.failedTestCase.explanation}</p>
-                                    </div>
-                                  )}
+                      <TabsContent value="testResult" className="h-full mt-4">
+                        {submissionResult ? (
+                          <Card className={`h-full ${
+                            submissionResult.status === 'accepted' 
+                              ? 'border-green-500/50 bg-green-900/10' 
+                              : 'border-red-500/50 bg-red-900/10'
+                          }`}>
+                            <CardHeader className="pb-3">
+                              <CardTitle className="flex items-center gap-2 text-lg">
+                                {submissionResult.status === 'accepted' ? (
+                                  <>
+                                    <CheckCircle2 className="h-5 w-5 text-green-500" />
+                                    <span className="text-green-500">Accepted</span>
+                                  </>
+                                ) : (
+                                  <>
+                                    <XCircle className="h-5 w-5 text-red-500" />
+                                    <span className="text-red-500">
+                                      {submissionResult.status.replace('_', ' ').toUpperCase()}
+                                    </span>
+                                  </>
+                                )}
+                              </CardTitle>
+                            </CardHeader>
+                            <CardContent className="space-y-3">
+                              <div className="grid grid-cols-3 gap-3 text-center">
+                                <div className="p-2 bg-gray-800/50 rounded">
+                                  <p className="text-xs text-gray-400">Test Cases</p>
+                                  <p className="text-sm font-semibold">
+                                    {submissionResult.testCasesPassed}/{submissionResult.totalTestCases}
+                                  </p>
+                                </div>
+                                <div className="p-2 bg-gray-800/50 rounded">
+                                  <p className="text-xs text-gray-400">Runtime</p>
+                                  <p className="text-sm font-semibold">{submissionResult.runtime}</p>
+                                </div>
+                                <div className="p-2 bg-gray-800/50 rounded">
+                                  <p className="text-xs text-gray-400">Memory</p>
+                                  <p className="text-sm font-semibold">{submissionResult.memory}</p>
                                 </div>
                               </div>
-                            )}
-                          </CardContent>
-                        </Card>
-                      ) : (
-                        <Card className="h-full bg-gray-900/30">
-                          <CardContent className="flex items-center justify-center h-full">
-                            <p className="text-gray-400">Submit your code to see results...</p>
-                          </CardContent>
-                        </Card>
-                      )}
-                    </TabsContent>
-                  </div>
-                </Tabs>
 
-                {/* Code Editor */}
-                <div className="flex-1 border-t border-border">
-                  <CodeEditor
-                    defaultCode={problem.starterCode || ''}
-                    language={selectedLanguage}
-                    onRun={handleRunCode}
-                    onSubmit={handleSubmit}
-                    showSubmit={true}
-                  />
-                </div>
-              </div>
+                              {submissionResult.error && (
+                                <div className="p-3 bg-red-900/20 border border-red-500/30 rounded-lg">
+                                  <p className="text-sm text-red-400">{submissionResult.error}</p>
+                                </div>
+                              )}
+
+                              {submissionResult.failedTestCase && (
+                                <ScrollArea className="h-48">
+                                  <div className="space-y-2">
+                                    <h4 className="text-sm text-red-400 font-semibold">Failed Test Case:</h4>
+                                    <div className="space-y-2 text-sm">
+                                      <div className="p-2 bg-gray-800/50 rounded">
+                                        <p className="text-gray-400 text-xs mb-1">Input:</p>
+                                        <code className="text-green-400 text-xs">{submissionResult.failedTestCase.input}</code>
+                                      </div>
+                                      <div className="p-2 bg-gray-800/50 rounded">
+                                        <p className="text-gray-400 text-xs mb-1">Expected:</p>
+                                        <code className="text-blue-400 text-xs">{submissionResult.failedTestCase.expectedOutput}</code>
+                                      </div>
+                                      <div className="p-2 bg-gray-800/50 rounded">
+                                        <p className="text-gray-400 text-xs mb-1">Your Output:</p>
+                                        <code className="text-red-400 text-xs">{submissionResult.failedTestCase.actualOutput}</code>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </ScrollArea>
+                              )}
+
+                              {consoleOutput && (
+                                <div className="mt-3">
+                                  <h4 className="text-sm text-gray-400 font-semibold mb-2">Console Output:</h4>
+                                  <div className="p-3 bg-gray-900/50 rounded-lg border border-gray-700">
+                                    <pre className="text-xs text-gray-300 font-mono whitespace-pre-wrap">
+                                      {consoleOutput}
+                                    </pre>
+                                  </div>
+                                </div>
+                              )}
+                            </CardContent>
+                          </Card>
+                        ) : (
+                          <Card className="h-full bg-gray-900/30 border border-gray-800">
+                            <CardContent className="flex flex-col items-center justify-center h-full text-center p-6">
+                              <Code className="h-12 w-12 text-gray-600 mb-3" />
+                              <p className="text-gray-400">Run your code to see test results</p>
+                              <p className="text-xs text-gray-500 mt-2">Click "Run" to test against sample cases</p>
+                            </CardContent>
+                          </Card>
+                        )}
+                      </TabsContent>
+                    </div>
+                  </Tabs>
+                </ResizablePanel>
+              </ResizablePanelGroup>
             </ResizablePanel>
           </ResizablePanelGroup>
         )}
