@@ -1,22 +1,22 @@
 [
   {
-    "content": "Audit and refactor other auth components (OTPVerification, ProfileSelection, DomainSelection)",
-    "status": "completed"
+    "content": "Create React hook for automatic contrast calculation based on background luminance",
+    "status": "in_progress"
   },
   {
-    "content": "Audit and refactor Dashboard and DashboardHome components",
+    "content": "Enhance globals.css with CSS-based automatic contrast system",
     "status": "pending"
   },
   {
-    "content": "Audit and refactor all section components for text contrast",
+    "content": "Create ContrastWrapper component for automatic text color adjustment",
     "status": "pending"
   },
   {
-    "content": "Run comprehensive testing with testing agent",
+    "content": "Apply automatic contrast system to all major components",
     "status": "pending"
   },
   {
-    "content": "Create final verification screenshots across different pages",
-    "status": "completed"
+    "content": "Test contrast ratios and verify WCAG AA compliance",
+    "status": "pending"
   }
 ]
