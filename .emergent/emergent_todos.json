@@ -1,15 +1,15 @@
 [
   {
     "content": "Create maximum specificity CSS rules to override ALL text colors",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Add CSS layer system to ensure enforcement cannot be overridden",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Scan all sections for contrast violations and fix them",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Verify ZERO contrast violations exist in Contest, Compete, Achieve, Problems",
