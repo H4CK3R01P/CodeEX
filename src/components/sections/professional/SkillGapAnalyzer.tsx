@@ -230,7 +230,12 @@ export function SkillGapAnalyzer({ userData }: SkillGapAnalyzerProps) {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              {skillGaps.map((gap, index) => (
+              {filteredSkills.length === 0 && (
+                <div className="text-center py-8 text-muted-foreground">
+                  No skills match the selected filter
+                </div>
+              )}
+              {filteredSkills.map((gap, index) => (
                 <motion.div
                   key={gap.skill}
                   initial={{ opacity: 0, x: -20 }}
