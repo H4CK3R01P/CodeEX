@@ -4,14 +4,17 @@ import { OTPVerification } from './components/OTPVerification';
 import { ProfileSelection } from './components/ProfileSelection';
 import { DomainSelection } from './components/DomainSelection';
 import { IndustryTypeSelection, IndustryType } from './components/IndustryTypeSelection';
+import { ProfessionalDomainSelection, ProfessionalDomain } from './components/ProfessionalDomainSelection';
+import { ProfessionalRoleSelection } from './components/ProfessionalRoleSelection';
 import { Dashboard } from './components/Dashboard';
+import { ProfessionalDashboard } from './components/ProfessionalDashboard';
 import { IndustryDashboard } from './components/industry/IndustryDashboard';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Toaster } from './components/ui/sonner';
 import { StatusIndicator } from './components/StatusIndicator';
 import { motion, AnimatePresence } from 'motion/react';
 
-export type OnboardingStep = 'login' | 'otp' | 'profile' | 'domain' | 'industry-type' | 'dashboard';
+export type OnboardingStep = 'login' | 'otp' | 'profile' | 'domain' | 'industry-type' | 'professional-domain' | 'professional-role' | 'dashboard';
 export type ProfileType = 'student' | 'professional' | 'industry';
 
 export interface UserData {
@@ -20,6 +23,10 @@ export interface UserData {
   profileType?: ProfileType;
   domain?: string;
   industryType?: IndustryType;
+  // Professional-specific fields
+  professionalDomain?: ProfessionalDomain;
+  currentRole?: string;
+  targetRole?: string;
 }
 
 function AppContent() {
