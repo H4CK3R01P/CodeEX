@@ -1,22 +1,14 @@
 [
   {
-    "content": "Verify globals.css is imported in main.tsx and confirm theme tokens are applied",
-    "status": "completed"
-  },
-  {
-    "content": "Add utility classes to globals.css for special contrast cases (.text-on-dark, .text-on-light)",
-    "status": "completed"
-  },
-  {
     "content": "Audit LoginForm.tsx for hardcoded text colors and identify all instances",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Refactor LoginForm.tsx to use semantic color tokens",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Test LoginForm with screenshot and verify text visibility improvements",
-    "status": "pending"
+    "status": "in_progress"
   }
 ]
