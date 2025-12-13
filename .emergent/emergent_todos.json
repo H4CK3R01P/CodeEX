@@ -1,14 +1,42 @@
 [
   {
-    "content": "Scan all sections for contrast violations and fix them",
-    "status": "completed"
-  },
-  {
-    "content": "Verify ZERO contrast violations exist in Contest, Compete, Achieve, Problems",
-    "status": "completed"
-  },
-  {
-    "content": "Document the enforcement system and validation rules",
+    "content": "Create IndustryDashboard main component with sidebar navigation",
     "status": "in_progress"
+  },
+  {
+    "content": "Build Workspace Home with KPI cards and quick actions",
+    "status": "pending"
+  },
+  {
+    "content": "Create Assessments workspace with test creation interface",
+    "status": "pending"
+  },
+  {
+    "content": "Build Evaluation workspace with candidate review system",
+    "status": "pending"
+  },
+  {
+    "content": "Create Learning & Upskilling workspace",
+    "status": "pending"
+  },
+  {
+    "content": "Build Team & Employee Management workspace",
+    "status": "pending"
+  },
+  {
+    "content": "Create Campus Hiring workspace",
+    "status": "pending"
+  },
+  {
+    "content": "Build Analytics Dashboard with charts",
+    "status": "pending"
+  },
+  {
+    "content": "Create Settings pages",
+    "status": "pending"
+  },
+  {
+    "content": "Update routing to use new Industry Dashboard",
+    "status": "pending"
   }
 ]
