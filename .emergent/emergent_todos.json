@@ -9,14 +9,14 @@
   },
   {
     "content": "Restart supervisor services and verify both frontend and backend are running",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Test preview URL to confirm UI loads without errors",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Verify API health endpoint responds correctly",
-    "status": "pending"
+    "status": "completed"
   }
 ]
