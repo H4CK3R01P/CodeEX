@@ -34,16 +34,110 @@ export function IndustryDashboard({ userData }: IndustryDashboardProps) {
   const [activeSection, setActiveSection] = useState<WorkspaceSection>('home');
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
 
-  const navItems = [
-    { id: 'home' as WorkspaceSection, label: 'Workspace Home', icon: LayoutDashboard },
-    { id: 'assessments' as WorkspaceSection, label: 'Assessments', icon: FileText },
-    { id: 'evaluation' as WorkspaceSection, label: 'Evaluation', icon: ClipboardCheck },
-    { id: 'learning' as WorkspaceSection, label: 'Learning & Upskilling', icon: GraduationCap },
-    { id: 'team' as WorkspaceSection, label: 'Team & Employees', icon: Users },
-    { id: 'campus' as WorkspaceSection, label: 'Campus Hiring', icon: Building2 },
-    { id: 'analytics' as WorkspaceSection, label: 'Analytics', icon: BarChart3 },
-    { id: 'settings' as WorkspaceSection, label: 'Settings', icon: Settings },
-  ];
+  // Get industry-specific navigation items
+  const getNavItems = () => {
+    const industryType = userData.industryType;
+    const baseItems = [
+      { id: 'home' as WorkspaceSection, label: 'Workspace Home', icon: LayoutDashboard },
+    ];
+
+    // Customize navigation based on industry type
+    switch (industryType) {
+      case 'tech-company':
+        return [
+          ...baseItems,
+          { id: 'assessments' as WorkspaceSection, label: 'Technical Assessments', icon: FileText },
+          { id: 'evaluation' as WorkspaceSection, label: 'Candidate Evaluation', icon: ClipboardCheck },
+          { id: 'learning' as WorkspaceSection, label: 'Developer Training', icon: GraduationCap },
+          { id: 'team' as WorkspaceSection, label: 'Engineering Teams', icon: Users },
+          { id: 'campus' as WorkspaceSection, label: 'Campus Hiring', icon: Building2 },
+          { id: 'analytics' as WorkspaceSection, label: 'Hiring Analytics', icon: BarChart3 },
+          { id: 'settings' as WorkspaceSection, label: 'Settings', icon: Settings },
+        ];
+      case 'consulting':
+        return [
+          ...baseItems,
+          { id: 'assessments' as WorkspaceSection, label: 'Case Studies', icon: FileText },
+          { id: 'evaluation' as WorkspaceSection, label: 'Consultant Evaluation', icon: ClipboardCheck },
+          { id: 'learning' as WorkspaceSection, label: 'Professional Development', icon: GraduationCap },
+          { id: 'team' as WorkspaceSection, label: 'Consultants', icon: Users },
+          { id: 'analytics' as WorkspaceSection, label: 'Project Analytics', icon: BarChart3 },
+          { id: 'settings' as WorkspaceSection, label: 'Settings', icon: Settings },
+        ];
+      case 'educational':
+        return [
+          ...baseItems,
+          { id: 'assessments' as WorkspaceSection, label: 'Student Assessments', icon: FileText },
+          { id: 'evaluation' as WorkspaceSection, label: 'Grading & Evaluation', icon: ClipboardCheck },
+          { id: 'learning' as WorkspaceSection, label: 'Course Management', icon: GraduationCap },
+          { id: 'team' as WorkspaceSection, label: 'Faculty & Staff', icon: Users },
+          { id: 'analytics' as WorkspaceSection, label: 'Academic Analytics', icon: BarChart3 },
+          { id: 'settings' as WorkspaceSection, label: 'Settings', icon: Settings },
+        ];
+      case 'healthcare':
+        return [
+          ...baseItems,
+          { id: 'assessments' as WorkspaceSection, label: 'Certifications', icon: FileText },
+          { id: 'evaluation' as WorkspaceSection, label: 'Staff Evaluation', icon: ClipboardCheck },
+          { id: 'learning' as WorkspaceSection, label: 'Medical Training', icon: GraduationCap },
+          { id: 'team' as WorkspaceSection, label: 'Medical Staff', icon: Users },
+          { id: 'analytics' as WorkspaceSection, label: 'Compliance Analytics', icon: BarChart3 },
+          { id: 'settings' as WorkspaceSection, label: 'Settings', icon: Settings },
+        ];
+      case 'financial':
+        return [
+          ...baseItems,
+          { id: 'assessments' as WorkspaceSection, label: 'Compliance Tests', icon: FileText },
+          { id: 'evaluation' as WorkspaceSection, label: 'Risk Assessment', icon: ClipboardCheck },
+          { id: 'learning' as WorkspaceSection, label: 'Regulatory Training', icon: GraduationCap },
+          { id: 'team' as WorkspaceSection, label: 'Financial Team', icon: Users },
+          { id: 'analytics' as WorkspaceSection, label: 'Risk Analytics', icon: BarChart3 },
+          { id: 'settings' as WorkspaceSection, label: 'Settings', icon: Settings },
+        ];
+      case 'manufacturing':
+        return [
+          ...baseItems,
+          { id: 'assessments' as WorkspaceSection, label: 'Safety Assessments', icon: FileText },
+          { id: 'evaluation' as WorkspaceSection, label: 'Quality Control', icon: ClipboardCheck },
+          { id: 'learning' as WorkspaceSection, label: 'Operations Training', icon: GraduationCap },
+          { id: 'team' as WorkspaceSection, label: 'Production Team', icon: Users },
+          { id: 'analytics' as WorkspaceSection, label: 'Operations Analytics', icon: BarChart3 },
+          { id: 'settings' as WorkspaceSection, label: 'Settings', icon: Settings },
+        ];
+      case 'retail':
+        return [
+          ...baseItems,
+          { id: 'assessments' as WorkspaceSection, label: 'Service Assessments', icon: FileText },
+          { id: 'evaluation' as WorkspaceSection, label: 'Performance Review', icon: ClipboardCheck },
+          { id: 'learning' as WorkspaceSection, label: 'Sales Training', icon: GraduationCap },
+          { id: 'team' as WorkspaceSection, label: 'Store Teams', icon: Users },
+          { id: 'analytics' as WorkspaceSection, label: 'Sales Analytics', icon: BarChart3 },
+          { id: 'settings' as WorkspaceSection, label: 'Settings', icon: Settings },
+        ];
+      case 'government':
+        return [
+          ...baseItems,
+          { id: 'assessments' as WorkspaceSection, label: 'Civil Service Exams', icon: FileText },
+          { id: 'evaluation' as WorkspaceSection, label: 'Performance Review', icon: ClipboardCheck },
+          { id: 'learning' as WorkspaceSection, label: 'Public Training', icon: GraduationCap },
+          { id: 'team' as WorkspaceSection, label: 'Public Servants', icon: Users },
+          { id: 'analytics' as WorkspaceSection, label: 'Service Analytics', icon: BarChart3 },
+          { id: 'settings' as WorkspaceSection, label: 'Settings', icon: Settings },
+        ];
+      default:
+        return [
+          ...baseItems,
+          { id: 'assessments' as WorkspaceSection, label: 'Assessments', icon: FileText },
+          { id: 'evaluation' as WorkspaceSection, label: 'Evaluation', icon: ClipboardCheck },
+          { id: 'learning' as WorkspaceSection, label: 'Learning & Training', icon: GraduationCap },
+          { id: 'team' as WorkspaceSection, label: 'Team Management', icon: Users },
+          { id: 'analytics' as WorkspaceSection, label: 'Analytics', icon: BarChart3 },
+          { id: 'settings' as WorkspaceSection, label: 'Settings', icon: Settings },
+        ];
+    }
+  };
+
+  const navItems = getNavItems();
 
   const renderSection = () => {
     switch (activeSection) {
