@@ -1,26 +1,22 @@
 [
   {
-    "content": "Create IndustryTypeSelection component with different industry types",
-    "status": "completed"
-  },
-  {
-    "content": "Update App.tsx routing to skip domain selection for industry users",
-    "status": "completed"
-  },
-  {
-    "content": "Create industry-type-specific workspace configurations",
-    "status": "completed"
-  },
-  {
-    "content": "Update IndustryDashboard to render based on industry type",
-    "status": "completed"
-  },
-  {
-    "content": "Customize each workspace section per industry type",
+    "content": "Redesign IndustryDashboard with horizontal top navigation",
     "status": "in_progress"
   },
   {
-    "content": "Test all industry types and their specific features",
+    "content": "Update all workspace components to show relevant cards",
+    "status": "pending"
+  },
+  {
+    "content": "Ensure all navigation buttons work correctly",
+    "status": "pending"
+  },
+  {
+    "content": "Add proper data and functionality to each section",
+    "status": "pending"
+  },
+  {
+    "content": "Test complete navigation flow",
     "status": "pending"
   }
 ]

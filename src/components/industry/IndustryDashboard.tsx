@@ -164,8 +164,8 @@ export function IndustryDashboard({ userData }: IndustryDashboardProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
-      {/* Top Bar */}
-      <div className="fixed top-0 left-0 right-0 h-16 bg-gray-900/80 backdrop-blur-lg border-b border-gray-800 z-50">
+      {/* Top Bar with Logo, Org, and User */}
+      <div className="fixed top-0 left-0 right-0 h-16 bg-gray-900/95 backdrop-blur-lg border-b border-gray-800 z-50">
         <div className="flex items-center justify-between h-full px-6">
           {/* Left: Logo & Org Switcher */}
           <div className="flex items-center gap-6">
@@ -200,11 +200,9 @@ export function IndustryDashboard({ userData }: IndustryDashboardProps) {
         </div>
       </div>
 
-      {/* Sidebar */}
-      <div className={`fixed left-0 top-16 bottom-0 bg-gray-900/50 backdrop-blur-lg border-r border-gray-800 transition-all duration-300 z-40 ${
-        sidebarExpanded ? 'w-64' : 'w-20'
-      }`}>
-        <nav className="p-4 space-y-2">
+      {/* Horizontal Navigation Bar */}
+      <div className="fixed top-16 left-0 right-0 h-14 bg-gray-900/90 backdrop-blur-lg border-b border-gray-800 z-40">
+        <div className="flex items-center h-full px-6 gap-2 overflow-x-auto">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeSection === item.id;
@@ -212,25 +210,23 @@ export function IndustryDashboard({ userData }: IndustryDashboardProps) {
               <button
                 key={item.id}
                 onClick={() => setActiveSection(item.id)}
-                className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all whitespace-nowrap ${
                   isActive
                     ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg'
                     : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
                 }`}
               >
-                <Icon className="w-5 h-5 flex-shrink-0" />
-                {sidebarExpanded && <span className="font-medium">{item.label}</span>}
+                <Icon className="w-4 h-4 flex-shrink-0" />
+                <span className="font-medium text-sm">{item.label}</span>
               </button>
             );
           })}
-        </nav>
+        </div>
       </div>
 
       {/* Main Content */}
-      <div className={`pt-16 transition-all duration-300 ${
-        sidebarExpanded ? 'pl-64' : 'pl-20'
-      }`}>
-        <div className="p-8">
+      <div className="pt-30">
+        <div className="p-8 mt-14">
           {renderSection()}
         </div>
       </div>
