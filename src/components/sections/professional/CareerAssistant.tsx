@@ -11,26 +11,25 @@ import {
   Target,
   AlertCircle,
   BookOpen,
-  Lightbulb
+  Lightbulb,
+  Trash2
 } from 'lucide-react';
 import { UserData } from '../../../App';
+import { toast } from 'sonner';
 
 interface CareerAssistantProps {
   userData: UserData;
 }
 
+interface Message {
+  type: 'user' | 'assistant';
+  text: string;
+  time: string;
+}
+
 export function CareerAssistant({ userData }: CareerAssistantProps) {
   const [message, setMessage] = useState('');
-  
-  const suggestedQuestions = [
-    'What skills should I focus on this month?',
-    'Am I ready for a promotion to Tech Lead?',
-    'How do I improve my leadership skills?',
-    'What certifications should I pursue?',
-    'How can I prepare for system design interviews?'
-  ];
-
-  const conversationHistory = [
+  const [conversationHistory, setConversationHistory] = useState<Message[]>([
     {
       type: 'user',
       text: 'How close am I to being ready for Tech Lead role?',
@@ -51,6 +50,14 @@ export function CareerAssistant({ userData }: CareerAssistantProps) {
       text: `This week, I recommend:\n\n1. Complete "Microservices Migration Plan" task (2-3 hours)\n2. Watch leadership training module 3 (1 hour)\n3. Practice system design problems (2 hours)\n4. Read 2 case studies on tech leadership\n\nThis will give you maximum impact toward your goal.`,
       time: '10:32 AM'
     }
+  ]);
+  
+  const suggestedQuestions = [
+    'What skills should I focus on this month?',
+    'Am I ready for a promotion to Tech Lead?',
+    'How do I improve my leadership skills?',
+    'What certifications should I pursue?',
+    'How can I prepare for system design interviews?'
   ];
 
   const insights = [
@@ -76,10 +83,50 @@ export function CareerAssistant({ userData }: CareerAssistantProps) {
 
   const handleSendMessage = () => {
     if (message.trim()) {
-      // Handle message send (will integrate with AI later)
-      console.log('Message:', message);
+      const currentTime = new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+      
+      // Add user message
+      const userMessage: Message = {
+        type: 'user',
+        text: message,
+        time: currentTime
+      };
+      setConversationHistory([...conversationHistory, userMessage]);
+      
+      // Simulate AI response
+      setTimeout(() => {
+        const aiResponse: Message = {
+          type: 'assistant',
+          text: getAIResponse(message),
+          time: currentTime
+        };
+        setConversationHistory(prev => [...prev, aiResponse]);
+      }, 1000);
+      
       setMessage('');
+      toast.success('Message sent!');
     }
+  };
+
+  const getAIResponse = (question: string) => {
+    const lowerQ = question.toLowerCase();
+    
+    if (lowerQ.includes('skill') || lowerQ.includes('focus')) {
+      return `Based on your skill gap analysis, focus on:\n\n1. System Design (13% gap)\n2. Cloud Architecture (AWS/Azure)\n3. Leadership & Communication\n\nI recommend starting with "Microservices Migration Plan" task this week.`;
+    } else if (lowerQ.includes('ready') || lowerQ.includes('promotion')) {
+      return `You're currently at 68% readiness for ${userData.targetRole}. You need:\n\n• 4-6 more months of focused learning\n• Complete 3 major projects\n• Get AWS certification\n• Improve leadership skills by 30%\n\nYou're making great progress!`;
+    } else if (lowerQ.includes('certification')) {
+      return `For ${userData.targetRole}, I recommend:\n\n1. AWS Solutions Architect (High priority)\n2. Kubernetes Administrator\n3. Leadership & Management courses\n\nThese align well with your career goals and skill gaps.`;
+    } else if (lowerQ.includes('interview')) {
+      return `For ${userData.targetRole} interviews, prepare:\n\n1. System Design (most important)\n2. Behavioral/Leadership questions\n3. Technical depth in your domain\n4. Past project experiences\n\nCheck the Interview Readiness section for mock interviews!`;
+    } else {
+      return `Great question! Based on your profile (${userData.currentRole} → ${userData.targetRole}):\n\n• Focus on your skill gaps (System Design, Leadership)\n• Complete real-world practice tasks\n• Build your portfolio\n• Network with tech leads\n\nI'm here to help - feel free to ask more specific questions!`;
+    }
+  };
+
+  const handleClearChat = () => {
+    setConversationHistory([]);
+    toast.info('Chat history cleared');
   };
 
   return (
@@ -97,10 +144,20 @@ export function CareerAssistant({ userData }: CareerAssistantProps) {
               Your 24/7 career mentor for {userData.professionalDomain?.split('-').join(' ')}
             </p>
           </div>
-          <Badge className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 border-purple-500/30 text-purple-400">
-            <Sparkles className="w-3 h-3 mr-1" />
-            AI-Powered
-          </Badge>
+          <div className="flex gap-2">
+            <Button 
+              variant="outline"
+              onClick={handleClearChat}
+              disabled={conversationHistory.length === 0}
+            >
+              <Trash2 className="w-4 h-4 mr-2" />
+              Clear Chat
+            </Button>
+            <Badge className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 border-purple-500/30 text-purple-400">
+              <Sparkles className="w-3 h-3 mr-1" />
+              AI-Powered
+            </Badge>
+          </div>
         </div>
       </motion.div>
 
@@ -117,6 +174,13 @@ export function CareerAssistant({ userData }: CareerAssistantProps) {
             <CardContent className="flex-1 flex flex-col">
               {/* Chat History */}
               <div className="flex-1 overflow-y-auto space-y-4 mb-4">
+                {conversationHistory.length === 0 && (
+                  <div className="text-center py-12 text-muted-foreground">
+                    <MessageSquare className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                    <p>Start a conversation with your career assistant!</p>
+                    <p className="text-sm mt-2">Ask about skills, career growth, or next steps.</p>
+                  </div>
+                )}
                 {conversationHistory.map((msg, index) => (
                   <motion.div
                     key={index}
@@ -140,21 +204,23 @@ export function CareerAssistant({ userData }: CareerAssistantProps) {
               </div>
 
               {/* Suggested Questions */}
-              <div className="mb-4">
-                <p className="text-sm text-muted-foreground mb-2">Suggested questions:</p>
-                <div className="flex flex-wrap gap-2">
-                  {suggestedQuestions.slice(0, 3).map((question, index) => (
-                    <Button
-                      key={index}
-                      variant="outline"
-                      size="sm"
-                      onClick={() => setMessage(question)}
-                    >
-                      {question}
-                    </Button>
-                  ))}
+              {conversationHistory.length < 6 && (
+                <div className="mb-4">
+                  <p className="text-sm text-muted-foreground mb-2">Suggested questions:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {suggestedQuestions.slice(0, 3).map((question, index) => (
+                      <Button
+                        key={index}
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setMessage(question)}
+                      >
+                        {question}
+                      </Button>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* Input */}
               <div className="flex gap-2">
@@ -168,6 +234,7 @@ export function CareerAssistant({ userData }: CareerAssistantProps) {
                 />
                 <Button
                   onClick={handleSendMessage}
+                  disabled={!message.trim()}
                   className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
                 >
                   <Send className="w-4 h-4" />
