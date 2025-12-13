@@ -225,8 +225,8 @@ export function IndustryDashboard({ userData }: IndustryDashboardProps) {
       </div>
 
       {/* Main Content - Adjusted for new header height */}
-      <div className="pt-[120px]">
-        <div className="px-8 py-6">
+      <div className="pt-32 min-h-screen">
+        <div className="px-8 py-6 max-w-[1920px] mx-auto">
           {renderSection()}
         </div>
       </div>
