@@ -219,13 +219,13 @@ export function CodeEditor({
       </div>
 
       {/* Editor */}
-      <div className="flex-1 relative overflow-hidden" style={{ height: isFullscreen ? 'calc(100vh - 60px)' : height }}>
+      <div className="flex-1 relative overflow-hidden" style={{ height: isFullscreen ? 'calc(100vh - 60px)' : height || '100%' }}>
         <textarea
           ref={textareaRef}
           value={code}
           onChange={(e) => setCode(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="w-full h-full p-4 font-mono resize-none focus:outline-none bg-card text-card-foreground border-0 overflow-x-auto"
+          className="w-full h-full p-4 font-mono resize-none focus:outline-none bg-card text-card-foreground border-0"
           style={{ 
             fontSize: `${fontSize}px`, 
             lineHeight: '1.6', 
@@ -233,7 +233,8 @@ export function CodeEditor({
             whiteSpace: 'pre',
             wordWrap: 'normal',
             overflowWrap: 'normal',
-            minWidth: '100%',
+            overflowY: 'auto',
+            overflowX: 'auto',
           }}
           placeholder="// Start coding here..."
           spellCheck={false}
