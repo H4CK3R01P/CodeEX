@@ -86,6 +86,29 @@ export function SkillGapAnalyzer({ userData }: SkillGapAnalyzerProps) {
     }
   };
 
+  const filteredSkills = filterPriority === 'all' 
+    ? skillGaps 
+    : skillGaps.filter(skill => skill.priority === filterPriority);
+
+  const handleStartLearning = (skillName: string) => {
+    toast.success(`Starting learning path for ${skillName}!`, {
+      description: 'We\'ll create a personalized plan for you.'
+    });
+    setSelectedSkills([...selectedSkills, skillName]);
+  };
+
+  const handleGenerateReport = () => {
+    toast.success('Generating detailed skill gap report...', {
+      description: 'You\'ll receive it via email in 2-3 minutes.'
+    });
+  };
+
+  const handleViewRoadmap = () => {
+    toast.info('Navigating to Career Roadmap...', {
+      description: 'Check your personalized learning path.'
+    });
+  };
+
   return (
     <div className="p-6 space-y-6">
       {/* Header */}
