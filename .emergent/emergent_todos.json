@@ -1,15 +1,15 @@
 [
   {
     "content": "Redesign IndustryDashboard with horizontal top navigation",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Update all workspace components to show relevant cards",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Ensure all navigation buttons work correctly",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Add proper data and functionality to each section",
