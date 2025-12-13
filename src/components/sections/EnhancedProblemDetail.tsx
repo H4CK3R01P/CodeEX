@@ -416,15 +416,16 @@ export function EnhancedProblemDetail({ problem, onBack, domainId }: EnhancedPro
             </ResizablePanel>
           </ResizablePanelGroup>
         ) : (
-          // Other domains: Vertical split
+          // LeetCode-style: Horizontal split - Problem on left, Editor+Console on right
           <ResizablePanelGroup direction="horizontal">
-            <ResizablePanel defaultSize={50} minSize={30}>
+            {/* Left Panel: Problem Description */}
+            <ResizablePanel defaultSize={40} minSize={25} maxSize={60}>
               <Tabs value={activeTab} onValueChange={setActiveTab} className="h-full flex flex-col">
                 <TabsList className="mx-4 mt-4 bg-gray-800/50">
                   <TabsTrigger value="description">Description</TabsTrigger>
                   <TabsTrigger value="hints">Hints</TabsTrigger>
-                  <TabsTrigger value="submissions">Submissions</TabsTrigger>
                   <TabsTrigger value="editorial">Editorial</TabsTrigger>
+                  <TabsTrigger value="submissions">Submissions</TabsTrigger>
                 </TabsList>
 
                 <ScrollArea className="flex-1 px-4">
