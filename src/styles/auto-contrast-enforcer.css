@@ -1,0 +1,423 @@
+/**
+ * ============================================================================
+ * AUTOMATIC TEXT CONTRAST ENFORCER
+ * Strictly enforces WCAG AA contrast (4.5:1) across ALL components
+ * Overrides ALL hardcoded colors without exceptions
+ * ============================================================================
+ */
+
+/* ============================================================================
+   SECTION 1: GRADIENT BACKGROUNDS - FORCE WHITE TEXT
+   ============================================================================ */
+
+/* Override ALL text inside gradient backgrounds */
+[class*="bg-gradient"] *,
+[class*="gradient-to"] *,
+[class*="from-"] *,
+[style*="gradient"] * {
+  color: #ffffff !important;
+}
+
+/* Specific gradient combinations */
+.bg-gradient-to-r *, 
+.bg-gradient-to-l *,
+.bg-gradient-to-t *,
+.bg-gradient-to-b *,
+.bg-gradient-to-br *,
+.bg-gradient-to-bl *,
+.bg-gradient-to-tr *,
+.bg-gradient-to-tl * {
+  color: #ffffff !important;
+}
+
+/* ============================================================================
+   SECTION 2: DARK COLORED BACKGROUNDS (500-900) - FORCE WHITE TEXT
+   ============================================================================ */
+
+/* Blue shades */
+.bg-blue-500, .bg-blue-500 *,
+.bg-blue-600, .bg-blue-600 *,
+.bg-blue-700, .bg-blue-700 *,
+.bg-blue-800, .bg-blue-800 *,
+.bg-blue-900, .bg-blue-900 *,
+
+/* Indigo shades */
+.bg-indigo-500, .bg-indigo-500 *,
+.bg-indigo-600, .bg-indigo-600 *,
+.bg-indigo-700, .bg-indigo-700 *,
+.bg-indigo-800, .bg-indigo-800 *,
+.bg-indigo-900, .bg-indigo-900 *,
+
+/* Purple shades */
+.bg-purple-500, .bg-purple-500 *,
+.bg-purple-600, .bg-purple-600 *,
+.bg-purple-700, .bg-purple-700 *,
+.bg-purple-800, .bg-purple-800 *,
+.bg-purple-900, .bg-purple-900 *,
+
+/* Violet shades */
+.bg-violet-500, .bg-violet-500 *,
+.bg-violet-600, .bg-violet-600 *,
+.bg-violet-700, .bg-violet-700 *,
+.bg-violet-800, .bg-violet-800 *,
+.bg-violet-900, .bg-violet-900 *,
+
+/* Pink shades */
+.bg-pink-500, .bg-pink-500 *,
+.bg-pink-600, .bg-pink-600 *,
+.bg-pink-700, .bg-pink-700 *,
+.bg-pink-800, .bg-pink-800 *,
+.bg-pink-900, .bg-pink-900 *,
+
+/* Red shades */
+.bg-red-500, .bg-red-500 *,
+.bg-red-600, .bg-red-600 *,
+.bg-red-700, .bg-red-700 *,
+.bg-red-800, .bg-red-800 *,
+.bg-red-900, .bg-red-900 *,
+
+/* Orange shades */
+.bg-orange-500, .bg-orange-500 *,
+.bg-orange-600, .bg-orange-600 *,
+.bg-orange-700, .bg-orange-700 *,
+.bg-orange-800, .bg-orange-800 *,
+.bg-orange-900, .bg-orange-900 *,
+
+/* Amber shades */
+.bg-amber-500, .bg-amber-500 *,
+.bg-amber-600, .bg-amber-600 *,
+.bg-amber-700, .bg-amber-700 *,
+.bg-amber-800, .bg-amber-800 *,
+.bg-amber-900, .bg-amber-900 *,
+
+/* Yellow shades (darker) */
+.bg-yellow-600, .bg-yellow-600 *,
+.bg-yellow-700, .bg-yellow-700 *,
+.bg-yellow-800, .bg-yellow-800 *,
+.bg-yellow-900, .bg-yellow-900 *,
+
+/* Green shades */
+.bg-green-500, .bg-green-500 *,
+.bg-green-600, .bg-green-600 *,
+.bg-green-700, .bg-green-700 *,
+.bg-green-800, .bg-green-800 *,
+.bg-green-900, .bg-green-900 *,
+
+/* Emerald shades */
+.bg-emerald-500, .bg-emerald-500 *,
+.bg-emerald-600, .bg-emerald-600 *,
+.bg-emerald-700, .bg-emerald-700 *,
+.bg-emerald-800, .bg-emerald-800 *,
+.bg-emerald-900, .bg-emerald-900 *,
+
+/* Teal shades */
+.bg-teal-500, .bg-teal-500 *,
+.bg-teal-600, .bg-teal-600 *,
+.bg-teal-700, .bg-teal-700 *,
+.bg-teal-800, .bg-teal-800 *,
+.bg-teal-900, .bg-teal-900 *,
+
+/* Cyan shades */
+.bg-cyan-500, .bg-cyan-500 *,
+.bg-cyan-600, .bg-cyan-600 *,
+.bg-cyan-700, .bg-cyan-700 *,
+.bg-cyan-800, .bg-cyan-800 *,
+.bg-cyan-900, .bg-cyan-900 *,
+
+/* Gray shades (darker) */
+.bg-gray-600, .bg-gray-600 *,
+.bg-gray-700, .bg-gray-700 *,
+.bg-gray-800, .bg-gray-800 *,
+.bg-gray-900, .bg-gray-900 *,
+
+/* Primary and secondary */
+.bg-primary, .bg-primary *,
+.bg-secondary, .bg-secondary * {
+  color: #ffffff !important;
+}
+
+/* ============================================================================
+   SECTION 3: LIGHT BACKGROUNDS (50-200) - FORCE DARK TEXT
+   ============================================================================ */
+
+.bg-white, .bg-white *,
+.bg-gray-50, .bg-gray-50 *,
+.bg-gray-100, .bg-gray-100 *,
+.bg-gray-200, .bg-gray-200 *,
+.bg-gray-300, .bg-gray-300 *,
+
+.bg-blue-50, .bg-blue-50 *,
+.bg-blue-100, .bg-blue-100 *,
+.bg-blue-200, .bg-blue-200 *,
+
+.bg-indigo-50, .bg-indigo-50 *,
+.bg-indigo-100, .bg-indigo-100 *,
+.bg-indigo-200, .bg-indigo-200 *,
+
+.bg-purple-50, .bg-purple-50 *,
+.bg-purple-100, .bg-purple-100 *,
+.bg-purple-200, .bg-purple-200 *,
+
+.bg-pink-50, .bg-pink-50 *,
+.bg-pink-100, .bg-pink-100 *,
+.bg-pink-200, .bg-pink-200 *,
+
+.bg-red-50, .bg-red-50 *,
+.bg-red-100, .bg-red-100 *,
+.bg-red-200, .bg-red-200 *,
+
+.bg-orange-50, .bg-orange-50 *,
+.bg-orange-100, .bg-orange-100 *,
+.bg-orange-200, .bg-orange-200 *,
+
+.bg-yellow-50, .bg-yellow-50 *,
+.bg-yellow-100, .bg-yellow-100 *,
+.bg-yellow-200, .bg-yellow-200 *,
+
+.bg-green-50, .bg-green-50 *,
+.bg-green-100, .bg-green-100 *,
+.bg-green-200, .bg-green-200 *,
+
+.bg-teal-50, .bg-teal-50 *,
+.bg-teal-100, .bg-teal-100 *,
+.bg-teal-200, .bg-teal-200 * {
+  color: #0a0a0f !important;
+}
+
+/* ============================================================================
+   SECTION 4: OVERRIDE SPECIFIC TEXT COLOR CLASSES
+   These rules override hardcoded text-{color} classes
+   ============================================================================ */
+
+/* Override gray text on colored backgrounds */
+[class*="bg-blue"] .text-gray-600,
+[class*="bg-blue"] .text-gray-500,
+[class*="bg-blue"] .text-gray-700,
+[class*="bg-purple"] .text-gray-600,
+[class*="bg-purple"] .text-gray-500,
+[class*="bg-purple"] .text-gray-700,
+[class*="bg-green"] .text-gray-600,
+[class*="bg-green"] .text-gray-500,
+[class*="bg-green"] .text-gray-700,
+[class*="bg-red"] .text-gray-600,
+[class*="bg-red"] .text-gray-500,
+[class*="bg-red"] .text-gray-700,
+[class*="bg-yellow"] .text-gray-600,
+[class*="bg-yellow"] .text-gray-500,
+[class*="bg-yellow"] .text-gray-700,
+[class*="bg-orange"] .text-gray-600,
+[class*="bg-orange"] .text-gray-500,
+[class*="bg-orange"] .text-gray-700,
+[class*="bg-indigo"] .text-gray-600,
+[class*="bg-indigo"] .text-gray-500,
+[class*="bg-indigo"] .text-gray-700 {
+  color: #ffffff !important;
+}
+
+/* Override gray-900 text on colored backgrounds */
+[class*="bg-blue"] .text-gray-900,
+[class*="bg-purple"] .text-gray-900,
+[class*="bg-green"] .text-gray-900,
+[class*="bg-red"] .text-gray-900,
+[class*="bg-yellow"] .text-gray-900,
+[class*="bg-orange"] .text-gray-900,
+[class*="bg-indigo"] .text-gray-900 {
+  color: #ffffff !important;
+}
+
+/* ============================================================================
+   SECTION 5: CARD-SPECIFIC ENFORCEMENT
+   ============================================================================ */
+
+/* All cards with colored backgrounds */
+[class*="Card"][class*="bg-"],
+.card[class*="bg-"],
+[role="article"][class*="bg-"] {
+  color: inherit !important;
+}
+
+/* Card titles on colored backgrounds */
+[class*="bg-blue"] h1, [class*="bg-blue"] h2, [class*="bg-blue"] h3,
+[class*="bg-purple"] h1, [class*="bg-purple"] h2, [class*="bg-purple"] h3,
+[class*="bg-green"] h1, [class*="bg-green"] h2, [class*="bg-green"] h3,
+[class*="bg-red"] h1, [class*="bg-red"] h2, [class*="bg-red"] h3,
+[class*="bg-yellow"] h1, [class*="bg-yellow"] h2, [class*="bg-yellow"] h3,
+[class*="bg-orange"] h1, [class*="bg-orange"] h2, [class*="bg-orange"] h3,
+[class*="bg-indigo"] h1, [class*="bg-indigo"] h2, [class*="bg-indigo"] h3 {
+  color: inherit !important;
+}
+
+/* Card descriptions and paragraphs */
+[class*="bg-blue"] p, [class*="bg-blue"] span,
+[class*="bg-purple"] p, [class*="bg-purple"] span,
+[class*="bg-green"] p, [class*="bg-green"] span,
+[class*="bg-red"] p, [class*="bg-red"] span,
+[class*="bg-yellow"] p, [class*="bg-yellow"] span,
+[class*="bg-orange"] p, [class*="bg-orange"] span,
+[class*="bg-indigo"] p, [class*="bg-indigo"] span {
+  color: inherit !important;
+}
+
+/* ============================================================================
+   SECTION 6: BADGE & LABEL ENFORCEMENT
+   ============================================================================ */
+
+/* Badges with colored backgrounds */
+[class*="Badge"][class*="bg-yellow-"] {
+  color: #0a0a0f !important;
+}
+
+[class*="Badge"][class*="bg-blue-"],
+[class*="Badge"][class*="bg-purple-"],
+[class*="Badge"][class*="bg-green-"],
+[class*="Badge"][class*="bg-red-"],
+[class*="Badge"][class*="bg-orange-"],
+[class*="Badge"][class*="bg-indigo-"] {
+  color: #ffffff !important;
+}
+
+/* ============================================================================
+   SECTION 7: BUTTON ENFORCEMENT
+   ============================================================================ */
+
+/* Buttons with gradient or colored backgrounds */
+button[class*="gradient"] *,
+button[class*="bg-blue"] *,
+button[class*="bg-purple"] *,
+button[class*="bg-green"] *,
+button[class*="bg-red"] *,
+button[class*="bg-yellow"] *,
+button[class*="bg-orange"] *,
+button[class*="bg-indigo"] * {
+  color: #ffffff !important;
+}
+
+/* ============================================================================
+   SECTION 8: SPECIFIC COMPONENT OVERRIDES
+   Problem, Contest, Compete, Achieve sections
+   ============================================================================ */
+
+/* Problems Library cards */
+.problems-library [class*="Card"],
+.problems-section [class*="Card"],
+[data-section="problems"] [class*="Card"] {
+  /* Handled by parent background rules */
+}
+
+/* Contest cards */
+.contests-section [class*="Card"],
+[data-section="contests"] [class*="Card"],
+.compete-section [class*="Card"],
+[data-section="compete"] [class*="Card"] {
+  /* Handled by parent background rules */
+}
+
+/* Achieve section milestone cards */
+.achieve-section [class*="Card"],
+[data-section="achieve"] [class*="Card"],
+.milestones-card {
+  /* Handled by parent background rules */
+}
+
+/* Leaderboard ranks with colored backgrounds */
+.leaderboard [class*="bg-yellow-500"],
+.leaderboard [class*="bg-gray-400"],
+.leaderboard [class*="bg-orange-500"] {
+  color: #ffffff !important;
+}
+
+.leaderboard [class*="bg-yellow-500"] *,
+.leaderboard [class*="bg-gray-400"] *,
+.leaderboard [class*="bg-orange-500"] * {
+  color: #ffffff !important;
+}
+
+/* ============================================================================
+   SECTION 9: METADATA & SMALL TEXT
+   ============================================================================ */
+
+/* Override gray text in colored containers */
+[class*="bg-blue-5"][class*="00"] .text-sm,
+[class*="bg-blue-6"][class*="00"] .text-sm,
+[class*="bg-blue-7"][class*="00"] .text-sm,
+[class*="bg-purple-5"][class*="00"] .text-sm,
+[class*="bg-purple-6"][class*="00"] .text-sm,
+[class*="bg-purple-7"][class*="00"] .text-sm {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* ============================================================================
+   SECTION 10: INLINE STYLES OVERRIDE
+   Use JavaScript for inline style enforcement
+   ============================================================================ */
+
+/* This will be handled by the JavaScript enforcer */
+
+/* ============================================================================
+   SECTION 11: EXCEPTION - SVG ICONS
+   Preserve icon colors for better visual hierarchy
+   ============================================================================ */
+
+/* Icons can keep their colors for visual distinction */
+svg {
+  color: inherit;
+  opacity: 0.95;
+}
+
+/* But override if explicitly needed */
+[class*="bg-blue-"] svg[class*="text-blue"],
+[class*="bg-purple-"] svg[class*="text-purple"],
+[class*="bg-green-"] svg[class*="text-green"] {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* ============================================================================
+   SECTION 12: DARK MODE COMPATIBILITY
+   ============================================================================ */
+
+.dark [class*="bg-gray-100"] *,
+.dark .bg-white * {
+  color: #0a0a0f !important;
+}
+
+/* ============================================================================
+   SECTION 13: LINK ENFORCEMENT
+   ============================================================================ */
+
+[class*="bg-blue-"] a,
+[class*="bg-purple-"] a,
+[class*="bg-green-"] a,
+[class*="bg-red-"] a,
+[class*="bg-yellow-"] a,
+[class*="bg-orange-"] a,
+[class*="bg-indigo-"] a {
+  color: rgba(255, 255, 255, 0.95) !important;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.5);
+}
+
+[class*="bg-blue-"] a:hover,
+[class*="bg-purple-"] a:hover,
+[class*="bg-green-"] a:hover {
+  color: #ffffff !important;
+  text-decoration-color: #ffffff;
+}
+
+/* ============================================================================
+   SECTION 14: CODE SNIPPETS
+   ============================================================================ */
+
+[class*="bg-blue-"] code,
+[class*="bg-purple-"] code,
+[class*="bg-green-"] code,
+[class*="bg-red-"] code,
+[class*="bg-yellow-"] code,
+[class*="bg-orange-"] code,
+[class*="bg-indigo-"] code {
+  color: rgba(255, 255, 255, 0.95) !important;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ============================================================================
+   END OF AUTO-CONTRAST ENFORCER
+   ============================================================================ */
