@@ -256,8 +256,20 @@ export function SkillGapAnalyzer({ userData }: SkillGapAnalyzerProps) {
                         <span>📊 Industry demand: {gap.industryDemand}%</span>
                       </div>
                     </div>
-                    <Button size="sm" variant="outline">
-                      Start Learning
+                    <Button 
+                      size="sm" 
+                      variant={selectedSkills.includes(gap.skill) ? 'default' : 'outline'}
+                      onClick={() => handleStartLearning(gap.skill)}
+                      disabled={selectedSkills.includes(gap.skill)}
+                    >
+                      {selectedSkills.includes(gap.skill) ? (
+                        <>
+                          <CheckCircle className="w-4 h-4 mr-2" />
+                          Added
+                        </>
+                      ) : (
+                        'Start Learning'
+                      )}
                     </Button>
                   </div>
                   
