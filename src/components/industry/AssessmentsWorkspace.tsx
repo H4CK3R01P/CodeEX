@@ -23,6 +23,106 @@ interface AssessmentsWorkspaceProps {
 
 export function AssessmentsWorkspace({ userData }: AssessmentsWorkspaceProps) {
   const [activeTab, setActiveTab] = useState<'coding' | 'mcq' | 'case' | 'takehome'>('coding');
+  const [assessmentsList, setAssessmentsList] = useState([
+    { 
+      id: 1,
+      name: 'Senior React Developer Assessment', 
+      type: 'Coding - Frontend', 
+      difficulty: 'Hard', 
+      status: 'Active', 
+      candidates: 24,
+      duration: '120 min',
+      created: '2 days ago'
+    },
+    { 
+      id: 2,
+      name: 'System Design - E-commerce Platform', 
+      type: 'Coding - System Design', 
+      difficulty: 'Hard', 
+      status: 'Active', 
+      candidates: 18,
+      duration: '180 min',
+      created: '5 days ago'
+    },
+    { 
+      id: 3,
+      name: 'Backend Engineer - Node.js', 
+      type: 'Coding - Backend', 
+      difficulty: 'Medium', 
+      status: 'Draft', 
+      candidates: 0,
+      duration: '90 min',
+      created: '1 week ago'
+    },
+    { 
+      id: 4,
+      name: 'Data Structures & Algorithms', 
+      type: 'Coding - DSA', 
+      difficulty: 'Medium', 
+      status: 'Active', 
+      candidates: 156,
+      duration: '60 min',
+      created: '2 weeks ago'
+    },
+    { 
+      id: 5,
+      name: 'Machine Learning Engineer Assessment', 
+      type: 'Coding - ML/AI', 
+      difficulty: 'Hard', 
+      status: 'Scheduled', 
+      candidates: 8,
+      duration: '150 min',
+      created: '3 days ago'
+    },
+  ]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedAssessment, setSelectedAssessment] = useState<any>(null);
+  const [editForm, setEditForm] = useState({ name: '', difficulty: '', duration: '', status: '' });
+
+  const handleDelete = (assessment: any) => {
+    setSelectedAssessment(assessment);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = () => {
+    setAssessmentsList(assessmentsList.filter(a => a.id !== selectedAssessment.id));
+    setShowDeleteModal(false);
+    setSelectedAssessment(null);
+  };
+
+  const handleEdit = (assessment: any) => {
+    setSelectedAssessment(assessment);
+    setEditForm({
+      name: assessment.name,
+      difficulty: assessment.difficulty,
+      duration: assessment.duration,
+      status: assessment.status
+    });
+    setShowEditModal(true);
+  };
+
+  const confirmEdit = () => {
+    setAssessmentsList(assessmentsList.map(a => 
+      a.id === selectedAssessment.id 
+        ? { ...a, ...editForm }
+        : a
+    ));
+    setShowEditModal(false);
+    setSelectedAssessment(null);
+  };
+
+  const handleDuplicate = (assessment: any) => {
+    const newAssessment = {
+      ...assessment,
+      id: Math.max(...assessmentsList.map(a => a.id)) + 1,
+      name: `${assessment.name} (Copy)`,
+      status: 'Draft',
+      candidates: 0,
+      created: 'Just now'
+    };
+    setAssessmentsList([...assessmentsList, newAssessment]);
+  };
 
   const tabs = [
     { id: 'coding' as const, label: 'Coding Tests', icon: Code },
