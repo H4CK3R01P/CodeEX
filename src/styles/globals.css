@@ -324,6 +324,20 @@ html {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
+/* Automatic Text Contrast Utilities */
+.text-on-dark {
+  color: #ffffff !important;
+}
+
+.text-on-light {
+  color: #0a0a0f !important;
+}
+
+/* Ensure readable text on colored backgrounds */
+.text-auto-contrast {
+  color: var(--foreground);
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
