@@ -163,9 +163,9 @@ export function IndustryDashboard({ userData }: IndustryDashboardProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
-      {/* Top Bar with Logo and Organization Name */}
-      <div className="fixed top-0 left-0 right-0 bg-gray-900/95 backdrop-blur-lg border-b border-gray-800 z-[100]">
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 flex flex-col">
+      {/* Top Header - Fixed Navbar */}
+      <header className="bg-gray-900/95 backdrop-blur-lg border-b border-gray-800 sticky top-0 z-50">
         {/* First Row: Logo, Org Name, Actions */}
         <div className="flex items-center justify-between h-16 px-6 border-b border-gray-800/50">
           {/* Left: Logo & Org Name */}
@@ -200,8 +200,8 @@ export function IndustryDashboard({ userData }: IndustryDashboardProps) {
           </div>
         </div>
 
-        {/* Second Row: Navigation Bar */}
-        <div className="flex items-center h-14 px-6 gap-2 overflow-x-auto scrollbar-hide">
+        {/* Second Row: Navigation Tabs */}
+        <nav className="flex items-center h-14 px-6 gap-2 overflow-x-auto scrollbar-hide">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeSection === item.id;
@@ -221,15 +221,15 @@ export function IndustryDashboard({ userData }: IndustryDashboardProps) {
               </button>
             );
           })}
-        </div>
-      </div>
+        </nav>
+      </header>
 
-      {/* Main Content - Adjusted for new header height */}
-      <div className="pt-32 min-h-screen">
-        <div className="px-8 py-6 max-w-[1920px] mx-auto">
+      {/* Main Content - Starts cleanly below navbar */}
+      <main className="flex-1 overflow-auto">
+        <div className="px-8 py-6">
           {renderSection()}
         </div>
-      </div>
+      </main>
     </div>
   );
 }
