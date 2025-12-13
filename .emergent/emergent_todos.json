@@ -1,22 +1,22 @@
 [
   {
-    "content": "Redesign IndustryDashboard with horizontal top navigation",
-    "status": "completed"
-  },
-  {
-    "content": "Update all workspace components to show relevant cards",
-    "status": "completed"
-  },
-  {
-    "content": "Ensure all navigation buttons work correctly",
+    "content": "Add navigation bar directly below organization header",
     "status": "in_progress"
   },
   {
-    "content": "Add proper data and functionality to each section",
+    "content": "Make all navigation buttons fully active and functional",
     "status": "pending"
   },
   {
-    "content": "Test complete navigation flow",
+    "content": "Add delete and modify actions to assessments",
+    "status": "pending"
+  },
+  {
+    "content": "Add interactive modals and forms for actions",
+    "status": "pending"
+  },
+  {
+    "content": "Test all interactive features",
     "status": "pending"
   }
 ]

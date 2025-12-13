@@ -164,19 +164,20 @@ export function IndustryDashboard({ userData }: IndustryDashboardProps) {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
-      {/* Top Bar with Logo, Org, and User */}
-      <div className="fixed top-0 left-0 right-0 h-16 bg-gray-900/95 backdrop-blur-lg border-b border-gray-800 z-50">
-        <div className="flex items-center justify-between h-full px-6">
-          {/* Left: Logo & Org Switcher */}
-          <div className="flex items-center gap-6">
+      {/* Top Bar with Logo and Organization Name */}
+      <div className="fixed top-0 left-0 right-0 bg-gray-900/95 backdrop-blur-lg border-b border-gray-800 z-50">
+        {/* First Row: Logo, Org Name, Actions */}
+        <div className="flex items-center justify-between h-16 px-6 border-b border-gray-800/50">
+          {/* Left: Logo & Org Name */}
+          <div className="flex items-center gap-3">
             <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
               CodeEX
             </h1>
-            <Button variant="outline" className="gap-2 bg-gray-800/50 border-gray-700">
-              <Building2 className="w-4 h-4" />
-              <span className="font-medium">{userData.name || 'My Organization'}</span>
-              <ChevronDown className="w-4 h-4" />
-            </Button>
+            <div className="h-6 w-px bg-gray-700"></div>
+            <div className="flex items-center gap-2">
+              <Building2 className="w-4 h-4 text-gray-400" />
+              <span className="font-semibold text-white">{userData.name || 'My Organization'}</span>
+            </div>
           </div>
 
           {/* Right: Search, Notifications, Profile */}
@@ -186,23 +187,21 @@ export function IndustryDashboard({ userData }: IndustryDashboardProps) {
               <input
                 type="text"
                 placeholder="Search..."
-                className="pl-10 pr-4 py-2 bg-gray-800/50 border border-gray-700 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="pl-10 pr-4 py-2 w-64 bg-gray-800/50 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500"
               />
             </div>
-            <Button variant="ghost" size="icon" className="relative">
-              <Bell className="w-5 h-5" />
+            <Button variant="ghost" size="icon" className="relative hover:bg-gray-800">
+              <Bell className="w-5 h-5 text-gray-400" />
               <span className="absolute top-1 right-1 w-2 h-2 bg-purple-500 rounded-full"></span>
             </Button>
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-semibold">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center text-white font-semibold text-sm">
               {userData.name?.charAt(0) || 'U'}
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Horizontal Navigation Bar */}
-      <div className="fixed top-16 left-0 right-0 h-14 bg-gray-900/90 backdrop-blur-lg border-b border-gray-800 z-40">
-        <div className="flex items-center h-full px-6 gap-2 overflow-x-auto">
+        {/* Second Row: Navigation Bar */}
+        <div className="flex items-center h-14 px-6 gap-2 overflow-x-auto scrollbar-hide">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeSection === item.id;
@@ -210,23 +209,24 @@ export function IndustryDashboard({ userData }: IndustryDashboardProps) {
               <button
                 key={item.id}
                 onClick={() => setActiveSection(item.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-all whitespace-nowrap ${
+                data-testid={`nav-${item.id}`}
+                className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all whitespace-nowrap font-medium text-sm ${
                   isActive
-                    ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg'
+                    ? 'bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-lg scale-105'
                     : 'text-gray-400 hover:text-white hover:bg-gray-800/50'
                 }`}
               >
                 <Icon className="w-4 h-4 flex-shrink-0" />
-                <span className="font-medium text-sm">{item.label}</span>
+                <span>{item.label}</span>
               </button>
             );
           })}
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="pt-30">
-        <div className="p-8 mt-14">
+      {/* Main Content - Adjusted for new header height */}
+      <div className="pt-[120px]">
+        <div className="px-8 py-6">
           {renderSection()}
         </div>
       </div>
