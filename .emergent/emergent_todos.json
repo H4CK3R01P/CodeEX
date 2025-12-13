@@ -1,22 +1,22 @@
 [
   {
-    "content": "Audit Problem, Contest, Compete, and Achieve sections for hardcoded colors",
-    "status": "completed"
-  },
-  {
-    "content": "Create enhanced CSS rules with maximum specificity to override ALL hardcoded colors",
-    "status": "completed"
-  },
-  {
-    "content": "Implement JavaScript-based runtime contrast detection for dynamic elements",
-    "status": "completed"
-  },
-  {
-    "content": "Apply AutoContrast wrapper to all section components",
+    "content": "Check backend service status and logs",
     "status": "in_progress"
   },
   {
-    "content": "Test all sections and verify WCAG AA compliance universally",
+    "content": "Test backend API endpoints (health, auth, data)",
+    "status": "pending"
+  },
+  {
+    "content": "Verify frontend-backend integration",
+    "status": "pending"
+  },
+  {
+    "content": "Fix any connection or integration issues",
+    "status": "pending"
+  },
+  {
+    "content": "Test complete user flow end-to-end",
     "status": "pending"
   }
 ]
