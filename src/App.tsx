@@ -3,6 +3,7 @@ import { LoginForm } from './components/LoginForm';
 import { OTPVerification } from './components/OTPVerification';
 import { ProfileSelection } from './components/ProfileSelection';
 import { DomainSelection } from './components/DomainSelection';
+import { IndustryTypeSelection, IndustryType } from './components/IndustryTypeSelection';
 import { Dashboard } from './components/Dashboard';
 import { IndustryDashboard } from './components/industry/IndustryDashboard';
 import { ErrorBoundary } from './components/ErrorBoundary';
@@ -10,7 +11,7 @@ import { Toaster } from './components/ui/sonner';
 import { StatusIndicator } from './components/StatusIndicator';
 import { motion, AnimatePresence } from 'motion/react';
 
-export type OnboardingStep = 'login' | 'otp' | 'profile' | 'domain' | 'dashboard';
+export type OnboardingStep = 'login' | 'otp' | 'profile' | 'domain' | 'industry-type' | 'dashboard';
 export type ProfileType = 'student' | 'professional' | 'industry';
 
 export interface UserData {
@@ -18,6 +19,7 @@ export interface UserData {
   contact: string;
   profileType?: ProfileType;
   domain?: string;
+  industryType?: IndustryType;
 }
 
 function AppContent() {
@@ -38,11 +40,21 @@ function AppContent() {
 
   const handleProfileSelect = (profileType: ProfileType) => {
     setUserData({ ...userData, profileType });
-    setCurrentStep('domain');
+    // Industry users go to industry type selection, others go to domain selection
+    if (profileType === 'industry') {
+      setCurrentStep('industry-type');
+    } else {
+      setCurrentStep('domain');
+    }
   };
 
   const handleDomainSelect = (domain: string) => {
     setUserData({ ...userData, domain });
+    setCurrentStep('dashboard');
+  };
+
+  const handleIndustryTypeSelect = (industryType: IndustryType) => {
+    setUserData({ ...userData, industryType });
     setCurrentStep('dashboard');
   };
 
