@@ -91,13 +91,13 @@ export function OTPVerification({ contact, onVerified, onBack }: OTPVerification
 
         <Card className="shadow-xl border-0">
           <CardHeader className="space-y-1">
-            <div className="w-12 h-12 bg-indigo-100 rounded-full flex items-center justify-center mb-4">
-              <Shield className="w-6 h-6 text-indigo-600" />
+            <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+              <Shield className="w-6 h-6 text-primary" />
             </div>
             <CardTitle>Verify Your Account</CardTitle>
             <CardDescription>
               We've sent a 6-digit verification code to<br />
-              <span className="text-indigo-600">{contact}</span>
+              <span className="text-primary font-medium">{contact}</span>
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -113,41 +113,41 @@ export function OTPVerification({ contact, onVerified, onBack }: OTPVerification
                     value={digit}
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
-                    className="w-12 h-12 text-center border-2 rounded-lg focus:border-indigo-600 focus:outline-none transition-colors"
+                    className="w-12 h-12 text-center text-foreground bg-input-background border-2 border-border rounded-lg focus:border-primary focus:outline-none transition-colors"
                     autoFocus={index === 0}
                   />
                 ))}
               </div>
               {error && (
-                <p className="text-red-500 text-sm mt-2 text-center">{error}</p>
+                <p className="text-destructive text-sm mt-2 text-center">{error}</p>
               )}
             </div>
 
             <Button
               onClick={handleVerify}
-              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
+              className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-on-dark"
             >
               Verify OTP
             </Button>
 
             <div className="text-center">
               {resendTimer > 0 ? (
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-muted-foreground">
                   Resend code in {resendTimer}s
                 </p>
               ) : (
                 <Button
                   variant="link"
                   onClick={handleResend}
-                  className="text-indigo-600"
+                  className="text-primary"
                 >
                   Resend Code
                 </Button>
               )}
             </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-              <p className="text-xs text-blue-800 text-center">
+            <div className="bg-accent/10 border border-accent/30 rounded-lg p-3">
+              <p className="text-xs text-accent-foreground text-center">
                 💡 Demo: Use any 6-digit code to proceed (e.g., 123456)
               </p>
             </div>

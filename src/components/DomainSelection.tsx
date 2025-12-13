@@ -153,8 +153,8 @@ export function DomainSelection({ profileType, onSelect, onBack }: DomainSelecti
         </Button>
 
         <div className="mb-8">
-          <h1 className="text-indigo-900 mb-2">Choose Your Domain</h1>
-          <p className="text-gray-600">Select the area you want to focus on</p>
+          <h1 className="text-foreground mb-2">Choose Your Domain</h1>
+          <p className="text-muted-foreground">Select the area you want to focus on</p>
           {selectedDomain && (
             <Badge variant="secondary" className="mt-2">
               1 selected
@@ -165,8 +165,8 @@ export function DomainSelection({ profileType, onSelect, onBack }: DomainSelecti
         <div className="space-y-8">
           {/* Coding Domains */}
           <div>
-            <h2 className="text-gray-900 mb-4 flex items-center gap-2">
-              <Code2 className="w-6 h-6 text-indigo-600" />
+            <h2 className="text-foreground mb-4 flex items-center gap-2">
+              <Code2 className="w-6 h-6 text-primary" />
               Software Development & Coding
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -175,17 +175,17 @@ export function DomainSelection({ profileType, onSelect, onBack }: DomainSelecti
                   key={domain.id}
                   className={`cursor-pointer transition-all duration-300 hover:shadow-lg ${
                     selectedDomain === domain.id
-                      ? 'border-2 border-indigo-500 shadow-lg'
-                      : 'border-2 border-transparent hover:border-gray-200'
+                      ? 'border-2 border-primary shadow-lg'
+                      : 'border-2 border-transparent hover:border-border'
                   }`}
                   onClick={() => toggleDomain(domain.id)}
                 >
                   <CardContent className="p-4">
-                    <div className={`${domain.color} w-12 h-12 rounded-lg flex items-center justify-center text-white mb-3`}>
+                    <div className={`${domain.color} w-12 h-12 rounded-lg flex items-center justify-center text-on-dark mb-3`}>
                       {domain.icon}
                     </div>
-                    <h3 className="text-gray-900 text-sm mb-1">{domain.name}</h3>
-                    <p className="text-gray-600 text-xs">{domain.description}</p>
+                    <h3 className="text-foreground text-sm mb-1 font-medium">{domain.name}</h3>
+                    <p className="text-muted-foreground text-xs">{domain.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -194,8 +194,8 @@ export function DomainSelection({ profileType, onSelect, onBack }: DomainSelecti
 
           {/* Competitive Exams */}
           <div>
-            <h2 className="text-gray-900 mb-4 flex items-center gap-2">
-              <BookOpen className="w-6 h-6 text-indigo-600" />
+            <h2 className="text-foreground mb-4 flex items-center gap-2">
+              <BookOpen className="w-6 h-6 text-primary" />
               Competitive Examinations
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -204,17 +204,17 @@ export function DomainSelection({ profileType, onSelect, onBack }: DomainSelecti
                   key={domain.id}
                   className={`cursor-pointer transition-all duration-300 hover:shadow-lg ${
                     selectedDomain === domain.id
-                      ? 'border-2 border-indigo-500 shadow-lg'
-                      : 'border-2 border-transparent hover:border-gray-200'
+                      ? 'border-2 border-primary shadow-lg'
+                      : 'border-2 border-transparent hover:border-border'
                   }`}
                   onClick={() => toggleDomain(domain.id)}
                 >
                   <CardContent className="p-4">
-                    <div className={`${domain.color} w-12 h-12 rounded-lg flex items-center justify-center text-white mb-3`}>
+                    <div className={`${domain.color} w-12 h-12 rounded-lg flex items-center justify-center text-on-dark mb-3`}>
                       {domain.icon}
                     </div>
-                    <h3 className="text-gray-900 text-sm mb-1">{domain.name}</h3>
-                    <p className="text-gray-600 text-xs">{domain.description}</p>
+                    <h3 className="text-foreground text-sm mb-1 font-medium">{domain.name}</h3>
+                    <p className="text-muted-foreground text-xs">{domain.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -226,7 +226,7 @@ export function DomainSelection({ profileType, onSelect, onBack }: DomainSelecti
           <Button
             onClick={handleContinue}
             disabled={!selectedDomain}
-            className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700"
+            className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-on-dark"
             size="lg"
           >
             Continue
