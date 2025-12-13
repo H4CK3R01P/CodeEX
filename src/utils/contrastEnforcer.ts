@@ -15,7 +15,7 @@ interface RGB {
  */
 function parseColor(color: string): RGB | null {
   // Handle rgb/rgba format
-  const rgbMatch = color.match(/rgba?\\((\\d+),\\s*(\\d+),\\s*(\\d+)/);
+  const rgbMatch = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
   if (rgbMatch) {
     return {
       r: parseInt(rgbMatch[1]),
@@ -25,7 +25,7 @@ function parseColor(color: string): RGB | null {
   }
 
   // Handle hex format
-  const hexMatch = color.match(/^#?([a-f\\d]{2})([a-f\\d]{2})([a-f\\d]{2})$/i);
+  const hexMatch = color.match(/^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i);
   if (hexMatch) {
     return {
       r: parseInt(hexMatch[1], 16),
