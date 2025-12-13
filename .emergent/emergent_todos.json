@@ -1,10 +1,6 @@
 [
   {
-    "content": "Apply automatic contrast system to all major components",
-    "status": "completed"
-  },
-  {
     "content": "Test contrast ratios and verify WCAG AA compliance",
-    "status": "in_progress"
+    "status": "completed"
   }
 ]
