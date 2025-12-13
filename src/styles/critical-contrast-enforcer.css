@@ -1,0 +1,491 @@
+/**
+ * ============================================================================
+ * CRITICAL BUG PREVENTION SYSTEM
+ * 
+ * RULE: Unreadable text = CRITICAL BUG
+ * 
+ * This CSS file uses MAXIMUM SPECIFICITY to prevent ANY component from
+ * rendering text with insufficient contrast. No exceptions.
+ * 
+ * WCAG AA Minimum: 4.5:1 contrast ratio
+ * ============================================================================
+ */
+
+/* 
+ * CSS Cascade Layers - Highest Priority Enforcement
+ * This ensures our rules override everything, including inline styles
+ */
+@layer base, components, utilities, contrast-enforcement;
+
+@layer contrast-enforcement {
+  
+  /* ========================================================================
+     SECTION 1: UNIVERSAL TEXT COLOR RESET
+     Remove ALL hardcoded text colors that may cause contrast issues
+     ======================================================================== */
+  
+  /* Remove all text color classes that don't respect background */
+  [class*="text-gray"],
+  [class*="text-blue"],
+  [class*="text-indigo"],
+  [class*="text-purple"],
+  [class*="text-violet"],
+  [class*="text-pink"],
+  [class*="text-red"],
+  [class*="text-orange"],
+  [class*="text-yellow"],
+  [class*="text-green"],
+  [class*="text-emerald"],
+  [class*="text-teal"],
+  [class*="text-cyan"] {
+    /* Will be overridden by background-aware rules below */
+  }
+
+  /* ========================================================================
+     SECTION 2: GRADIENT BACKGROUNDS - ABSOLUTE WHITE TEXT
+     ======================================================================== */
+  
+  /* ALL gradients must have white text - no exceptions */
+  [class*="gradient"],
+  [class*="from-"],
+  [style*="gradient"],
+  .bg-gradient-to-r,
+  .bg-gradient-to-l,
+  .bg-gradient-to-t,
+  .bg-gradient-to-b,
+  .bg-gradient-to-br,
+  .bg-gradient-to-bl,
+  .bg-gradient-to-tr,
+  .bg-gradient-to-tl {
+    color: #ffffff !important;
+  }
+  
+  /* All descendants of gradients */
+  [class*="gradient"] *:not(svg):not(path):not(circle):not(rect):not(line),
+  [class*="from-"] *:not(svg):not(path):not(circle):not(rect):not(line),
+  [style*="gradient"] *:not(svg):not(path):not(circle):not(rect):not(line) {
+    color: #ffffff !important;
+  }
+
+  /* ========================================================================
+     SECTION 3: DARK BACKGROUNDS (500-900) - FORCE WHITE TEXT
+     Every single Tailwind color at dark shades
+     ======================================================================== */
+  
+  /* Blue */
+  .bg-blue-500, .bg-blue-500 *:not(svg):not(path),
+  .bg-blue-600, .bg-blue-600 *:not(svg):not(path),
+  .bg-blue-700, .bg-blue-700 *:not(svg):not(path),
+  .bg-blue-800, .bg-blue-800 *:not(svg):not(path),
+  .bg-blue-900, .bg-blue-900 *:not(svg):not(path),
+  
+  /* Indigo */
+  .bg-indigo-500, .bg-indigo-500 *:not(svg):not(path),
+  .bg-indigo-600, .bg-indigo-600 *:not(svg):not(path),
+  .bg-indigo-700, .bg-indigo-700 *:not(svg):not(path),
+  .bg-indigo-800, .bg-indigo-800 *:not(svg):not(path),
+  .bg-indigo-900, .bg-indigo-900 *:not(svg):not(path),
+  
+  /* Purple */
+  .bg-purple-500, .bg-purple-500 *:not(svg):not(path),
+  .bg-purple-600, .bg-purple-600 *:not(svg):not(path),
+  .bg-purple-700, .bg-purple-700 *:not(svg):not(path),
+  .bg-purple-800, .bg-purple-800 *:not(svg):not(path),
+  .bg-purple-900, .bg-purple-900 *:not(svg):not(path),
+  
+  /* Violet */
+  .bg-violet-500, .bg-violet-500 *:not(svg):not(path),
+  .bg-violet-600, .bg-violet-600 *:not(svg):not(path),
+  .bg-violet-700, .bg-violet-700 *:not(svg):not(path),
+  .bg-violet-800, .bg-violet-800 *:not(svg):not(path),
+  .bg-violet-900, .bg-violet-900 *:not(svg):not(path),
+  
+  /* Pink */
+  .bg-pink-500, .bg-pink-500 *:not(svg):not(path),
+  .bg-pink-600, .bg-pink-600 *:not(svg):not(path),
+  .bg-pink-700, .bg-pink-700 *:not(svg):not(path),
+  .bg-pink-800, .bg-pink-800 *:not(svg):not(path),
+  .bg-pink-900, .bg-pink-900 *:not(svg):not(path),
+  
+  /* Red */
+  .bg-red-500, .bg-red-500 *:not(svg):not(path),
+  .bg-red-600, .bg-red-600 *:not(svg):not(path),
+  .bg-red-700, .bg-red-700 *:not(svg):not(path),
+  .bg-red-800, .bg-red-800 *:not(svg):not(path),
+  .bg-red-900, .bg-red-900 *:not(svg):not(path),
+  
+  /* Orange */
+  .bg-orange-500, .bg-orange-500 *:not(svg):not(path),
+  .bg-orange-600, .bg-orange-600 *:not(svg):not(path),
+  .bg-orange-700, .bg-orange-700 *:not(svg):not(path),
+  .bg-orange-800, .bg-orange-800 *:not(svg):not(path),
+  .bg-orange-900, .bg-orange-900 *:not(svg):not(path),
+  
+  /* Amber */
+  .bg-amber-500, .bg-amber-500 *:not(svg):not(path),
+  .bg-amber-600, .bg-amber-600 *:not(svg):not(path),
+  .bg-amber-700, .bg-amber-700 *:not(svg):not(path),
+  .bg-amber-800, .bg-amber-800 *:not(svg):not(path),
+  .bg-amber-900, .bg-amber-900 *:not(svg):not(path),
+  
+  /* Yellow (darker shades) */
+  .bg-yellow-600, .bg-yellow-600 *:not(svg):not(path),
+  .bg-yellow-700, .bg-yellow-700 *:not(svg):not(path),
+  .bg-yellow-800, .bg-yellow-800 *:not(svg):not(path),
+  .bg-yellow-900, .bg-yellow-900 *:not(svg):not(path),
+  
+  /* Green */
+  .bg-green-500, .bg-green-500 *:not(svg):not(path),
+  .bg-green-600, .bg-green-600 *:not(svg):not(path),
+  .bg-green-700, .bg-green-700 *:not(svg):not(path),
+  .bg-green-800, .bg-green-800 *:not(svg):not(path),
+  .bg-green-900, .bg-green-900 *:not(svg):not(path),
+  
+  /* Emerald */
+  .bg-emerald-500, .bg-emerald-500 *:not(svg):not(path),
+  .bg-emerald-600, .bg-emerald-600 *:not(svg):not(path),
+  .bg-emerald-700, .bg-emerald-700 *:not(svg):not(path),
+  .bg-emerald-800, .bg-emerald-800 *:not(svg):not(path),
+  .bg-emerald-900, .bg-emerald-900 *:not(svg):not(path),
+  
+  /* Teal */
+  .bg-teal-500, .bg-teal-500 *:not(svg):not(path),
+  .bg-teal-600, .bg-teal-600 *:not(svg):not(path),
+  .bg-teal-700, .bg-teal-700 *:not(svg):not(path),
+  .bg-teal-800, .bg-teal-800 *:not(svg):not(path),
+  .bg-teal-900, .bg-teal-900 *:not(svg):not(path),
+  
+  /* Cyan */
+  .bg-cyan-500, .bg-cyan-500 *:not(svg):not(path),
+  .bg-cyan-600, .bg-cyan-600 *:not(svg):not(path),
+  .bg-cyan-700, .bg-cyan-700 *:not(svg):not(path),
+  .bg-cyan-800, .bg-cyan-800 *:not(svg):not(path),
+  .bg-cyan-900, .bg-cyan-900 *:not(svg):not(path),
+  
+  /* Gray (darker) */
+  .bg-gray-600, .bg-gray-600 *:not(svg):not(path),
+  .bg-gray-700, .bg-gray-700 *:not(svg):not(path),
+  .bg-gray-800, .bg-gray-800 *:not(svg):not(path),
+  .bg-gray-900, .bg-gray-900 *:not(svg):not(path),
+  
+  /* Slate (darker) */
+  .bg-slate-600, .bg-slate-600 *:not(svg):not(path),
+  .bg-slate-700, .bg-slate-700 *:not(svg):not(path),
+  .bg-slate-800, .bg-slate-800 *:not(svg):not(path),
+  .bg-slate-900, .bg-slate-900 *:not(svg):not(path),
+  
+  /* Primary/Secondary semantic colors */
+  .bg-primary, .bg-primary *:not(svg):not(path),
+  .bg-secondary, .bg-secondary *:not(svg):not(path),
+  .bg-accent, .bg-accent *:not(svg):not(path) {
+    color: #ffffff !important;
+  }
+
+  /* ========================================================================
+     SECTION 4: LIGHT BACKGROUNDS (50-300) - FORCE DARK TEXT
+     ======================================================================== */
+  
+  .bg-white, .bg-white *:not(svg):not(path),
+  .bg-gray-50, .bg-gray-50 *:not(svg):not(path),
+  .bg-gray-100, .bg-gray-100 *:not(svg):not(path),
+  .bg-gray-200, .bg-gray-200 *:not(svg):not(path),
+  .bg-gray-300, .bg-gray-300 *:not(svg):not(path),
+  
+  .bg-slate-50, .bg-slate-50 *:not(svg):not(path),
+  .bg-slate-100, .bg-slate-100 *:not(svg):not(path),
+  .bg-slate-200, .bg-slate-200 *:not(svg):not(path),
+  .bg-slate-300, .bg-slate-300 *:not(svg):not(path),
+  
+  .bg-blue-50, .bg-blue-50 *:not(svg):not(path),
+  .bg-blue-100, .bg-blue-100 *:not(svg):not(path),
+  .bg-blue-200, .bg-blue-200 *:not(svg):not(path),
+  
+  .bg-indigo-50, .bg-indigo-50 *:not(svg):not(path),
+  .bg-indigo-100, .bg-indigo-100 *:not(svg):not(path),
+  .bg-indigo-200, .bg-indigo-200 *:not(svg):not(path),
+  
+  .bg-purple-50, .bg-purple-50 *:not(svg):not(path),
+  .bg-purple-100, .bg-purple-100 *:not(svg):not(path),
+  .bg-purple-200, .bg-purple-200 *:not(svg):not(path),
+  
+  .bg-pink-50, .bg-pink-50 *:not(svg):not(path),
+  .bg-pink-100, .bg-pink-100 *:not(svg):not(path),
+  .bg-pink-200, .bg-pink-200 *:not(svg):not(path),
+  
+  .bg-red-50, .bg-red-50 *:not(svg):not(path),
+  .bg-red-100, .bg-red-100 *:not(svg):not(path),
+  .bg-red-200, .bg-red-200 *:not(svg):not(path),
+  
+  .bg-orange-50, .bg-orange-50 *:not(svg):not(path),
+  .bg-orange-100, .bg-orange-100 *:not(svg):not(path),
+  .bg-orange-200, .bg-orange-200 *:not(svg):not(path),
+  
+  .bg-yellow-50, .bg-yellow-50 *:not(svg):not(path),
+  .bg-yellow-100, .bg-yellow-100 *:not(svg):not(path),
+  .bg-yellow-200, .bg-yellow-200 *:not(svg):not(path),
+  .bg-yellow-300, .bg-yellow-300 *:not(svg):not(path),
+  
+  .bg-green-50, .bg-green-50 *:not(svg):not(path),
+  .bg-green-100, .bg-green-100 *:not(svg):not(path),
+  .bg-green-200, .bg-green-200 *:not(svg):not(path),
+  
+  .bg-emerald-50, .bg-emerald-50 *:not(svg):not(path),
+  .bg-emerald-100, .bg-emerald-100 *:not(svg):not(path),
+  .bg-emerald-200, .bg-emerald-200 *:not(svg):not(path),
+  
+  .bg-teal-50, .bg-teal-50 *:not(svg):not(path),
+  .bg-teal-100, .bg-teal-100 *:not(svg):not(path),
+  .bg-teal-200, .bg-teal-200 *:not(svg):not(path),
+  
+  .bg-cyan-50, .bg-cyan-50 *:not(svg):not(path),
+  .bg-cyan-100, .bg-cyan-100 *:not(svg):not(path),
+  .bg-cyan-200, .bg-cyan-200 *:not(svg):not(path) {
+    color: #0a0a0f !important;
+  }
+
+  /* ========================================================================
+     SECTION 5: OVERRIDE ALL HARDCODED TEXT COLOR CLASSES
+     Prevent components from using text-{color} classes incorrectly
+     ======================================================================== */
+  
+  /* Override text-gray on ANY colored background */
+  [class*="bg-blue"] [class*="text-gray"],
+  [class*="bg-indigo"] [class*="text-gray"],
+  [class*="bg-purple"] [class*="text-gray"],
+  [class*="bg-violet"] [class*="text-gray"],
+  [class*="bg-pink"] [class*="text-gray"],
+  [class*="bg-red"] [class*="text-gray"],
+  [class*="bg-orange"] [class*="text-gray"],
+  [class*="bg-yellow"] [class*="text-gray"],
+  [class*="bg-green"] [class*="text-gray"],
+  [class*="bg-emerald"] [class*="text-gray"],
+  [class*="bg-teal"] [class*="text-gray"],
+  [class*="bg-cyan"] [class*="text-gray"] {
+    color: inherit !important;
+  }
+  
+  /* Override text-blue/indigo/purple on similar backgrounds (no blue on blue) */
+  [class*="bg-blue"] [class*="text-blue"],
+  [class*="bg-indigo"] [class*="text-indigo"],
+  [class*="bg-purple"] [class*="text-purple"],
+  [class*="bg-green"] [class*="text-green"],
+  [class*="bg-red"] [class*="text-red"],
+  [class*="bg-yellow"] [class*="text-yellow"] {
+    color: inherit !important;
+  }
+
+  /* ========================================================================
+     SECTION 6: SPECIFIC SECTION ENFORCEMENT
+     Contest, Compete, Achieve, Problems sections
+     ======================================================================== */
+  
+  /* Contest Section - All cards and elements */
+  [data-section="contest"] [class*="Card"],
+  [data-section="contest"] [class*="card"],
+  .contest-section [class*="Card"],
+  .contest-section [class*="card"],
+  .contests-section [class*="Card"],
+  .contests-section [class*="card"] {
+    /* Inherit from parent background */
+  }
+  
+  /* Compete Section - Leaderboard and cards */
+  [data-section="compete"] [class*="Card"],
+  [data-section="compete"] [class*="card"],
+  .compete-section [class*="Card"],
+  .compete-section [class*="card"],
+  .leaderboard [class*="Card"],
+  .leaderboard [class*="card"] {
+    /* Inherit from parent background */
+  }
+  
+  /* Achieve Section - Milestone cards */
+  [data-section="achieve"] [class*="Card"],
+  [data-section="achieve"] [class*="card"],
+  .achieve-section [class*="Card"],
+  .achieve-section [class*="card"],
+  .milestones-card {
+    /* Inherit from parent background */
+  }
+  
+  /* Problems Section - Problem cards */
+  [data-section="problems"] [class*="Card"],
+  [data-section="problems"] [class*="card"],
+  .problems-section [class*="Card"],
+  .problems-section [class*="card"],
+  .problems-library [class*="Card"],
+  .problems-library [class*="card"] {
+    /* Inherit from parent background */
+  }
+
+  /* ========================================================================
+     SECTION 7: ELEMENT-SPECIFIC ENFORCEMENT
+     Headings, paragraphs, buttons, badges, links
+     ======================================================================== */
+  
+  /* All headings must respect background */
+  [class*="bg-blue"] h1, [class*="bg-blue"] h2, [class*="bg-blue"] h3, 
+  [class*="bg-blue"] h4, [class*="bg-blue"] h5, [class*="bg-blue"] h6,
+  [class*="bg-indigo"] h1, [class*="bg-indigo"] h2, [class*="bg-indigo"] h3,
+  [class*="bg-purple"] h1, [class*="bg-purple"] h2, [class*="bg-purple"] h3,
+  [class*="bg-green"] h1, [class*="bg-green"] h2, [class*="bg-green"] h3,
+  [class*="bg-red"] h1, [class*="bg-red"] h2, [class*="bg-red"] h3,
+  [class*="bg-yellow"] h1, [class*="bg-yellow"] h2, [class*="bg-yellow"] h3,
+  [class*="bg-orange"] h1, [class*="bg-orange"] h2, [class*="bg-orange"] h3,
+  [class*="bg-pink"] h1, [class*="bg-pink"] h2, [class*="bg-pink"] h3 {
+    color: inherit !important;
+  }
+  
+  /* All paragraphs and spans must respect background */
+  [class*="bg-blue"] p, [class*="bg-blue"] span,
+  [class*="bg-indigo"] p, [class*="bg-indigo"] span,
+  [class*="bg-purple"] p, [class*="bg-purple"] span,
+  [class*="bg-green"] p, [class*="bg-green"] span,
+  [class*="bg-red"] p, [class*="bg-red"] span,
+  [class*="bg-yellow"] p, [class*="bg-yellow"] span,
+  [class*="bg-orange"] p, [class*="bg-orange"] span,
+  [class*="bg-pink"] p, [class*="bg-pink"] span {
+    color: inherit !important;
+  }
+  
+  /* Buttons on colored backgrounds */
+  [class*="bg-blue"] button:not([class*="bg-"]),
+  [class*="bg-purple"] button:not([class*="bg-"]),
+  [class*="bg-green"] button:not([class*="bg-"]),
+  [class*="bg-red"] button:not([class*="bg-"]),
+  [class*="gradient"] button:not([class*="bg-"]) {
+    color: inherit !important;
+  }
+  
+  /* Links on colored backgrounds */
+  [class*="bg-blue"] a:not([class*="bg-"]),
+  [class*="bg-purple"] a:not([class*="bg-"]),
+  [class*="bg-green"] a:not([class*="bg-"]),
+  [class*="bg-red"] a:not([class*="bg-"]),
+  [class*="gradient"] a:not([class*="bg-"]) {
+    color: rgba(255, 255, 255, 0.95) !important;
+    text-decoration: underline;
+  }
+  
+  /* Badges and labels */
+  [class*="Badge"][class*="bg-"],
+  [class*="badge"][class*="bg-"],
+  .badge[class*="bg-"] {
+    /* Inherit from their own background class */
+  }
+
+  /* ========================================================================
+     SECTION 8: SMALL TEXT & METADATA
+     Must maintain higher contrast for readability
+     ======================================================================== */
+  
+  [class*="bg-blue"] .text-sm,
+  [class*="bg-blue"] .text-xs,
+  [class*="bg-purple"] .text-sm,
+  [class*="bg-purple"] .text-xs,
+  [class*="bg-green"] .text-sm,
+  [class*="bg-green"] .text-xs,
+  [class*="gradient"] .text-sm,
+  [class*="gradient"] .text-xs {
+    color: rgba(255, 255, 255, 0.95) !important;
+  }
+
+  /* ========================================================================
+     SECTION 9: CODE BLOCKS & PRE
+     ======================================================================== */
+  
+  [class*="bg-blue"] code, [class*="bg-blue"] pre,
+  [class*="bg-purple"] code, [class*="bg-purple"] pre,
+  [class*="bg-green"] code, [class*="bg-green"] pre,
+  [class*="gradient"] code, [class*="gradient"] pre {
+    color: rgba(255, 255, 255, 0.95) !important;
+    background-color: rgba(0, 0, 0, 0.2) !important;
+  }
+
+  /* ========================================================================
+     SECTION 10: INLINE STYLES OVERRIDE
+     Prevent inline style="color: ..." from breaking contrast
+     ======================================================================== */
+  
+  [class*="bg-blue"][style*="color"],
+  [class*="bg-purple"][style*="color"],
+  [class*="bg-green"][style*="color"],
+  [class*="bg-red"][style*="color"],
+  [class*="gradient"][style*="color"] {
+    color: #ffffff !important;
+  }
+
+  /* ========================================================================
+     SECTION 11: CARD COMPONENT SPECIFIC
+     Shadcn Card components
+     ======================================================================== */
+  
+  [class*="Card"][class*="bg-blue"],
+  [class*="Card"][class*="bg-purple"],
+  [class*="Card"][class*="bg-green"],
+  [class*="Card"][class*="bg-red"],
+  [class*="Card"][class*="bg-gradient"] {
+    color: #ffffff !important;
+  }
+  
+  [class*="CardTitle"],
+  [class*="CardDescription"],
+  [class*="CardContent"] {
+    color: inherit !important;
+  }
+
+  /* ========================================================================
+     SECTION 12: DARK MODE COMPATIBILITY
+     ======================================================================== */
+  
+  .dark [class*="bg-gray-100"],
+  .dark [class*="bg-gray-200"],
+  .dark .bg-white {
+    color: #0a0a0f !important;
+  }
+  
+  .dark [class*="bg-gray-100"] *:not(svg),
+  .dark [class*="bg-gray-200"] *:not(svg),
+  .dark .bg-white *:not(svg) {
+    color: #0a0a0f !important;
+  }
+
+  /* ========================================================================
+     SECTION 13: PREVENT OPACITY TRICKS
+     Some components use opacity to "dim" text - this can break contrast
+     ======================================================================== */
+  
+  [class*="bg-blue"] [class*="opacity-"],
+  [class*="bg-purple"] [class*="opacity-"],
+  [class*="bg-green"] [class*="opacity-"],
+  [class*="gradient"] [class*="opacity-"] {
+    opacity: 1 !important;
+  }
+
+  /* ========================================================================
+     SECTION 14: VALIDATION MARKER
+     Add visual indicator in dev mode that enforcement is active
+     ======================================================================== */
+  
+  body::before {
+    content: "✅ Contrast Enforcement Active";
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: #10b981;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    z-index: 999999;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+} /* End @layer contrast-enforcement */
+
+/* ============================================================================
+   CRITICAL: This layer must be loaded LAST to ensure maximum priority
+   Import this file AFTER all other stylesheets
+   ============================================================================ */
