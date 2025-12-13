@@ -586,13 +586,23 @@ export function EnhancedProblemDetail({ problem, onBack, domainId }: EnhancedPro
                 {/* Bottom: Test Cases + Console + Result */}
                 <ResizablePanel defaultSize={40} minSize={20}>
                   <Tabs 
-                    value={submissionResult ? 'testResult' : 'testcase'} 
+                    value={activeTab === 'testcase' || activeTab === 'console' || activeTab === 'testResult' ? activeTab : 'testcase'} 
                     onValueChange={setActiveTab} 
                     className="h-full flex flex-col"
                   >
                     <TabsList className="mx-4 mt-2 bg-gray-800/50">
-                      <TabsTrigger value="testcase">Testcase</TabsTrigger>
-                      <TabsTrigger value="testResult">Test Result</TabsTrigger>
+                      <TabsTrigger value="testcase">
+                        <Code className="h-4 w-4 mr-1" />
+                        Testcase
+                      </TabsTrigger>
+                      <TabsTrigger value="console">
+                        <Code className="h-4 w-4 mr-1" />
+                        Console
+                      </TabsTrigger>
+                      <TabsTrigger value="testResult">
+                        <CheckCircle2 className="h-4 w-4 mr-1" />
+                        Test Result
+                      </TabsTrigger>
                     </TabsList>
 
                     <div className="flex-1 overflow-hidden px-4 pb-4">
