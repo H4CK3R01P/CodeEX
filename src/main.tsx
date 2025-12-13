@@ -4,10 +4,9 @@
   import "./styles/globals.css";
   import "./styles/auto-contrast-enforcer.css";
   import "./index.css";
-  import { initializeContrastEnforcer } from "./utils/contrastEnforcer";
 
-  // Initialize automatic contrast enforcement
-  initializeContrastEnforcer();
+  // CSS-based automatic contrast enforcement is sufficient
+  // JavaScript enforcer available if needed: import { initializeContrastEnforcer } from "./utils/contrastEnforcer";
 
   createRoot(document.getElementById("root")!).render(<App />);
   
