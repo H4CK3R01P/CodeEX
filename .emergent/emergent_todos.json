@@ -1,23 +1,23 @@
 [
   {
     "content": "Create IndustryTypeSelection component with different industry types",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Update App.tsx routing to skip domain selection for industry users",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Create industry-type-specific workspace configurations",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Update IndustryDashboard to render based on industry type",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Customize each workspace section per industry type",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Test all industry types and their specific features",
