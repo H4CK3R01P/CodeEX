@@ -365,7 +365,10 @@ export function SkillGapAnalyzer({ userData }: SkillGapAnalyzerProps) {
               <p className="text-sm text-muted-foreground mb-4">
                 Get a personalized learning plan to achieve {userData.targetRole}
               </p>
-              <Button className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700">
+              <Button 
+                className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700"
+                onClick={() => handleViewRoadmap()}
+              >
                 View Roadmap
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
