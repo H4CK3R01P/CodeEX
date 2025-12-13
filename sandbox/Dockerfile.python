@@ -1,0 +1,29 @@
+# CodeEX Python Sandbox
+# Secure execution environment for Python code
+
+FROM python:3.11-alpine
+
+# Metadata
+LABEL maintainer="CodeEX Auto-Grader"
+LABEL description="Secure Python sandbox for competitive programming"
+LABEL version="1.0"
+
+# Install minimal dependencies
+RUN apk add --no-cache \
+    && rm -rf /var/cache/apk/*
+
+# Create non-root user for execution
+RUN adduser -D -u 1000 -s /bin/sh sandbox
+
+# Create sandbox directory (code will be mounted here)
+RUN mkdir -p /sandbox && \
+    chown sandbox:sandbox /sandbox
+
+# Set working directory
+WORKDIR /sandbox
+
+# Switch to non-root user
+USER sandbox
+
+# Default command (will be overridden)
+CMD ["python3"]

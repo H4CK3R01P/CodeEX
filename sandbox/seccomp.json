@@ -1,0 +1,37 @@
+{
+  "defaultAction": "SCMP_ACT_ERRNO",
+  "architectures": [
+    "SCMP_ARCH_X86_64",
+    "SCMP_ARCH_X86",
+    "SCMP_ARCH_X32"
+  ],
+  "syscalls": [
+    {
+      "names": [
+        "read", "write", "open", "openat", "close", "stat", "fstat",
+        "lstat", "poll", "lseek", "mmap", "mprotect", "munmap",
+        "brk", "rt_sigaction", "rt_sigprocmask", "rt_sigreturn",
+        "ioctl", "pread64", "pwrite64", "readv", "writev",
+        "access", "pipe", "pipe2", "select", "sched_yield",
+        "mremap", "msync", "mincore", "madvise",
+        "dup", "dup2", "dup3", "pause", "nanosleep",
+        "getitimer", "alarm", "setitimer", "getpid", "getppid",
+        "getuid", "geteuid", "getgid", "getegid", "gettid",
+        "sysinfo", "futex", "set_tid_address", "restart_syscall",
+        "exit", "exit_group", "wait4", "waitid", "uname",
+        "fcntl", "flock", "fsync", "fdatasync",
+        "truncate", "ftruncate", "getcwd", "chdir", "fchdir",
+        "rename", "renameat", "renameat2", "mkdir", "mkdirat",
+        "rmdir", "creat", "link", "linkat", "unlink", "unlinkat",
+        "symlink", "symlinkat", "readlink", "readlinkat",
+        "chmod", "fchmod", "fchmodat", "umask",
+        "gettimeofday", "getrlimit", "getrusage", "times", "time",
+        "clock_gettime", "clock_getres", "clock_nanosleep",
+        "sched_getaffinity", "set_robust_list", "get_robust_list",
+        "prlimit64", "getrandom", "newfstatat", "statx", "rseq",
+        "clone", "clone3", "fork", "vfork", "execve", "execveat"
+      ],
+      "action": "SCMP_ACT_ALLOW"
+    }
+  ]
+}
