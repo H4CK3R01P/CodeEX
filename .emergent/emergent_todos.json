@@ -1,22 +1,22 @@
 [
   {
-    "content": "Check supervisor configuration file and identify incorrect directory paths",
-    "status": "completed"
+    "content": "Verify globals.css is imported in main.tsx and confirm theme tokens are applied",
+    "status": "in_progress"
   },
   {
-    "content": "Update supervisor config to use correct paths (/app for frontend, /app for backend with api/ subfolder)",
-    "status": "completed"
+    "content": "Add utility classes to globals.css for special contrast cases (.text-on-dark, .text-on-light)",
+    "status": "pending"
   },
   {
-    "content": "Restart supervisor services and verify both frontend and backend are running",
-    "status": "completed"
+    "content": "Audit LoginForm.tsx for hardcoded text colors and identify all instances",
+    "status": "pending"
   },
   {
-    "content": "Test preview URL to confirm UI loads without errors",
-    "status": "completed"
+    "content": "Refactor LoginForm.tsx to use semantic color tokens",
+    "status": "pending"
   },
   {
-    "content": "Verify API health endpoint responds correctly",
-    "status": "completed"
+    "content": "Test LoginForm with screenshot and verify text visibility improvements",
+    "status": "pending"
   }
 ]
