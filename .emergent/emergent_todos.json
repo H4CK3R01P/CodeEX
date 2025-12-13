@@ -1,11 +1,7 @@
 [
   {
-    "content": "Test LoginForm with screenshot and verify text visibility improvements",
-    "status": "completed"
-  },
-  {
     "content": "Audit and refactor other auth components (OTPVerification, ProfileSelection, DomainSelection)",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Audit and refactor Dashboard and DashboardHome components",
@@ -21,6 +17,6 @@
   },
   {
     "content": "Create final verification screenshots across different pages",
-    "status": "pending"
+    "status": "completed"
   }
 ]
