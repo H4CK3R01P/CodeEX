@@ -165,7 +165,7 @@ export function IndustryDashboard({ userData }: IndustryDashboardProps) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950">
       {/* Top Bar with Logo and Organization Name */}
-      <div className="fixed top-0 left-0 right-0 bg-gray-900/95 backdrop-blur-lg border-b border-gray-800 z-50">
+      <div className="fixed top-0 left-0 right-0 bg-gray-900/95 backdrop-blur-lg border-b border-gray-800 z-[100]">
         {/* First Row: Logo, Org Name, Actions */}
         <div className="flex items-center justify-between h-16 px-6 border-b border-gray-800/50">
           {/* Left: Logo & Org Name */}
