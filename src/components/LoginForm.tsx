@@ -55,12 +55,12 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
         <div className="text-center mb-8">
           <div className="flex items-center justify-center gap-2 mb-4">
             <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-3 rounded-xl">
-              <Code2 className="w-8 h-8 text-white" />
+              <Code2 className="w-8 h-8 text-on-dark" />
             </div>
-            <GraduationCap className="w-10 h-10 text-indigo-600" />
+            <GraduationCap className="w-10 h-10 text-primary" />
           </div>
-          <h1 className="text-indigo-900 mb-2">CodeEX</h1>
-          <p className="text-gray-600">Your Gateway to Excellence</p>
+          <h1 className="text-foreground mb-2">CodeEX</h1>
+          <p className="text-muted-foreground">Your Gateway to Excellence</p>
         </div>
 
         <Card className="shadow-xl border-0">
@@ -82,7 +82,7 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
                   className={errors.name ? 'border-red-500' : ''}
                 />
                 {errors.name && (
-                  <p className="text-red-500 text-sm">{errors.name}</p>
+                  <p className="text-destructive text-sm">{errors.name}</p>
                 )}
               </div>
 
@@ -96,17 +96,17 @@ export function LoginForm({ onSubmit }: LoginFormProps) {
                   className={errors.contact ? 'border-red-500' : ''}
                 />
                 {errors.contact && (
-                  <p className="text-red-500 text-sm">{errors.contact}</p>
+                  <p className="text-destructive text-sm">{errors.contact}</p>
                 )}
               </div>
 
-              <Button type="submit" className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700">
+              <Button type="submit" className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-on-dark">
                 Continue
               </Button>
             </form>
 
             <div className="mt-6 pt-6 border-t">
-              <p className="text-sm text-gray-500 text-center">
+              <p className="text-sm text-muted-foreground text-center">
                 By continuing, you agree to our Terms of Service and Privacy Policy
               </p>
             </div>
