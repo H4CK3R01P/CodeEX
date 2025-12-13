@@ -1,42 +1,26 @@
 [
   {
-    "content": "Create IndustryDashboard main component with sidebar navigation",
-    "status": "completed"
+    "content": "Create IndustryTypeSelection component with different industry types",
+    "status": "in_progress"
   },
   {
-    "content": "Build Workspace Home with KPI cards and quick actions",
-    "status": "completed"
+    "content": "Update App.tsx routing to skip domain selection for industry users",
+    "status": "pending"
   },
   {
-    "content": "Create Assessments workspace with test creation interface",
-    "status": "completed"
+    "content": "Create industry-type-specific workspace configurations",
+    "status": "pending"
   },
   {
-    "content": "Build Evaluation workspace with candidate review system",
-    "status": "completed"
+    "content": "Update IndustryDashboard to render based on industry type",
+    "status": "pending"
   },
   {
-    "content": "Create Learning & Upskilling workspace",
-    "status": "completed"
+    "content": "Customize each workspace section per industry type",
+    "status": "pending"
   },
   {
-    "content": "Build Team & Employee Management workspace",
-    "status": "completed"
-  },
-  {
-    "content": "Create Campus Hiring workspace",
-    "status": "completed"
-  },
-  {
-    "content": "Build Analytics Dashboard with charts",
-    "status": "completed"
-  },
-  {
-    "content": "Create Settings pages",
-    "status": "completed"
-  },
-  {
-    "content": "Update routing to use new Industry Dashboard",
-    "status": "completed"
+    "content": "Test all industry types and their specific features",
+    "status": "pending"
   }
 ]
