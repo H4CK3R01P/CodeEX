@@ -1,0 +1,22 @@
+[
+  {
+    "content": "Check supervisor configuration file and identify incorrect directory paths",
+    "status": "in_progress"
+  },
+  {
+    "content": "Update supervisor config to use correct paths (/app for frontend, /app for backend with api/ subfolder)",
+    "status": "pending"
+  },
+  {
+    "content": "Restart supervisor services and verify both frontend and backend are running",
+    "status": "pending"
+  },
+  {
+    "content": "Test preview URL to confirm UI loads without errors",
+    "status": "pending"
+  },
+  {
+    "content": "Verify API health endpoint responds correctly",
+    "status": "pending"
+  }
+]
