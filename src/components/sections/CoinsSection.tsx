@@ -43,22 +43,22 @@ export function CoinsSection({ coins }: CoinsSectionProps) {
       </div>
 
       {/* Coin Balance */}
-      <Card className="mb-6 bg-gradient-to-br from-yellow-50 to-orange-50 border-yellow-200">
+      <Card className="mb-6 bg-gradient-to-br from-purple-600 to-purple-700 border-purple-500 hover:from-purple-700 hover:to-purple-800 active:from-purple-800 active:to-purple-900 transition-all duration-200 shadow-lg hover:shadow-xl">
         <CardContent className="p-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+              <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center shadow-lg backdrop-blur-sm">
                 <Coins className="w-8 h-8 text-white" />
               </div>
               <div>
-                <div className="text-sm text-text-primary-dark mb-1">Your Balance</div>
-                <div className="text-3xl text-text-high-contrast font-bold">{coins.toLocaleString()}</div>
-                <div className="text-sm text-text-primary-dark">Coins</div>
+                <div className="text-sm text-white/90 mb-1">Your Balance</div>
+                <div className="text-3xl text-white font-bold">{coins.toLocaleString()}</div>
+                <div className="text-sm text-white/90">Coins</div>
               </div>
             </div>
             <div className="text-right">
-              <div className="text-sm text-gray-600 mb-1">This Month</div>
-              <div className="flex items-center gap-1 text-green-600">
+              <div className="text-sm text-white/80 mb-1">This Month</div>
+              <div className="flex items-center gap-1 text-emerald-300">
                 <TrendingUp className="w-4 h-4" />
                 <span>+250 coins</span>
               </div>
@@ -102,16 +102,18 @@ export function CoinsSection({ coins }: CoinsSectionProps) {
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-to-br from-purple-50 to-pink-50 border-purple-200">
+          <Card className="bg-gradient-to-br from-purple-600 to-purple-700 border-purple-500 hover:from-purple-700 hover:to-purple-800 active:from-purple-800 active:to-purple-900 transition-all duration-200 shadow-lg hover:shadow-xl">
             <CardContent className="p-6">
               <div className="flex items-start gap-4">
-                <Gift className="w-8 h-8 text-purple-600 flex-shrink-0" />
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm flex-shrink-0">
+                  <Gift className="w-6 h-6 text-white" />
+                </div>
                 <div>
-                  <h3 className="text-text-primary-dark font-bold mb-2">Bonus Opportunity!</h3>
-                  <p className="text-sm text-text-on-light mb-4">
+                  <h3 className="text-white font-bold mb-2">Bonus Opportunity!</h3>
+                  <p className="text-sm text-white/90 mb-4">
                     Complete all 3 daily challenges this week to earn a bonus of 200 coins!
                   </p>
-                  <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+                  <Button className="bg-white/20 hover:bg-white/30 text-white backdrop-blur-sm border border-white/30">
                     View Challenge
                   </Button>
                 </div>
