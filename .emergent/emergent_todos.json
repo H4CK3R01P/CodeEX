@@ -1,30 +1,34 @@
 [
   {
-    "content": "Create ProfessionalDomainSelection with 8 professional domains",
+    "content": "Navigate to Social section and capture initial state",
     "status": "in_progress"
   },
   {
-    "content": "Create RoleSelection for current and target roles",
+    "content": "Test creating a new post",
     "status": "pending"
   },
   {
-    "content": "Build Skill Gap Analyzer as first screen",
+    "content": "Test liking a post and verify interaction count updates",
     "status": "pending"
   },
   {
-    "content": "Create Domain-Driven Career Roadmap",
+    "content": "Test commenting on a post",
     "status": "pending"
   },
   {
-    "content": "Build Professional Dashboard with all 10 features",
+    "content": "Test leaderboard tab and user highlighting",
     "status": "pending"
   },
   {
-    "content": "Update App.tsx routing for professional flow",
+    "content": "Verify infinite scroll functionality",
     "status": "pending"
   },
   {
-    "content": "Test complete professional user journey",
+    "content": "Check if actions are optimistic",
+    "status": "pending"
+  },
+  {
+    "content": "Generate comprehensive test report",
     "status": "pending"
   }
 ]
