@@ -617,6 +617,46 @@ export function Social({ userData }: SocialProps) {
 
         {/* Activity Feed Tab */}
         <TabsContent value="feed" className="space-y-6">
+          {/* Create Post Button */}
+          <div className="flex justify-end">
+            <Dialog open={showCreatePost} onOpenChange={setShowCreatePost}>
+              <DialogTrigger asChild>
+                <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Create Post
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Create a New Post</DialogTitle>
+                  <DialogDescription>
+                    Share your thoughts, achievements, or ask questions with the community.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-4 py-4">
+                  <Textarea
+                    placeholder="What's on your mind?"
+                    value={newPostText}
+                    onChange={(e) => setNewPostText(e.target.value)}
+                    className="min-h-[120px]"
+                  />
+                  <div className="flex justify-end gap-2">
+                    <Button variant="outline" onClick={() => setShowCreatePost(false)}>
+                      Cancel
+                    </Button>
+                    <Button 
+                      onClick={handleCreatePost}
+                      className="bg-gradient-to-r from-purple-500 to-blue-500"
+                      disabled={!newPostText.trim()}
+                    >
+                      Post
+                    </Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Main Feed */}
             <div className="lg:col-span-2 space-y-4">
@@ -628,7 +668,40 @@ export function Social({ userData }: SocialProps) {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {activityFeed.map((activity) => renderActivityCard(activity))}
+                  {activityFeed.slice(0, displayCount).map((activity) => renderActivityCard(activity))}
+                  
+                  {/* Load More Button */}
+                  {displayCount < activityFeed.length && (
+                    <div className="flex justify-center pt-4">
+                      <Button
+                        variant="outline"
+                        onClick={handleLoadMore}
+                        disabled={isLoadingMore}
+                        className="w-full"
+                      >
+                        {isLoadingMore ? (
+                          <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            Loading...
+                          </>
+                        ) : (
+                          <>
+                            Load More Posts
+                            <span className="ml-2 text-muted-foreground">
+                              ({activityFeed.length - displayCount} remaining)
+                            </span>
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  )}
+                  
+                  {displayCount >= activityFeed.length && activityFeed.length > 4 && (
+                    <div className="text-center py-4 text-muted-foreground">
+                      <CheckCircle2 className="w-5 h-5 inline mr-2" />
+                      You've reached the end of the feed
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </div>
