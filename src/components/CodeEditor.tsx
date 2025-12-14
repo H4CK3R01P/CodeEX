@@ -219,7 +219,7 @@ export function CodeEditor({
       </div>
 
       {/* Editor */}
-      <div className="flex-1 relative overflow-hidden" style={{ height: isFullscreen ? 'calc(100vh - 60px)' : height || '100%' }}>
+      <div className="flex-1 relative overflow-hidden min-h-0">
         <textarea
           ref={textareaRef}
           value={code}
@@ -235,6 +235,7 @@ export function CodeEditor({
             overflowWrap: 'normal',
             overflowY: 'auto',
             overflowX: 'auto',
+            minHeight: '100%',
           }}
           placeholder="// Start coding here..."
           spellCheck={false}
