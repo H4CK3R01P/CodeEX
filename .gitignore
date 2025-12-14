@@ -91,3 +91,7 @@ temp/
 
 # Documentation backups
 *.md.backup
+-e 
+# Environment files
+*.env
+*.env.*
