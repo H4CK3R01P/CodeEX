@@ -83,10 +83,45 @@ export function ProblemDetail({ problem, onBack, domainId }: ProblemDetailProps)
   const [selectedSubmission, setSelectedSubmission] = useState<Submission | null>(null);
   const [showSubmissionViewer, setShowSubmissionViewer] = useState(false);
 
+  // Load saved code and language from localStorage on mount
   useEffect(() => {
+    const savedCode = localStorage.getItem(`code_${problem.id}_${selectedLanguage}`);
+    const savedLanguage = localStorage.getItem(`language_${problem.id}`);
+    
+    if (savedLanguage) {
+      setSelectedLanguage(savedLanguage);
+    }
+    
+    if (savedCode) {
+      setCurrentCode(savedCode);
+    } else {
+      setCurrentCode(problem.starterCode || '');
+    }
+    
     setShowHints(new Array(problem.hints.length).fill(false));
     loadSubmissions();
   }, [problem.id]);
+
+  // Save code to localStorage whenever it changes
+  useEffect(() => {
+    if (currentCode && currentCode !== problem.starterCode) {
+      localStorage.setItem(`code_${problem.id}_${selectedLanguage}`, currentCode);
+    }
+  }, [currentCode, problem.id, selectedLanguage]);
+
+  // Save language preference
+  useEffect(() => {
+    localStorage.setItem(`language_${problem.id}`, selectedLanguage);
+    
+    // Load code for the new language if available
+    const savedCodeForLanguage = localStorage.getItem(`code_${problem.id}_${selectedLanguage}`);
+    if (savedCodeForLanguage) {
+      setCurrentCode(savedCodeForLanguage);
+    } else {
+      // Reset to starter code for this language if no saved code
+      setCurrentCode(problem.starterCode || '');
+    }
+  }, [selectedLanguage, problem.id]);
 
   const loadSubmissions = async () => {
     try {
