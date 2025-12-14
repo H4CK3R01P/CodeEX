@@ -1,15 +1,15 @@
 [
   {
     "content": "Analyze screenshot to identify readability issues",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Locate question/option rendering component",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Update question text color for readability",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Update option text colors for readability",
