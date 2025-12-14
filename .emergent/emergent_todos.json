@@ -5,14 +5,14 @@
   },
   {
     "content": "Update all text colors to white in instructions card",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Ensure color inheritance for nested elements",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Verify consistency across all states",
-    "status": "pending"
+    "status": "in_progress"
   }
 ]
