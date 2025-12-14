@@ -1,34 +1,34 @@
 [
   {
-    "content": "Navigate to Social section and capture initial state",
-    "status": "completed"
-  },
-  {
-    "content": "Test creating a new post",
-    "status": "completed"
-  },
-  {
-    "content": "Test liking a post and verify interaction count updates",
-    "status": "completed"
-  },
-  {
-    "content": "Test commenting on a post",
-    "status": "completed"
-  },
-  {
-    "content": "Test leaderboard tab and user highlighting",
-    "status": "completed"
-  },
-  {
-    "content": "Verify infinite scroll functionality",
-    "status": "completed"
-  },
-  {
-    "content": "Check if actions are optimistic",
-    "status": "completed"
-  },
-  {
-    "content": "Generate comprehensive test report",
+    "content": "Implement optimistic like functionality with state updates",
     "status": "in_progress"
+  },
+  {
+    "content": "Add comment input UI and comment thread display",
+    "status": "pending"
+  },
+  {
+    "content": "Create post creation dialog with form",
+    "status": "pending"
+  },
+  {
+    "content": "Add Leaderboard tab with user rankings",
+    "status": "pending"
+  },
+  {
+    "content": "Implement infinite scroll with load more",
+    "status": "pending"
+  },
+  {
+    "content": "Fix friend request state management",
+    "status": "pending"
+  },
+  {
+    "content": "Add visual feedback for all interactions",
+    "status": "pending"
+  },
+  {
+    "content": "Test all fixed features",
+    "status": "pending"
   }
 ]
