@@ -484,6 +484,7 @@ async def generate_hint(
 async def generate_explanation(
     request: ExplanationRequest,
     background_tasks: BackgroundTasks,
+    user_id: str = "anonymous",  # TODO: Get from auth middleware
     _: None = Depends(check_ai_enabled)
 ):
     """
@@ -495,8 +496,14 @@ async def generate_explanation(
     - detailed: Comprehensive with edge cases
     - comprehensive: Everything + real-world applications
     
+    **Rate Limit:** 3 requests per minute per user
+    
     **Note:** Explanations are verified for accuracy.
     """
+    # Check rate limit (3/min)
+    prompt_hash = f"{request.topic}:{request.detail_level}"
+    check_rate_limit("generate-explanation", user_id, prompt_hash)
+    
     try:
         from backend.ai.orchestrator import (
             CodeEXOrchestrator,
