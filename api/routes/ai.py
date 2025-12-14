@@ -655,7 +655,7 @@ async def generate_explanation(
                 request.include_examples
             )
             
-            return ExplanationResponse(
+            response = ExplanationResponse(
                 success=True,
                 explanation=explanation_data['explanation'],
                 examples=explanation_data.get('examples'),
@@ -666,6 +666,21 @@ async def generate_explanation(
                 },
                 request_id=result.request_id
             )
+            
+            # Cache successful response
+            if cache_key:
+                set_cached_response(
+                    cache_key,
+                    "generate-explanation",
+                    response.dict(),
+                    metadata={
+                        'topic': request.topic,
+                        'detail_level': request.detail_level,
+                        'generation_time_ms': result.total_time_ms
+                    }
+                )
+            
+            return response
         else:
             logger.warning(f"Explanation generation failed: {result.status}")
             
