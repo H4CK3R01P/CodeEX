@@ -1,30 +1,26 @@
 [
   {
-    "content": "Create ProfessionalDomainSelection with 8 professional domains",
+    "content": "Copy CodeEX repository to /app directory",
     "status": "in_progress"
   },
   {
-    "content": "Create RoleSelection for current and target roles",
+    "content": "Install Python backend dependencies",
     "status": "pending"
   },
   {
-    "content": "Build Skill Gap Analyzer as first screen",
+    "content": "Install frontend dependencies",
     "status": "pending"
   },
   {
-    "content": "Create Domain-Driven Career Roadmap",
+    "content": "Configure environment and services",
     "status": "pending"
   },
   {
-    "content": "Build Professional Dashboard with all 10 features",
+    "content": "Start backend and frontend servers",
     "status": "pending"
   },
   {
-    "content": "Update App.tsx routing for professional flow",
-    "status": "pending"
-  },
-  {
-    "content": "Test complete professional user journey",
+    "content": "Verify application is running",
     "status": "pending"
   }
 ]
