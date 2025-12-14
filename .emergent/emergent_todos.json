@@ -1,27 +1,27 @@
 [
   {
     "content": "Create AI interface structure and base files",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Define AI request/response schemas with strict validation",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Create AI interface protocols and abstract classes",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Implement mock AI provider (no real calls)",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Create AI configuration and constants",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Add validation utilities for AI data",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Document AI interface layer",
