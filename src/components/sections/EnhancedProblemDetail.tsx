@@ -583,7 +583,7 @@ export function EnhancedProblemDetail({ problem, onBack, domainId }: EnhancedPro
                 <ResizableHandle />
 
                 {/* Bottom: Test Cases + Console + Result */}
-                <ResizablePanel defaultSize={40} minSize={20}>
+                <ResizablePanel defaultSize={35} minSize={25}>
                   <Tabs 
                     value={activeTab === 'testcase' || activeTab === 'console' || activeTab === 'testResult' ? activeTab : 'testcase'} 
                     onValueChange={setActiveTab} 
