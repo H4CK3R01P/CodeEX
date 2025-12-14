@@ -1,26 +1,26 @@
 [
   {
-    "content": "Create structured logging module for AI pipeline",
-    "status": "completed"
+    "content": "Create rate limiter module with per-user tracking",
+    "status": "in_progress"
   },
   {
-    "content": "Create ai_metrics.py for metrics tracking",
-    "status": "completed"
+    "content": "Create abuse detection system",
+    "status": "pending"
   },
   {
-    "content": "Integrate logging into brain orchestrator",
-    "status": "completed"
+    "content": "Integrate rate limiting into AI endpoints",
+    "status": "pending"
   },
   {
-    "content": "Create admin metrics endpoint",
-    "status": "completed"
+    "content": "Add feature flag and configuration",
+    "status": "pending"
   },
   {
-    "content": "Add safety checks for sensitive data",
-    "status": "completed"
+    "content": "Test rate limiting and error responses",
+    "status": "pending"
   },
   {
-    "content": "Create documentation and examples",
-    "status": "completed"
+    "content": "Create documentation",
+    "status": "pending"
   }
 ]
