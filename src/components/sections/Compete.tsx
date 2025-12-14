@@ -30,40 +30,40 @@ export function Compete({ userData }: CompeteProps) {
 
       {/* Stats */}
       <div className="grid md:grid-cols-4 gap-4 mb-6">
-        <Card className="bg-gradient-to-br from-yellow-500 to-orange-500">
+        <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-2 mb-2">
-              <Trophy className="w-5 h-5 text-white" />
+              <Trophy className="w-5 h-5 text-yellow-600" />
             </div>
-            <div className="text-2xl text-white font-bold mb-1">12</div>
-            <div className="text-sm text-white/90">{isExam ? 'Competitions' : 'Contests'} Participated</div>
+            <div className="text-2xl text-gray-900 mb-1">12</div>
+            <div className="text-sm text-gray-600">{isExam ? 'Competitions' : 'Contests'} Participated</div>
           </CardContent>
         </Card>
-        <Card className="bg-gradient-to-br from-purple-500 to-pink-500">
+        <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-2 mb-2">
-              <Award className="w-5 h-5 text-white" />
+              <Award className="w-5 h-5 text-purple-600" />
             </div>
-            <div className="text-2xl text-white font-bold mb-1">3</div>
-            <div className="text-sm text-white/90">Podium Finishes</div>
+            <div className="text-2xl text-gray-900 mb-1">3</div>
+            <div className="text-sm text-gray-600">Podium Finishes</div>
           </CardContent>
         </Card>
-        <Card className="bg-gradient-to-br from-green-500 to-emerald-500">
+        <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-2 mb-2">
-              <TrendingUp className="w-5 h-5 text-white" />
+              <TrendingUp className="w-5 h-5 text-green-600" />
             </div>
-            <div className="text-2xl text-white font-bold mb-1">{domainData.stats[1].value}</div>
-            <div className="text-sm text-white/90">Current Rating</div>
+            <div className="text-2xl text-gray-900 mb-1">{domainData.stats[1].value}</div>
+            <div className="text-sm text-gray-600">Current Rating</div>
           </CardContent>
         </Card>
-        <Card className="bg-gradient-to-br from-blue-500 to-cyan-500">
+        <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-2 mb-2">
-              <Users className="w-5 h-5 text-white" />
+              <Users className="w-5 h-5 text-blue-600" />
             </div>
-            <div className="text-2xl text-white font-bold mb-1">#342</div>
-            <div className="text-sm text-white/90">Global Rank</div>
+            <div className="text-2xl text-gray-900 mb-1">#342</div>
+            <div className="text-sm text-gray-600">Global Rank</div>
           </CardContent>
         </Card>
       </div>

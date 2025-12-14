@@ -271,13 +271,13 @@ export function TestTaking({ test, onSubmit }: TestTakingProps) {
             </div>
 
             {/* Question */}
-            <Card className="mb-6 bg-white">
+            <Card className="mb-6">
               <CardContent className="p-6">
                 <div className="mb-6">
                   <div className="flex items-start gap-3">
-                    <Badge variant="outline" className="mt-1 font-bold">Q{currentQ.id}</Badge>
+                    <Badge variant="outline" className="mt-1">Q{currentQ.id}</Badge>
                     <div className="flex-1">
-                      <p className="text-gray-900 leading-relaxed font-semibold text-base">{currentQ.question}</p>
+                      <p className="text-gray-900 leading-relaxed">{currentQ.question}</p>
                     </div>
                   </div>
                 </div>
@@ -295,19 +295,19 @@ export function TestTaking({ test, onSubmit }: TestTakingProps) {
                           className={`w-full text-left p-4 rounded-lg border-2 transition-all ${
                             isSelected
                               ? 'border-indigo-600 bg-indigo-50'
-                              : 'border-gray-300 hover:border-indigo-400 hover:bg-gray-50'
+                              : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                           }`}
                         >
                           <div className="flex items-start gap-3">
                             <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center flex-shrink-0 ${
                               isSelected
                                 ? 'border-indigo-600 bg-indigo-600'
-                                : 'border-gray-400'
+                                : 'border-gray-300'
                             }`}>
                               {isSelected && <div className="w-2 h-2 rounded-full bg-white" />}
                             </div>
-                            <span className="text-sm text-gray-900 font-medium">
-                              <span className="text-gray-900 font-bold mr-2">({optionLabel})</span>
+                            <span className="text-sm text-gray-700">
+                              <span className="text-gray-900 mr-2">({optionLabel})</span>
                               {option}
                             </span>
                           </div>
@@ -317,7 +317,7 @@ export function TestTaking({ test, onSubmit }: TestTakingProps) {
                   </div>
                 ) : (
                   <div>
-                    <label className="text-sm text-gray-900 font-semibold mb-2 block">
+                    <label className="text-sm text-gray-700 mb-2 block">
                       Enter your answer (rounded to nearest integer):
                     </label>
                     <Input
@@ -325,7 +325,7 @@ export function TestTaking({ test, onSubmit }: TestTakingProps) {
                       value={answers[currentQuestion] || ''}
                       onChange={(e) => handleAnswer(e.target.value)}
                       placeholder="Enter numerical answer"
-                      className="max-w-xs text-gray-900 font-medium"
+                      className="max-w-xs"
                     />
                   </div>
                 )}

@@ -19,6 +19,8 @@ import {
   XCircle,
   Flame,
   Star,
+  Download,
+  FileText,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
@@ -34,6 +36,7 @@ import {
 } from '../ui/select';
 import { UserData } from '../../App';
 import { getDomainConfig } from '../../utils/domainConfig';
+import { toast } from 'sonner@2.0.3';
 
 interface AnalyticsProps {
   userData: UserData;
@@ -120,6 +123,78 @@ export function Analytics({ userData }: AnalyticsProps) {
     return null;
   };
 
+  const handleExportCSV = () => {
+    // Generate CSV data
+    const csvData = [
+      ['Analytics Report', `${userData.name}`],
+      ['Time Range', timeRange === '7d' ? 'Last 7 days' : timeRange === '30d' ? 'Last 30 days' : timeRange === '90d' ? 'Last 90 days' : 'All time'],
+      ['Generated', new Date().toLocaleDateString()],
+      [],
+      ['Overview Statistics'],
+      ['Metric', 'Value', 'Change'],
+      ['Problems Solved', analytics.overview.totalSolved, analytics.overview.solvedChange],
+      ['Accuracy', `${analytics.overview.accuracy}%`, analytics.overview.accuracyChange],
+      ['Current Streak', `${analytics.overview.streak} days`, analytics.overview.streakChange],
+      ['Global Rank', analytics.overview.rank, analytics.overview.rankChange],
+      [],
+      ['Problem Difficulty Breakdown'],
+      ['Difficulty', 'Solved', 'Total', 'Percentage'],
+      ['Easy', analytics.problemStats.easy.solved, analytics.problemStats.easy.total, `${((analytics.problemStats.easy.solved / analytics.problemStats.easy.total) * 100).toFixed(1)}%`],
+      ['Medium', analytics.problemStats.medium.solved, analytics.problemStats.medium.total, `${((analytics.problemStats.medium.solved / analytics.problemStats.medium.total) * 100).toFixed(1)}%`],
+      ['Hard', analytics.problemStats.hard.solved, analytics.problemStats.hard.total, `${((analytics.problemStats.hard.solved / analytics.problemStats.hard.total) * 100).toFixed(1)}%`],
+      [],
+      ['Category Performance'],
+      ['Category', 'Solved', 'Total', 'Accuracy'],
+      ...analytics.categoryBreakdown.map(cat => [cat.name, cat.solved, cat.total, `${cat.accuracy}%`]),
+      [],
+      ['Language Statistics'],
+      ['Language', 'Problems', 'Percentage'],
+      ...analytics.languageStats.map(lang => [lang.language, lang.problems, `${lang.percentage}%`]),
+      [],
+      ['Strengths'],
+      ...analytics.strengths.map(s => [s]),
+      [],
+      ['Areas to Improve'],
+      ...analytics.weaknesses.map(w => [w]),
+    ];
+
+    const csvContent = csvData.map(row => row.join(',')).join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `analytics_report_${Date.now()}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    toast.success('Analytics report downloaded successfully!');
+  };
+
+  const handleExportJSON = () => {
+    // Generate JSON export
+    const exportData = {
+      user: userData.name,
+      timeRange,
+      generated: new Date().toISOString(),
+      analytics: analytics,
+    };
+
+    const jsonContent = JSON.stringify(exportData, null, 2);
+    const blob = new Blob([jsonContent], { type: 'application/json' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `analytics_data_${Date.now()}.json`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    toast.success('Analytics data exported successfully!');
+  };
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[500px]">
@@ -139,7 +214,7 @@ export function Analytics({ userData }: AnalyticsProps) {
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex items-center justify-between"
+        className="flex items-center justify-between flex-wrap gap-4"
       >
         <div>
           <h1 className="text-3xl font-bold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent">
@@ -149,17 +224,37 @@ export function Analytics({ userData }: AnalyticsProps) {
             Track your progress and identify areas for improvement
           </p>
         </div>
-        <Select value={timeRange} onValueChange={setTimeRange}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Select time range" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="7d">Last 7 days</SelectItem>
-            <SelectItem value="30d">Last 30 days</SelectItem>
-            <SelectItem value="90d">Last 90 days</SelectItem>
-            <SelectItem value="all">All time</SelectItem>
-          </SelectContent>
-        </Select>
+        <div className="flex items-center gap-2">
+          <Select value={timeRange} onValueChange={setTimeRange}>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Select time range" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="7d">Last 7 days</SelectItem>
+              <SelectItem value="30d">Last 30 days</SelectItem>
+              <SelectItem value="90d">Last 90 days</SelectItem>
+              <SelectItem value="all">All time</SelectItem>
+            </SelectContent>
+          </Select>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleExportCSV}
+            className="gap-2"
+          >
+            <FileText className="w-4 h-4" />
+            Export CSV
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleExportJSON}
+            className="gap-2"
+          >
+            <Download className="w-4 h-4" />
+            Export JSON
+          </Button>
+        </div>
       </motion.div>
 
       {/* Overview Stats */}

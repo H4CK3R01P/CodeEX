@@ -84,26 +84,26 @@ export function TestInstructions({ test, onBack, onBegin }: TestInstructionsProp
       <div className="flex-1 overflow-y-auto p-6">
         <div className="max-w-5xl mx-auto">
           {currentPage === 1 ? (
-            <Card className="bg-gradient-to-br from-purple-600 to-purple-700 border-purple-500 shadow-lg">
-              <CardContent className="p-6 text-white">
+            <Card>
+              <CardContent className="p-6">
                 <div className="mb-6">
                   <div className="flex items-center gap-2 mb-4">
-                    <AlertCircle className="w-5 h-5 text-white" />
-                    <h3 className="text-white font-bold">Official Test Instructions</h3>
+                    <AlertCircle className="w-5 h-5 text-indigo-600" />
+                    <h3 className="text-gray-900">Official Test Instructions</h3>
                   </div>
-                  <p className="text-sm text-white/90">
+                  <p className="text-sm text-gray-600">
                     Please read the instructions carefully before starting the test.
                   </p>
                 </div>
 
-                <ScrollArea className="h-[500px] pr-4 text-white">
-                  <div className="space-y-6 text-white">
+                <ScrollArea className="h-[500px] pr-4">
+                  <div className="space-y-6">
                     {officialInstructions.map((section, idx) => (
-                      <div key={idx} className="text-white">
-                        <h4 className="text-white font-semibold mb-3">{section.section}</h4>
-                        <ol className="list-decimal list-inside space-y-2 text-white">
+                      <div key={idx}>
+                        <h4 className="text-gray-900 mb-3">{section.section}</h4>
+                        <ol className="list-decimal list-inside space-y-2">
                           {section.items.map((item, itemIdx) => (
-                            <li key={itemIdx} className="text-sm text-white leading-relaxed">
+                            <li key={itemIdx} className="text-sm text-gray-700 leading-relaxed">
                               {item}
                             </li>
                           ))}

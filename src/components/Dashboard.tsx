@@ -60,6 +60,34 @@ export function Dashboard({ userData }: DashboardProps) {
   const terminology = getDomainTerminology(userData.domain || '');
   const isCodingDomain = config.category === 'coding';
 
+  // Handle logout - clear session and reload page
+  const handleLogout = () => {
+    // Close the menu
+    setShowUserMenu(false);
+    
+    // Show confirmation toast
+    if (typeof window !== 'undefined') {
+      // Clear any stored session data
+      sessionStorage.clear();
+      localStorage.removeItem('userData');
+      
+      // Reload the page to reset to login screen
+      setTimeout(() => {
+        window.location.reload();
+      }, 300);
+    }
+  };
+
+  // Handle settings navigation
+  const handleSettings = () => {
+    // Close the menu
+    setShowUserMenu(false);
+    
+    // For now, show a toast notification
+    // In the future, this can navigate to a settings page
+    alert('Settings feature coming soon! You can change your preferences here.');
+  };
+
   const navItems = [
     { id: 'dashboard' as Section, label: 'Dashboard', icon: <Code className="w-4 h-4" />, gradient: 'from-purple-500 to-pink-500' },
     { id: 'daily' as Section, label: 'Daily', icon: <Calendar className="w-4 h-4" />, gradient: 'from-indigo-500 to-purple-500' },
@@ -237,6 +265,7 @@ export function Dashboard({ userData }: DashboardProps) {
                       <Button 
                         variant="ghost" 
                         className="w-full justify-start hover:bg-purple-500/10"
+                        onClick={handleSettings}
                       >
                         <Settings className="w-4 h-4 mr-2" />
                         Settings
@@ -244,6 +273,7 @@ export function Dashboard({ userData }: DashboardProps) {
                       <Button 
                         variant="ghost" 
                         className="w-full justify-start text-red-400 hover:bg-red-500/10 hover:text-red-400"
+                        onClick={handleLogout}
                       >
                         <LogOut className="w-4 h-4 mr-2" />
                         Logout

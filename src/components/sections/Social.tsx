@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Users,
@@ -22,6 +22,9 @@ import {
   UserCheck,
   UserX,
   Activity,
+  Plus,
+  X,
+  Loader2,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
@@ -31,6 +34,15 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { Separator } from '../ui/separator';
 import { ScrollArea } from '../ui/scroll-area';
+import { Textarea } from '../ui/textarea';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '../ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,10 +56,40 @@ interface SocialProps {
   userData: UserData;
 }
 
+interface ActivityComment {
+  id: number;
+  user: string;
+  username: string;
+  text: string;
+  time: string;
+}
+
+interface ActivityItem {
+  id: number;
+  user: string;
+  username: string;
+  action: string;
+  problem?: string;
+  difficulty?: string;
+  time: string;
+  likes: number;
+  comments: ActivityComment[];
+  language?: string;
+  achievement?: string;
+  contest?: string;
+  rank?: number;
+  liked?: boolean;
+}
+
 export function Social({ userData }: SocialProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('feed');
-  const [commentText, setCommentText] = useState('');
+  const [commentText, setCommentText] = useState<{ [key: number]: string }>({});
+  const [showComments, setShowComments] = useState<{ [key: number]: boolean }>({});
+  const [showCreatePost, setShowCreatePost] = useState(false);
+  const [newPostText, setNewPostText] = useState('');
+  const [displayCount, setDisplayCount] = useState(4);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   // Mock data - in production, fetch from backend
   const [friends] = useState([
@@ -97,7 +139,8 @@ export function Social({ userData }: SocialProps) {
     },
   ]);
 
-  const [activityFeed] = useState([
+  // Activity feed with proper state management
+  const [activityFeed, setActivityFeed] = useState<ActivityItem[]>([
     {
       id: 1,
       user: 'Alex Johnson',
@@ -107,8 +150,9 @@ export function Social({ userData }: SocialProps) {
       difficulty: 'Easy',
       time: '5m ago',
       likes: 12,
-      comments: 3,
+      comments: [],
       language: 'JavaScript',
+      liked: false,
     },
     {
       id: 2,
@@ -118,7 +162,8 @@ export function Social({ userData }: SocialProps) {
       achievement: '100 Day Streak',
       time: '15m ago',
       likes: 45,
-      comments: 8,
+      comments: [],
+      liked: false,
     },
     {
       id: 3,
@@ -129,8 +174,9 @@ export function Social({ userData }: SocialProps) {
       difficulty: 'Medium',
       time: '1h ago',
       likes: 23,
-      comments: 5,
+      comments: [],
       language: 'Python',
+      liked: false,
     },
     {
       id: 4,
@@ -141,13 +187,78 @@ export function Social({ userData }: SocialProps) {
       rank: 234,
       time: '2h ago',
       likes: 18,
-      comments: 2,
+      comments: [],
+      liked: false,
+    },
+    // Additional mock data for infinite scroll
+    {
+      id: 5,
+      user: 'Alex Johnson',
+      username: '@alexj',
+      action: 'solved',
+      problem: 'Binary Search',
+      difficulty: 'Easy',
+      time: '3h ago',
+      likes: 8,
+      comments: [],
+      language: 'Java',
+      liked: false,
+    },
+    {
+      id: 6,
+      user: 'Mike Wilson',
+      username: '@mikew',
+      action: 'achieved',
+      achievement: '50 Problems Solved',
+      time: '4h ago',
+      likes: 32,
+      comments: [],
+      liked: false,
+    },
+    {
+      id: 7,
+      user: 'Sarah Chen',
+      username: '@sarach',
+      action: 'solved',
+      problem: 'Merge K Sorted Lists',
+      difficulty: 'Hard',
+      time: '5h ago',
+      likes: 67,
+      comments: [],
+      language: 'C++',
+      liked: false,
+    },
+    {
+      id: 8,
+      user: 'Emma Davis',
+      username: '@emmad',
+      action: 'ranked',
+      contest: 'Weekly Contest 371',
+      rank: 189,
+      time: '6h ago',
+      likes: 25,
+      comments: [],
+      liked: false,
     },
   ]);
 
-  const [friendRequests] = useState([
+  const [friendRequests, setFriendRequests] = useState([
     { id: 1, name: 'John Doe', username: '@johnd', mutualFriends: 3 },
     { id: 2, name: 'Jane Smith', username: '@janes', mutualFriends: 5 },
+  ]);
+
+  // Leaderboard data
+  const [leaderboard] = useState([
+    { id: 1, rank: 1, name: 'Code Master', username: '@codemaster', solved: 1245, points: 15670, change: 0 },
+    { id: 2, rank: 2, name: 'Algorithm Pro', username: '@algopro', solved: 1189, points: 14890, change: 1 },
+    { id: 3, rank: 3, name: 'Mike Wilson', username: '@mikew', solved: 312, points: 4560, change: -1 },
+    { id: 4, rank: 4, name: 'Data Wizard', username: '@datawiz', solved: 298, points: 4321, change: 2 },
+    { id: 5, rank: 5, name: 'Alex Johnson', username: '@alexj', solved: 234, points: 3890, change: 0 },
+    { id: 6, rank: 6, name: userData.name, username: '@' + userData.name.toLowerCase().replace(/\s+/g, ''), solved: 156, points: 2340, change: 3, isCurrentUser: true },
+    { id: 7, rank: 7, name: 'Sarah Chen', username: '@sarach', solved: 189, points: 2890, change: -2 },
+    { id: 8, rank: 8, name: 'Emma Davis', username: '@emmad', solved: 156, points: 2340, change: 1 },
+    { id: 9, rank: 9, name: 'Tech Ninja', username: '@techninja', solved: 145, points: 2156, change: 0 },
+    { id: 10, rank: 10, name: 'Code Warrior', username: '@codewar', solved: 134, points: 2045, change: -1 },
   ]);
 
   const getDifficultyColor = (difficulty: string) => {
@@ -165,27 +276,108 @@ export function Social({ userData }: SocialProps) {
 
   const handleAddFriend = (name: string) => {
     toast.success(`Friend request sent to ${name}!`);
+    // In production: API call here
   };
 
-  const handleAcceptRequest = (name: string) => {
+  const handleAcceptRequest = (id: number, name: string) => {
+    // Optimistic update: remove from requests
+    setFriendRequests(prev => prev.filter(req => req.id !== id));
     toast.success(`You are now friends with ${name}!`);
+    // In production: API call here
   };
 
-  const handleRejectRequest = (name: string) => {
+  const handleRejectRequest = (id: number, name: string) => {
+    // Optimistic update: remove from requests
+    setFriendRequests(prev => prev.filter(req => req.id !== id));
     toast.info(`Friend request from ${name} declined.`);
+    // In production: API call here
   };
 
   const handleLike = (activityId: number) => {
-    toast.success('Liked!');
+    // Optimistic update
+    setActivityFeed(prev => prev.map(activity =>
+      activity.id === activityId
+        ? {
+            ...activity,
+            likes: activity.liked ? activity.likes - 1 : activity.likes + 1,
+            liked: !activity.liked
+          }
+        : activity
+    ));
+    toast.success(activityFeed.find(a => a.id === activityId)?.liked ? 'Unliked!' : 'Liked!');
+    // In production: API call here
   };
 
-  const handleComment = () => {
-    if (!commentText.trim()) return;
+  const handleComment = (activityId: number) => {
+    const text = commentText[activityId]?.trim();
+    if (!text) return;
+
+    // Optimistic update: add comment to feed
+    const newComment: ActivityComment = {
+      id: Date.now(),
+      user: userData.name,
+      username: '@' + userData.name.toLowerCase().replace(/\s+/g, ''),
+      text: text,
+      time: 'Just now',
+    };
+
+    setActivityFeed(prev => prev.map(activity =>
+      activity.id === activityId
+        ? { ...activity, comments: [...activity.comments, newComment] }
+        : activity
+    ));
+
+    setCommentText(prev => ({ ...prev, [activityId]: '' }));
     toast.success('Comment posted!');
-    setCommentText('');
+    // In production: API call here
   };
 
-  const renderActivityCard = (activity: any) => {
+  const toggleComments = (activityId: number) => {
+    setShowComments(prev => ({
+      ...prev,
+      [activityId]: !prev[activityId]
+    }));
+  };
+
+  const handleCreatePost = () => {
+    if (!newPostText.trim()) {
+      toast.error('Please write something!');
+      return;
+    }
+
+    // Optimistic update: add new post to feed
+    const newPost: ActivityItem = {
+      id: Date.now(),
+      user: userData.name,
+      username: '@' + userData.name.toLowerCase().replace(/\s+/g, ''),
+      action: 'posted',
+      time: 'Just now',
+      likes: 0,
+      comments: [],
+      liked: false,
+    };
+
+    setActivityFeed(prev => [newPost, ...prev]);
+    setNewPostText('');
+    setShowCreatePost(false);
+    toast.success('Post created successfully!');
+    // In production: API call here
+  };
+
+  const handleLoadMore = () => {
+    setIsLoadingMore(true);
+    // Simulate loading
+    setTimeout(() => {
+      setDisplayCount(prev => Math.min(prev + 4, activityFeed.length));
+      setIsLoadingMore(false);
+      if (displayCount + 4 >= activityFeed.length) {
+        toast.info('All posts loaded!');
+      }
+    }, 1000);
+    // In production: Fetch more data from API
+  };
+
+  const renderActivityCard = (activity: ActivityItem) => {
     const getActivityContent = () => {
       switch (activity.action) {
         case 'solved':
@@ -194,9 +386,11 @@ export function Social({ userData }: SocialProps) {
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-muted-foreground">solved</span>
                 <span className="font-semibold text-purple-500">{activity.problem}</span>
-                <Badge className={getDifficultyColor(activity.difficulty)}>
-                  {activity.difficulty}
-                </Badge>
+                {activity.difficulty && (
+                  <Badge className={getDifficultyColor(activity.difficulty)}>
+                    {activity.difficulty}
+                  </Badge>
+                )}
                 {activity.language && (
                   <Badge variant="outline" className="text-blue-500">
                     <Code className="w-3 h-3 mr-1" />
@@ -223,6 +417,12 @@ export function Social({ userData }: SocialProps) {
               <span className="font-semibold text-orange-500">#{activity.rank}</span>
               <span className="text-muted-foreground">in</span>
               <span className="font-semibold text-blue-500">{activity.contest}</span>
+            </div>
+          );
+        case 'posted':
+          return (
+            <div className="text-foreground">
+              {newPostText || 'Shared an update'}
             </div>
           );
         default:
@@ -282,29 +482,99 @@ export function Social({ userData }: SocialProps) {
             <Button
               variant="ghost"
               size="sm"
-              className="text-muted-foreground hover:text-pink-500 transition-colors"
+              className={`transition-colors ${activity.liked ? 'text-pink-500' : 'text-muted-foreground hover:text-pink-500'}`}
               onClick={() => handleLike(activity.id)}
             >
-              <Heart className="w-4 h-4 mr-1" />
+              <Heart className={`w-4 h-4 mr-1 ${activity.liked ? 'fill-pink-500' : ''}`} />
               {activity.likes}
             </Button>
             <Button
               variant="ghost"
               size="sm"
               className="text-muted-foreground hover:text-blue-500 transition-colors"
+              onClick={() => toggleComments(activity.id)}
             >
               <MessageSquare className="w-4 h-4 mr-1" />
-              {activity.comments}
+              {activity.comments.length}
             </Button>
             <Button
               variant="ghost"
               size="sm"
               className="text-muted-foreground hover:text-green-500 transition-colors"
+              onClick={() => toast.info('Share feature coming soon!')}
             >
               <Share2 className="w-4 h-4 mr-1" />
               Share
             </Button>
           </div>
+
+          {/* Comments Section */}
+          <AnimatePresence>
+            {showComments[activity.id] && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="pl-[52px] space-y-3 border-t border-border/30 pt-3 mt-3"
+              >
+                {/* Existing Comments */}
+                {activity.comments.length > 0 && (
+                  <div className="space-y-2">
+                    {activity.comments.map((comment) => (
+                      <div key={comment.id} className="flex gap-2">
+                        <Avatar className="w-7 h-7 border border-purple-500/30">
+                          <AvatarFallback className="bg-gradient-to-br from-blue-500 to-cyan-500 text-white text-xs">
+                            {comment.user.split(' ').map((n: string) => n[0]).join('')}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1 bg-muted/50 rounded-lg p-2">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-sm font-semibold">{comment.user}</span>
+                            <span className="text-xs text-muted-foreground">{comment.time}</span>
+                          </div>
+                          <p className="text-sm">{comment.text}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Comment Input */}
+                <div className="flex gap-2">
+                  <Avatar className="w-8 h-8 border-2 border-purple-500/50">
+                    <AvatarFallback className="bg-gradient-to-br from-purple-500 to-pink-500 text-white text-xs">
+                      {userData.name.split(' ').map((n: string) => n[0]).join('')}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 flex gap-2">
+                    <Input
+                      placeholder="Write a comment..."
+                      value={commentText[activity.id] || ''}
+                      onChange={(e) => setCommentText(prev => ({
+                        ...prev,
+                        [activity.id]: e.target.value
+                      }))}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                          e.preventDefault();
+                          handleComment(activity.id);
+                        }
+                      }}
+                      className="flex-1"
+                    />
+                    <Button
+                      size="sm"
+                      onClick={() => handleComment(activity.id)}
+                      disabled={!commentText[activity.id]?.trim()}
+                      className="bg-gradient-to-r from-purple-500 to-blue-500"
+                    >
+                      <Send className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </motion.div>
     );
@@ -327,7 +597,7 @@ export function Social({ userData }: SocialProps) {
       </motion.div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="feed">Activity Feed</TabsTrigger>
           <TabsTrigger value="friends">
             Friends
@@ -339,10 +609,54 @@ export function Social({ userData }: SocialProps) {
               <Badge className="ml-2 bg-red-500">{friendRequests.length}</Badge>
             )}
           </TabsTrigger>
+          <TabsTrigger value="leaderboard">
+            <Trophy className="w-4 h-4 mr-1" />
+            Leaderboard
+          </TabsTrigger>
         </TabsList>
 
         {/* Activity Feed Tab */}
         <TabsContent value="feed" className="space-y-6">
+          {/* Create Post Button */}
+          <div className="flex justify-end">
+            <Dialog open={showCreatePost} onOpenChange={setShowCreatePost}>
+              <DialogTrigger asChild>
+                <Button className="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600">
+                  <Plus className="w-4 h-4 mr-2" />
+                  Create Post
+                </Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Create a New Post</DialogTitle>
+                  <DialogDescription>
+                    Share your thoughts, achievements, or ask questions with the community.
+                  </DialogDescription>
+                </DialogHeader>
+                <div className="space-y-4 py-4">
+                  <Textarea
+                    placeholder="What's on your mind?"
+                    value={newPostText}
+                    onChange={(e) => setNewPostText(e.target.value)}
+                    className="min-h-[120px]"
+                  />
+                  <div className="flex justify-end gap-2">
+                    <Button variant="outline" onClick={() => setShowCreatePost(false)}>
+                      Cancel
+                    </Button>
+                    <Button 
+                      onClick={handleCreatePost}
+                      className="bg-gradient-to-r from-purple-500 to-blue-500"
+                      disabled={!newPostText.trim()}
+                    >
+                      Post
+                    </Button>
+                  </div>
+                </div>
+              </DialogContent>
+            </Dialog>
+          </div>
+
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             {/* Main Feed */}
             <div className="lg:col-span-2 space-y-4">
@@ -354,7 +668,40 @@ export function Social({ userData }: SocialProps) {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {activityFeed.map((activity) => renderActivityCard(activity))}
+                  {activityFeed.slice(0, displayCount).map((activity) => renderActivityCard(activity))}
+                  
+                  {/* Load More Button */}
+                  {displayCount < activityFeed.length && (
+                    <div className="flex justify-center pt-4">
+                      <Button
+                        variant="outline"
+                        onClick={handleLoadMore}
+                        disabled={isLoadingMore}
+                        className="w-full"
+                      >
+                        {isLoadingMore ? (
+                          <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            Loading...
+                          </>
+                        ) : (
+                          <>
+                            Load More Posts
+                            <span className="ml-2 text-muted-foreground">
+                              ({activityFeed.length - displayCount} remaining)
+                            </span>
+                          </>
+                        )}
+                      </Button>
+                    </div>
+                  )}
+                  
+                  {displayCount >= activityFeed.length && activityFeed.length > 4 && (
+                    <div className="text-center py-4 text-muted-foreground">
+                      <CheckCircle2 className="w-5 h-5 inline mr-2" />
+                      You've reached the end of the feed
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             </div>
@@ -586,7 +933,7 @@ export function Social({ userData }: SocialProps) {
                       <Button
                         size="sm"
                         className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
-                        onClick={() => handleAcceptRequest(request.name)}
+                        onClick={() => handleAcceptRequest(request.id, request.name)}
                       >
                         <UserCheck className="w-4 h-4 mr-1" />
                         Accept
@@ -594,7 +941,7 @@ export function Social({ userData }: SocialProps) {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => handleRejectRequest(request.name)}
+                        onClick={() => handleRejectRequest(request.id, request.name)}
                       >
                         <UserX className="w-4 h-4 mr-1" />
                         Decline
@@ -654,6 +1001,124 @@ export function Social({ userData }: SocialProps) {
                   </Button>
                 </div>
               ))}
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        {/* Leaderboard Tab */}
+        <TabsContent value="leaderboard" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="flex items-center gap-2">
+                  <Trophy className="w-5 h-5 text-yellow-500" />
+                  Global Leaderboard
+                </CardTitle>
+                <Badge variant="outline" className="text-purple-500">
+                  Weekly Rankings
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {leaderboard.map((entry, index) => (
+                  <motion.div
+                    key={entry.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    className={`flex items-center justify-between p-4 rounded-xl border transition-all ${
+                      entry.isCurrentUser
+                        ? 'border-purple-500 bg-gradient-to-r from-purple-500/10 to-pink-500/10 shadow-lg shadow-purple-500/20'
+                        : 'border-border/50 bg-card/30 hover:bg-card/50'
+                    }`}
+                  >
+                    <div className="flex items-center gap-4">
+                      {/* Rank Badge */}
+                      <div
+                        className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${
+                          entry.rank === 1
+                            ? 'bg-gradient-to-br from-yellow-400 to-yellow-600 text-white shadow-lg shadow-yellow-500/50'
+                            : entry.rank === 2
+                            ? 'bg-gradient-to-br from-gray-300 to-gray-500 text-white shadow-lg shadow-gray-400/50'
+                            : entry.rank === 3
+                            ? 'bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-lg shadow-orange-500/50'
+                            : entry.isCurrentUser
+                            ? 'bg-gradient-to-br from-purple-500 to-pink-500 text-white'
+                            : 'bg-muted text-foreground'
+                        }`}
+                      >
+                        {entry.rank <= 3 ? (
+                          <Trophy className="w-6 h-6" />
+                        ) : (
+                          `#${entry.rank}`
+                        )}
+                      </div>
+
+                      {/* User Info */}
+                      <div className="flex items-center gap-3">
+                        <Avatar className={`w-10 h-10 border-2 ${entry.isCurrentUser ? 'border-purple-500' : 'border-border'}`}>
+                          <AvatarFallback className={entry.isCurrentUser ? 'bg-gradient-to-br from-purple-500 to-pink-500 text-white' : 'bg-gradient-to-br from-blue-500 to-cyan-500 text-white'}>
+                            {entry.name.split(' ').map((n) => n[0]).join('')}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <p className={`font-semibold ${entry.isCurrentUser ? 'text-purple-500' : ''}`}>
+                              {entry.name}
+                            </p>
+                            {entry.isCurrentUser && (
+                              <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0">
+                                You
+                              </Badge>
+                            )}
+                          </div>
+                          <p className="text-sm text-muted-foreground">{entry.username}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Stats */}
+                    <div className="flex items-center gap-6">
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-purple-500">{entry.solved}</div>
+                        <div className="text-xs text-muted-foreground">Solved</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-blue-500">{entry.points}</div>
+                        <div className="text-xs text-muted-foreground">Points</div>
+                      </div>
+                      <div className="text-center min-w-[60px]">
+                        {entry.change !== 0 && (
+                          <div className={`flex items-center justify-center gap-1 ${entry.change > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                            <TrendingUp className={`w-4 h-4 ${entry.change < 0 ? 'rotate-180' : ''}`} />
+                            <span className="text-sm font-bold">{Math.abs(entry.change)}</span>
+                          </div>
+                        )}
+                        {entry.change === 0 && (
+                          <div className="text-muted-foreground">
+                            <span className="text-sm">−</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Leaderboard Footer */}
+              <div className="mt-6 p-4 rounded-xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-purple-500">Your Rank</p>
+                    <p className="text-xs text-muted-foreground">Top 60% globally</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-2xl font-bold text-purple-500">#{leaderboard.find(e => e.isCurrentUser)?.rank || '?'}</p>
+                    <p className="text-xs text-muted-foreground">Keep pushing!</p>
+                  </div>
+                </div>
+              </div>
             </CardContent>
           </Card>
         </TabsContent>

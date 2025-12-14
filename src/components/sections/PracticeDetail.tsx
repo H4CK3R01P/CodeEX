@@ -397,7 +397,16 @@ export function PracticeDetail({ practice, onBack, userData }: PracticeDetailPro
     <div className="h-screen flex flex-col bg-gray-50">
       {/* Header */}
       <div className="bg-white border-b px-4 lg:px-6 py-4">
-        <Button variant="ghost" onClick={onBack} className="mb-2">
+        <Button 
+          type="button"
+          variant="ghost" 
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onBack();
+          }} 
+          className="mb-2"
+        >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to Practice
         </Button>

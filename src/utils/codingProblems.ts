@@ -604,7 +604,6 @@ Requirements:
       starterCode: `import React, { useState, useEffect, useRef } from 'react';\n\nfunction InfiniteScroll() {\n  // Implement infinite scroll here\n  \n  return (\n    <div>\n      {/* Your JSX here */}\n    </div>\n  );\n}\n\nexport default InfiniteScroll;`,
       points: 150,
       acceptance: 55.7,
-      isPremium: false,
     },
   ];
 }

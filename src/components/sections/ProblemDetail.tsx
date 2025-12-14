@@ -35,6 +35,7 @@ import { api } from '../../utils/apiClient';
 import { motion, AnimatePresence } from 'motion/react';
 import { HintDialog } from './HintDialog';
 import { SubmissionViewer } from './SubmissionViewer';
+import { SubmissionResultModal } from './SubmissionResultModal';
 
 interface ProblemDetailProps {
   problem: CodingProblem;
@@ -82,11 +83,48 @@ export function ProblemDetail({ problem, onBack, domainId }: ProblemDetailProps)
   const [selectedHint, setSelectedHint] = useState<{ hint: string; number: number } | null>(null);
   const [selectedSubmission, setSelectedSubmission] = useState<Submission | null>(null);
   const [showSubmissionViewer, setShowSubmissionViewer] = useState(false);
+  const [showResultModal, setShowResultModal] = useState(false);
+  const [coinsEarned, setCoinsEarned] = useState(0);
 
+  // Load saved code and language from localStorage on mount
   useEffect(() => {
+    const savedCode = localStorage.getItem(`code_${problem.id}_${selectedLanguage}`);
+    const savedLanguage = localStorage.getItem(`language_${problem.id}`);
+    
+    if (savedLanguage) {
+      setSelectedLanguage(savedLanguage);
+    }
+    
+    if (savedCode) {
+      setCurrentCode(savedCode);
+    } else {
+      setCurrentCode(problem.starterCode || '');
+    }
+    
     setShowHints(new Array(problem.hints.length).fill(false));
     loadSubmissions();
   }, [problem.id]);
+
+  // Save code to localStorage whenever it changes
+  useEffect(() => {
+    if (currentCode && currentCode !== problem.starterCode) {
+      localStorage.setItem(`code_${problem.id}_${selectedLanguage}`, currentCode);
+    }
+  }, [currentCode, problem.id, selectedLanguage]);
+
+  // Save language preference
+  useEffect(() => {
+    localStorage.setItem(`language_${problem.id}`, selectedLanguage);
+    
+    // Load code for the new language if available
+    const savedCodeForLanguage = localStorage.getItem(`code_${problem.id}_${selectedLanguage}`);
+    if (savedCodeForLanguage) {
+      setCurrentCode(savedCodeForLanguage);
+    } else {
+      // Reset to starter code for this language if no saved code
+      setCurrentCode(problem.starterCode || '');
+    }
+  }, [selectedLanguage, problem.id]);
 
   const loadSubmissions = async () => {
     try {
@@ -188,11 +226,28 @@ export function ProblemDetail({ problem, onBack, domainId }: ProblemDetailProps)
         
         setSubmissionResult(result);
         
+        // Calculate coins based on difficulty
         if (status === 'accepted') {
+          const difficultyCoins = {
+            'Easy': 10,
+            'Medium': 25,
+            'Hard': 50,
+          };
+          const coins = difficultyCoins[problem.difficulty as keyof typeof difficultyCoins] || 15;
+          setCoinsEarned(coins);
+          
           toast.success('🎉 Solution Accepted!');
+          
+          // Update user coins in localStorage
+          const currentCoins = parseInt(localStorage.getItem('userCoins') || '250');
+          localStorage.setItem('userCoins', String(currentCoins + coins));
         } else {
           toast.error('Solution not accepted');
+          setCoinsEarned(0);
         }
+        
+        // Show result modal
+        setShowResultModal(true);
         
         loadSubmissions();
       }
@@ -758,6 +813,16 @@ export function ProblemDetail({ problem, onBack, domainId }: ProblemDetailProps)
             setShowSubmissionViewer(false);
             setSelectedSubmission(null);
           }}
+        />
+      )}
+
+      {/* Submission Result Modal */}
+      {submissionResult && (
+        <SubmissionResultModal
+          open={showResultModal}
+          onClose={() => setShowResultModal(false)}
+          result={submissionResult}
+          coinsEarned={coinsEarned}
         />
       )}
     </div>

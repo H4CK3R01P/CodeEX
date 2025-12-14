@@ -28,42 +28,42 @@ export function Achieve({ userData }: AchieveProps) {
 
       {/* Stats */}
       <div className="grid md:grid-cols-4 gap-4 mb-6">
-        <Card className="bg-gradient-to-br from-yellow-500 to-orange-500">
+        <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-2 mb-2">
-              <Award className="w-5 h-5 text-white" />
+              <Award className="w-5 h-5 text-yellow-600" />
             </div>
-            <div className="text-2xl text-white font-bold mb-1">{unlockedAchievements.length}</div>
-            <div className="text-sm text-white/90">Unlocked</div>
+            <div className="text-2xl text-gray-900 mb-1">{unlockedAchievements.length}</div>
+            <div className="text-sm text-gray-600">Unlocked</div>
           </CardContent>
         </Card>
-        <Card className="bg-gradient-to-br from-gray-600 to-gray-700">
+        <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-2 mb-2">
-              <Lock className="w-5 h-5 text-white" />
+              <Lock className="w-5 h-5 text-gray-400" />
             </div>
-            <div className="text-2xl text-white font-bold mb-1">{lockedAchievements.length}</div>
-            <div className="text-sm text-white/90">Locked</div>
+            <div className="text-2xl text-gray-900 mb-1">{lockedAchievements.length}</div>
+            <div className="text-sm text-gray-600">Locked</div>
           </CardContent>
         </Card>
-        <Card className="bg-gradient-to-br from-indigo-500 to-purple-500">
+        <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-2 mb-2">
-              <Star className="w-5 h-5 text-white" />
+              <Star className="w-5 h-5 text-indigo-600" />
             </div>
-            <div className="text-2xl text-white font-bold mb-1">{unlockedAchievements.length * 50}</div>
-            <div className="text-sm text-white/90">Total XP</div>
+            <div className="text-2xl text-gray-900 mb-1">{unlockedAchievements.length * 50}</div>
+            <div className="text-sm text-gray-600">Total XP</div>
           </CardContent>
         </Card>
-        <Card className="bg-gradient-to-br from-green-500 to-emerald-500">
+        <Card>
           <CardContent className="p-4">
             <div className="flex items-center gap-2 mb-2">
-              <TrendingUp className="w-5 h-5 text-white" />
+              <TrendingUp className="w-5 h-5 text-green-600" />
             </div>
-            <div className="text-2xl text-white font-bold mb-1">
+            <div className="text-2xl text-gray-900 mb-1">
               {Math.round((unlockedAchievements.length / domainData.achievements.length) * 100)}%
             </div>
-            <div className="text-sm text-white/90">Completion</div>
+            <div className="text-sm text-gray-600">Completion</div>
           </CardContent>
         </Card>
       </div>
@@ -97,21 +97,21 @@ export function Achieve({ userData }: AchieveProps) {
           <h3 className="text-gray-900 mb-4">Unlocked Achievements</h3>
           <div className="grid md:grid-cols-2 gap-4">
             {unlockedAchievements.map((achievement) => (
-              <Card key={achievement.id} className="bg-gradient-to-br from-purple-600 to-purple-700 border-purple-500 hover:from-purple-700 hover:to-purple-800 active:from-purple-800 active:to-purple-900 transition-all duration-200 shadow-lg hover:shadow-xl">
+              <Card key={achievement.id} className="bg-gradient-to-br from-yellow-50 to-orange-50 border-yellow-200">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full flex items-center justify-center text-3xl shadow-lg">
+                    <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-3xl shadow-lg">
                       {achievement.icon}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-2">
-                        <h4 className="text-white font-bold">{achievement.name}</h4>
-                        <Badge variant="secondary" className="bg-white/20 text-white font-semibold backdrop-blur-sm">
+                        <h4 className="text-gray-900">{achievement.name}</h4>
+                        <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">
                           +50 XP
                         </Badge>
                       </div>
-                      <p className="text-sm text-white/90 mb-3">{achievement.description}</p>
-                      <div className="flex items-center gap-2 text-xs text-emerald-300 font-semibold">
+                      <p className="text-sm text-gray-600 mb-3">{achievement.description}</p>
+                      <div className="flex items-center gap-2 text-xs text-green-600">
                         <Award className="w-4 h-4" />
                         <span>Unlocked</span>
                       </div>

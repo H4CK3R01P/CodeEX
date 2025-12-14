@@ -1,34 +1,42 @@
 [
   {
-    "content": "Backup current changes documentation",
+    "content": "Login as Industry user and capture initial workspace",
     "status": "completed"
   },
   {
-    "content": "Pull latest code from GitHub repository",
+    "content": "Verify sidebar sections for Industry role",
     "status": "completed"
   },
   {
-    "content": "Reapply semantic color tokens to globals.css",
-    "status": "in_progress"
+    "content": "Test assessment creation flow - all steps",
+    "status": "completed"
   },
   {
-    "content": "Reapply purple backgrounds to Achieve section",
-    "status": "pending"
+    "content": "Test sending invites to candidates",
+    "status": "completed"
   },
   {
-    "content": "Reapply purple backgrounds to Coins section",
-    "status": "pending"
+    "content": "Test reviewing candidate submissions with code viewer",
+    "status": "completed"
   },
   {
-    "content": "Reapply white text to Test Instructions",
-    "status": "pending"
+    "content": "Test saving feedback on submissions",
+    "status": "completed"
   },
   {
-    "content": "Reapply readability fixes to TestTaking component",
-    "status": "pending"
+    "content": "Navigate analytics and verify hiring funnel",
+    "status": "completed"
   },
   {
-    "content": "Verify all changes and test application",
-    "status": "pending"
+    "content": "Check for broken admin actions",
+    "status": "completed"
+  },
+  {
+    "content": "Verify role-based access controls",
+    "status": "completed"
+  },
+  {
+    "content": "Generate comprehensive Industry Workspace report",
+    "status": "completed"
   }
 ]

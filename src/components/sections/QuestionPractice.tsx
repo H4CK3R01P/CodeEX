@@ -590,9 +590,9 @@ export function QuestionPractice({
         </AnimatePresence>
 
         {/* Question Navigator */}
-        <Card className="mt-6 shadow-lg bg-slate-800">
+        <Card className="mt-6 shadow-lg">
           <CardContent className="p-4">
-            <h4 className="text-sm font-medium text-white mb-3">Question Navigator</h4>
+            <h4 className="text-sm font-medium text-gray-700 mb-3">Question Navigator</h4>
             <div className="grid grid-cols-10 gap-2">
               {questions.map((q, index) => {
                 const answered = userAnswers[q.id]?.trim();
