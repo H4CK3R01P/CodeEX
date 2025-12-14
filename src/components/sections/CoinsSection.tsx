@@ -51,9 +51,9 @@ export function CoinsSection({ coins }: CoinsSectionProps) {
                 <Coins className="w-8 h-8 text-white" />
               </div>
               <div>
-                <div className="text-sm text-gray-600 mb-1">Your Balance</div>
-                <div className="text-3xl text-gray-900">{coins.toLocaleString()}</div>
-                <div className="text-sm text-gray-600">Coins</div>
+                <div className="text-sm text-black mb-1">Your Balance</div>
+                <div className="text-3xl text-black font-bold">{coins.toLocaleString()}</div>
+                <div className="text-sm text-black">Coins</div>
               </div>
             </div>
             <div className="text-right">
@@ -107,8 +107,8 @@ export function CoinsSection({ coins }: CoinsSectionProps) {
               <div className="flex items-start gap-4">
                 <Gift className="w-8 h-8 text-purple-600 flex-shrink-0" />
                 <div>
-                  <h3 className="text-gray-900 mb-2">Bonus Opportunity!</h3>
-                  <p className="text-sm text-gray-600 mb-4">
+                  <h3 className="text-black font-bold mb-2">Bonus Opportunity!</h3>
+                  <p className="text-sm text-black mb-4">
                     Complete all 3 daily challenges this week to earn a bonus of 200 coins!
                   </p>
                   <Button className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
