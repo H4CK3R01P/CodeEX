@@ -226,11 +226,28 @@ export function ProblemDetail({ problem, onBack, domainId }: ProblemDetailProps)
         
         setSubmissionResult(result);
         
+        // Calculate coins based on difficulty
         if (status === 'accepted') {
+          const difficultyCoins = {
+            'Easy': 10,
+            'Medium': 25,
+            'Hard': 50,
+          };
+          const coins = difficultyCoins[problem.difficulty as keyof typeof difficultyCoins] || 15;
+          setCoinsEarned(coins);
+          
           toast.success('🎉 Solution Accepted!');
+          
+          // Update user coins in localStorage
+          const currentCoins = parseInt(localStorage.getItem('userCoins') || '250');
+          localStorage.setItem('userCoins', String(currentCoins + coins));
         } else {
           toast.error('Solution not accepted');
+          setCoinsEarned(0);
         }
+        
+        // Show result modal
+        setShowResultModal(true);
         
         loadSubmissions();
       }
