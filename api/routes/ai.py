@@ -433,7 +433,7 @@ async def generate_question(
             # Parse output into question format
             question = _parse_question_output(result.output)
             
-            return QuestionGenerationResponse(
+            response = QuestionGenerationResponse(
                 success=True,
                 question=question,
                 metadata={
@@ -443,6 +443,21 @@ async def generate_question(
                 },
                 request_id=result.request_id
             )
+            
+            # Cache successful response (30 day TTL)
+            if cache_key:
+                set_cached_response(
+                    cache_key,
+                    "generate-question",
+                    response.dict(),
+                    metadata={
+                        'topic': request.topic,
+                        'difficulty': request.difficulty,
+                        'generation_time_ms': result.total_time_ms
+                    }
+                )
+            
+            return response
         else:
             # AI generation failed but don't crash
             logger.warning(f"Question generation failed: {result.status}")
