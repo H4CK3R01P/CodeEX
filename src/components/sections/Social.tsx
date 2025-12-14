@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import {
   Users,
@@ -22,6 +22,9 @@ import {
   UserCheck,
   UserX,
   Activity,
+  Plus,
+  X,
+  Loader2,
 } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
@@ -31,6 +34,15 @@ import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import { Separator } from '../ui/separator';
 import { ScrollArea } from '../ui/scroll-area';
+import { Textarea } from '../ui/textarea';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '../ui/dialog';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,10 +56,40 @@ interface SocialProps {
   userData: UserData;
 }
 
+interface ActivityComment {
+  id: number;
+  user: string;
+  username: string;
+  text: string;
+  time: string;
+}
+
+interface ActivityItem {
+  id: number;
+  user: string;
+  username: string;
+  action: string;
+  problem?: string;
+  difficulty?: string;
+  time: string;
+  likes: number;
+  comments: ActivityComment[];
+  language?: string;
+  achievement?: string;
+  contest?: string;
+  rank?: number;
+  liked?: boolean;
+}
+
 export function Social({ userData }: SocialProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeTab, setActiveTab] = useState('feed');
-  const [commentText, setCommentText] = useState('');
+  const [commentText, setCommentText] = useState<{ [key: number]: string }>({});
+  const [showComments, setShowComments] = useState<{ [key: number]: boolean }>({});
+  const [showCreatePost, setShowCreatePost] = useState(false);
+  const [newPostText, setNewPostText] = useState('');
+  const [displayCount, setDisplayCount] = useState(4);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   // Mock data - in production, fetch from backend
   const [friends] = useState([
