@@ -17,10 +17,10 @@
   },
   {
     "content": "Fix Achieve Section Unlocked Achievements text contrast",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Test all contrast fixes and verify accessibility",
-    "status": "pending"
+    "status": "in_progress"
   }
 ]
