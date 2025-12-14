@@ -17,15 +17,15 @@
   },
   {
     "content": "Create service layer for business logic",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Define repository layer for data access",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Stub out all API route definitions (disabled)",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Create configuration and constants",
