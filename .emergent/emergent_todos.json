@@ -1,22 +1,22 @@
 [
   {
     "content": "Create cache layer with domain-aware key generation",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Implement TTL policies per endpoint",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Add cache metrics tracking (hit/miss/savings)",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Integrate caching into AI endpoints",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
-    "content": "Add safety checks and fallback logic",
+    "content": "Add admin cache management endpoints",
     "status": "pending"
   },
   {
