@@ -1,18 +1,22 @@
 [
   {
-    "content": "Check and apply Question Navigator visibility fix (QuestionPractice.tsx)",
-    "status": "completed"
+    "content": "Check git status and identify conflicts",
+    "status": "in_progress"
   },
   {
-    "content": "Check and apply Compete Section stats cards gradients",
-    "status": "completed"
+    "content": "Review conflicting files",
+    "status": "pending"
   },
   {
-    "content": "Check and apply all other style changes",
-    "status": "completed"
+    "content": "Resolve merge conflicts",
+    "status": "pending"
   },
   {
-    "content": "Verify all changes are applied",
-    "status": "completed"
+    "content": "Test after conflict resolution",
+    "status": "pending"
+  },
+  {
+    "content": "Prepare for clean push",
+    "status": "pending"
   }
 ]
