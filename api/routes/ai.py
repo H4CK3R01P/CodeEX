@@ -762,21 +762,8 @@ async def review_solution(
 
 
 # ============================================================================
-# HEALTH CHECK
+# HEALTH CHECK (Moved to observability section)
 # ============================================================================
-
-@router.get(
-    "/health",
-    summary="Check AI service health",
-    description="Check if AI features are enabled and healthy"
-)
-async def ai_health_check():
-    """Check AI service health"""
-    return {
-        "ai_enabled": AI_ENABLED,
-        "status": "healthy" if AI_ENABLED else "disabled",
-        "version": "v1"
-    }
 
 
 # ============================================================================
