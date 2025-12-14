@@ -228,6 +228,7 @@ export function ProfessionalDashboard({ userData }: ProfessionalDashboardProps) 
                       <Button 
                         variant="ghost" 
                         className="w-full justify-start hover:bg-purple-500/10"
+                        onClick={handleSettings}
                       >
                         <Settings className="w-4 h-4 mr-2" />
                         Settings
@@ -235,6 +236,7 @@ export function ProfessionalDashboard({ userData }: ProfessionalDashboardProps) 
                       <Button 
                         variant="ghost" 
                         className="w-full justify-start text-red-400 hover:bg-red-500/10 hover:text-red-400"
+                        onClick={handleLogout}
                       >
                         <LogOut className="w-4 h-4 mr-2" />
                         Logout
