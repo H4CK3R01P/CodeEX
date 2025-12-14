@@ -1,34 +1,26 @@
 [
   {
-    "content": "Copy CodeEX repository to /app directory",
-    "status": "completed"
+    "content": "Fix Daily Challenge → Practice Flow Question Navigator visibility",
+    "status": "pending"
   },
   {
-    "content": "Install Python backend dependencies",
-    "status": "completed"
+    "content": "Fix Compete Section contest/competition card numbers contrast",
+    "status": "pending"
   },
   {
-    "content": "Install frontend dependencies",
-    "status": "completed"
+    "content": "Fix Contest Section Official Test Instructions text visibility",
+    "status": "pending"
   },
   {
-    "content": "Configure backend API and create server.py",
-    "status": "completed"
+    "content": "Fix Achieve Section numeric values visibility",
+    "status": "pending"
   },
   {
-    "content": "Configure frontend .env file",
-    "status": "completed"
+    "content": "Fix Achieve Section Unlocked Achievements text contrast",
+    "status": "pending"
   },
   {
-    "content": "Start backend server",
-    "status": "completed"
-  },
-  {
-    "content": "Start frontend server",
-    "status": "completed"
-  },
-  {
-    "content": "Verify application is running",
-    "status": "completed"
+    "content": "Test all contrast fixes and verify accessibility",
+    "status": "pending"
   }
 ]
