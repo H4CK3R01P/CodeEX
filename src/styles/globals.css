@@ -70,6 +70,12 @@
   /* Font Weights */
   --font-weight-medium: 600;
   --font-weight-normal: 400;
+  
+  /* High Contrast Text Tokens */
+  --text-primary-dark: #000000;
+  --text-high-contrast: #000000;
+  --text-on-light: #000000;
+  --text-on-gradient-light: #000000;
 }
 
 .dark {
