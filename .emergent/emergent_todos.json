@@ -1,18 +1,22 @@
 [
   {
-    "content": "Check existing theme configuration and color tokens",
-    "status": "completed"
+    "content": "Update Achieve section unlocked achievements to purple background",
+    "status": "in_progress"
   },
   {
-    "content": "Update Achieve section to use semantic color tokens",
-    "status": "completed"
+    "content": "Update Coins section balance and bonus cards to purple background",
+    "status": "pending"
   },
   {
-    "content": "Update Coins section to use semantic color tokens",
-    "status": "completed"
+    "content": "Add hover and active states for interactive cards",
+    "status": "pending"
   },
   {
-    "content": "Verify consistency across all views and modes",
-    "status": "completed"
+    "content": "Ensure text contrast on purple backgrounds",
+    "status": "pending"
+  },
+  {
+    "content": "Test visual consistency and responsiveness",
+    "status": "pending"
   }
 ]
