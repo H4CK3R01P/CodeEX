@@ -1,30 +1,34 @@
 [
   {
-    "content": "Create TypeScript types for AI API schemas",
-    "status": "completed"
+    "content": "Create aiFlags.ts for feature flag management",
+    "status": "in_progress"
   },
   {
-    "content": "Implement aiClient.ts with typed methods",
-    "status": "completed"
+    "content": "Create UI wrapper hooks with feature flag support",
+    "status": "pending"
   },
   {
-    "content": "Add error handling and loading states",
-    "status": "completed"
+    "content": "Create HintPanel component",
+    "status": "pending"
   },
   {
-    "content": "Add response validation and type guards",
-    "status": "completed"
+    "content": "Create ExplanationPanel component",
+    "status": "pending"
   },
   {
-    "content": "Create React hooks for easy integration",
-    "status": "completed"
+    "content": "Create SolutionReview component",
+    "status": "pending"
   },
   {
-    "content": "Create comprehensive documentation",
-    "status": "completed"
+    "content": "Create QuestionGenerator component",
+    "status": "pending"
   },
   {
-    "content": "Create example component usage",
-    "status": "completed"
+    "content": "Test AI components with error scenarios",
+    "status": "pending"
+  },
+  {
+    "content": "Document integration points",
+    "status": "pending"
   }
 ]
