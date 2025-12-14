@@ -303,6 +303,7 @@ def check_rate_limit(endpoint: str, user_id: str, prompt_data: Optional[str] = N
 async def generate_question(
     request: QuestionGenerationRequest,
     background_tasks: BackgroundTasks,
+    user_id: str = "anonymous",  # TODO: Get from auth middleware
     _: None = Depends(check_ai_enabled)
 ):
     """
@@ -310,8 +311,13 @@ async def generate_question(
     
     This endpoint uses AI to create a new question based on topic and difficulty.
     
+    **Rate Limit:** 1 request per minute per user
+    
     **Note:** This endpoint will not affect grading APIs even if it fails.
     """
+    # Check rate limit (1/min)
+    check_rate_limit("generate-question", user_id, request.topic)
+    
     try:
         # Import orchestrator (lazy import to isolate failures)
         from backend.ai.orchestrator import (
