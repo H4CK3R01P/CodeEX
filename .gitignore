@@ -62,3 +62,7 @@ htmlcov/
 
 # Docker
 *.pid
+-e 
+# Environment files
+*.env
+*.env.*
