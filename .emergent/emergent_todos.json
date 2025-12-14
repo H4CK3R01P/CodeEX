@@ -5,30 +5,30 @@
   },
   {
     "content": "Test creating a new post",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Test liking a post and verify interaction count updates",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Test commenting on a post",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Test leaderboard tab and user highlighting",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Verify infinite scroll functionality",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Check if actions are optimistic",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Generate comprehensive test report",
-    "status": "pending"
+    "status": "in_progress"
   }
 ]
