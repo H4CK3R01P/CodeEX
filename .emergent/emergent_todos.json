@@ -1,42 +1,38 @@
 [
   {
-    "content": "Login as Industry user and capture initial workspace",
-    "status": "completed"
+    "content": "Analyze frontend components and extract all data requirements",
+    "status": "in_progress"
   },
   {
-    "content": "Verify sidebar sections for Industry role",
-    "status": "completed"
+    "content": "Design complete database schema for all entities",
+    "status": "pending"
   },
   {
-    "content": "Test assessment creation flow - all steps",
-    "status": "completed"
+    "content": "Create enhanced folder structure for backend",
+    "status": "pending"
   },
   {
-    "content": "Test sending invites to candidates",
-    "status": "completed"
+    "content": "Implement all database models with Pydantic V2",
+    "status": "pending"
   },
   {
-    "content": "Test reviewing candidate submissions with code viewer",
-    "status": "completed"
+    "content": "Create service layer for business logic",
+    "status": "pending"
   },
   {
-    "content": "Test saving feedback on submissions",
-    "status": "completed"
+    "content": "Define repository layer for data access",
+    "status": "pending"
   },
   {
-    "content": "Navigate analytics and verify hiring funnel",
-    "status": "completed"
+    "content": "Stub out all API route definitions (disabled)",
+    "status": "pending"
   },
   {
-    "content": "Check for broken admin actions",
-    "status": "completed"
+    "content": "Create configuration and constants",
+    "status": "pending"
   },
   {
-    "content": "Verify role-based access controls",
-    "status": "completed"
-  },
-  {
-    "content": "Generate comprehensive Industry Workspace report",
-    "status": "completed"
+    "content": "Document backend architecture and integration guide",
+    "status": "pending"
   }
 ]
