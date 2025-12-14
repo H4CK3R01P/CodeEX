@@ -316,7 +316,41 @@ def get_cached_response(cache_key: str, endpoint: str) -> Optional[Dict]:
     except Exception as e:
         # Never crash on cache error - log and continue
         logger.error(f"Cache retrieval error (non-fatal): {e}")
-        return None\n\n\ndef set_cached_response(\n    cache_key: str,\n    endpoint: str,\n    response: Dict,\n    metadata: Optional[Dict] = None\n) -> None:\n    \"\"\"Cache AI response.\n    \n    Args:\n        cache_key: Cache key\n        endpoint: Endpoint name\n        response: Response to cache\n        metadata: Optional metadata\n    \"\"\"\n    from brain.caching import get_cache_manager\n    \n    try:\n        cache_manager = get_cache_manager()\n        \n        # Add endpoint to metadata for invalidation\n        if metadata is None:\n            metadata = {}\n        metadata['endpoint'] = endpoint\n        \n        success = cache_manager.set(cache_key, response, endpoint, metadata)\n        \n        if success:\n            logger.info(f\"Cached response for {endpoint}: {cache_key[:16]}...\")\n        \n    except Exception as e:\n        # Never crash on cache error - log and continue\n        logger.error(f\"Cache storage error (non-fatal): {e}\")
+        return None
+
+
+def set_cached_response(
+    cache_key: str,
+    endpoint: str,
+    response: Dict,
+    metadata: Optional[Dict] = None
+) -> None:
+    """Cache AI response.
+    
+    Args:
+        cache_key: Cache key
+        endpoint: Endpoint name
+        response: Response to cache
+        metadata: Optional metadata
+    """
+    from brain.caching import get_cache_manager
+    
+    try:
+        cache_manager = get_cache_manager()
+        
+        # Add endpoint to metadata for invalidation
+        if metadata is None:
+            metadata = {}
+        metadata['endpoint'] = endpoint
+        
+        success = cache_manager.set(cache_key, response, endpoint, metadata)
+        
+        if success:
+            logger.info(f"Cached response for {endpoint}: {cache_key[:16]}...")
+        
+    except Exception as e:
+        # Never crash on cache error - log and continue
+        logger.error(f"Cache storage error (non-fatal): {e}")
 
 
 # ============================================================================
