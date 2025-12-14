@@ -1,22 +1,26 @@
 [
   {
-    "content": "Create rate limiter module with per-user tracking",
-    "status": "completed"
+    "content": "Create cache layer with domain-aware key generation",
+    "status": "in_progress"
   },
   {
-    "content": "Create abuse detection system",
-    "status": "completed"
+    "content": "Implement TTL policies per endpoint",
+    "status": "pending"
   },
   {
-    "content": "Integrate rate limiting into AI endpoints",
-    "status": "completed"
+    "content": "Add cache metrics tracking (hit/miss/savings)",
+    "status": "pending"
   },
   {
-    "content": "Add feature flag and configuration",
-    "status": "completed"
+    "content": "Integrate caching into AI endpoints",
+    "status": "pending"
+  },
+  {
+    "content": "Add safety checks and fallback logic",
+    "status": "pending"
   },
   {
     "content": "Create documentation",
-    "status": "completed"
+    "status": "pending"
   }
 ]
