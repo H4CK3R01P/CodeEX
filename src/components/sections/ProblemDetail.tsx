@@ -815,6 +815,16 @@ export function ProblemDetail({ problem, onBack, domainId }: ProblemDetailProps)
           }}
         />
       )}
+
+      {/* Submission Result Modal */}
+      {submissionResult && (
+        <SubmissionResultModal
+          open={showResultModal}
+          onClose={() => setShowResultModal(false)}
+          result={submissionResult}
+          coinsEarned={coinsEarned}
+        />
+      )}
     </div>
   );
 }
