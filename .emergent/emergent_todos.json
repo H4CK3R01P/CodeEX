@@ -1,18 +1,18 @@
 [
   {
     "content": "Check and apply Question Navigator visibility fix (QuestionPractice.tsx)",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Check and apply Compete Section stats cards gradients",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Check and apply all other style changes",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Verify all changes are applied",
-    "status": "pending"
+    "status": "completed"
   }
 ]
