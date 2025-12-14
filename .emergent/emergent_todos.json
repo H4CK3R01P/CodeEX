@@ -13,14 +13,14 @@
   },
   {
     "content": "Integrate caching into AI endpoints",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Add admin cache management endpoints",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Create documentation",
-    "status": "pending"
+    "status": "in_progress"
   }
 ]
