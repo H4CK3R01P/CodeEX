@@ -1,11 +1,11 @@
 [
   {
     "content": "Locate and view TestInstructions component",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Update all text colors to white in instructions card",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Ensure color inheritance for nested elements",
