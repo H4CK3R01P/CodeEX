@@ -1,34 +1,26 @@
 [
   {
-    "content": "Create aiFlags.ts for feature flag management",
-    "status": "completed"
+    "content": "Create structured logging module for AI pipeline",
+    "status": "in_progress"
   },
   {
-    "content": "Create UI wrapper hooks with feature flag support",
-    "status": "completed"
+    "content": "Create ai_metrics.py for metrics tracking",
+    "status": "pending"
   },
   {
-    "content": "Create HintPanel component",
-    "status": "completed"
+    "content": "Integrate logging into brain orchestrator",
+    "status": "pending"
   },
   {
-    "content": "Create ExplanationPanel component",
-    "status": "completed"
+    "content": "Create admin metrics endpoint",
+    "status": "pending"
   },
   {
-    "content": "Create SolutionReview component",
-    "status": "completed"
+    "content": "Add safety checks for sensitive data",
+    "status": "pending"
   },
   {
-    "content": "Create QuestionGenerator component",
-    "status": "completed"
-  },
-  {
-    "content": "Create comprehensive documentation",
-    "status": "completed"
-  },
-  {
-    "content": "Create integration examples",
-    "status": "completed"
+    "content": "Test observability layer",
+    "status": "pending"
   }
 ]
