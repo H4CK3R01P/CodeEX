@@ -377,7 +377,7 @@ export function Social({ userData }: SocialProps) {
     // In production: Fetch more data from API
   };
 
-  const renderActivityCard = (activity: any) => {
+  const renderActivityCard = (activity: ActivityItem) => {
     const getActivityContent = () => {
       switch (activity.action) {
         case 'solved':
@@ -386,9 +386,11 @@ export function Social({ userData }: SocialProps) {
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-muted-foreground">solved</span>
                 <span className="font-semibold text-purple-500">{activity.problem}</span>
-                <Badge className={getDifficultyColor(activity.difficulty)}>
-                  {activity.difficulty}
-                </Badge>
+                {activity.difficulty && (
+                  <Badge className={getDifficultyColor(activity.difficulty)}>
+                    {activity.difficulty}
+                  </Badge>
+                )}
                 {activity.language && (
                   <Badge variant="outline" className="text-blue-500">
                     <Code className="w-3 h-3 mr-1" />
@@ -415,6 +417,12 @@ export function Social({ userData }: SocialProps) {
               <span className="font-semibold text-orange-500">#{activity.rank}</span>
               <span className="text-muted-foreground">in</span>
               <span className="font-semibold text-blue-500">{activity.contest}</span>
+            </div>
+          );
+        case 'posted':
+          return (
+            <div className="text-foreground">
+              {newPostText || 'Shared an update'}
             </div>
           );
         default:
