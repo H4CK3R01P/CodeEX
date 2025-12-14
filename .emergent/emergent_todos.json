@@ -25,10 +25,10 @@
   },
   {
     "content": "Reapply readability fixes to TestTaking component",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Verify all changes and test application",
-    "status": "pending"
+    "status": "in_progress"
   }
 ]
