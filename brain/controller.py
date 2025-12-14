@@ -141,10 +141,14 @@ class CodeEXBrain:
         self,
         agent_role: AgentRole,
         input_data: Dict[str, Any],
-        authorized_operations: Optional[set] = None
+        authorized_operations: Optional[set] = None,
+        user_id: Optional[str] = None,
+        domain: str = "general",
+        endpoint: str = "/api/agent",
+        operation: str = "process"
     ) -> Dict[str, Any]:
         """
-        Execute an agent with sanitized input.
+        Execute an agent with sanitized input and observability.
         
         This is the primary method for agent interaction.
         
@@ -152,6 +156,10 @@ class CodeEXBrain:
             agent_role: Which agent to execute
             input_data: Input data (will be sanitized)
             authorized_operations: Set of explicitly authorized operations
+            user_id: User identifier (for observability, will be hashed)
+            domain: AI domain for metrics
+            endpoint: API endpoint for tracking
+            operation: Operation name for logging
             
         Returns:
             Verified agent output
@@ -165,32 +173,72 @@ class CodeEXBrain:
         
         # Get agent
         agent = self.agents[agent_role]
+        agent_name = agent_role.value
         
-        # Sanitize input
-        sanitized_input = self.sanitize_input(input_data)
+        # Get metrics instance
+        metrics = get_metrics_instance()
         
-        # Add authorization context if provided
-        if authorized_operations:
-            sanitized_input["authorized_operations"] = authorized_operations
+        # Start observability tracking
+        start_time = time.time()
+        success = True
+        failure_reason = None
         
         try:
-            # Execute agent
-            logger.info(f"Executing agent: {agent_role.value}")
-            output = agent.process(sanitized_input)
-            
-            # Verify output
-            verified_output = self.verify_output(agent_role, output)
-            
-            logger.info(f"Agent {agent_role.value} completed successfully")
-            return verified_output
-            
+            # Use structured logging context
+            with log_ai_request(
+                user_id=user_id,
+                domain=domain,
+                agent_name=agent_name,
+                endpoint=endpoint,
+                operation=operation,
+                # Additional context (will be sanitized)
+                agent_role=agent_name
+            ) as request_id:
+                
+                # Sanitize input
+                sanitized_input = self.sanitize_input(input_data)
+                
+                # Add authorization context if provided
+                if authorized_operations:
+                    sanitized_input["authorized_operations"] = authorized_operations
+                
+                # Execute agent
+                logger.info(f"Executing agent: {agent_name}")
+                output = agent.process(sanitized_input)
+                
+                # Verify output
+                verified_output = self.verify_output(agent_role, output)
+                
+                logger.info(f"Agent {agent_name} completed successfully")
+                return verified_output
+                
         except Exception as e:
-            logger.error(f"Agent {agent_role.value} failed: {str(e)}")
+            success = False
+            failure_reason = f"{type(e).__name__}: {str(e)}"
+            
+            logger.error(f"Agent {agent_name} failed: {str(e)}")
             return {
                 "error": str(e),
-                "agent": agent_role.value,
+                "agent": agent_name,
                 "failed": True
             }
+            
+        finally:
+            # Record metrics (non-blocking, thread-safe)
+            latency_ms = (time.time() - start_time) * 1000
+            
+            try:
+                metrics.record_request(
+                    agent_name=agent_name,
+                    domain=domain,
+                    endpoint=endpoint,
+                    latency_ms=latency_ms,
+                    success=success,
+                    failure_reason=failure_reason
+                )
+            except Exception as metrics_error:
+                # Never crash on metrics error
+                logger.error(f"Failed to record metrics: {metrics_error}")
     
     def authorize_full_solution(
         self,
