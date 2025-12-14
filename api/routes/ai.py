@@ -233,7 +233,7 @@ class SolutionReviewResponse(BaseModel):
 
 
 # ============================================================================
-# DEPENDENCY: Check if AI is enabled
+# DEPENDENCIES: Check AI enabled & Rate Limiting
 # ============================================================================
 
 async def check_ai_enabled():
@@ -243,6 +243,51 @@ async def check_ai_enabled():
             status_code=503,
             detail="AI features are currently disabled"
         )
+
+
+def check_rate_limit(endpoint: str, user_id: str, prompt_data: Optional[str] = None):
+    """Check rate limit and abuse for AI endpoint.
+    
+    Args:
+        endpoint: Endpoint name
+        user_id: User identifier
+        prompt_data: Optional prompt data for abuse detection
+        
+    Raises:
+        HTTPException: If rate limit exceeded or abuse detected
+    """
+    from brain.security import get_rate_limiter, get_abuse_detector, RateLimitExceeded
+    
+    try:
+        # Check rate limit
+        rate_limiter = get_rate_limiter()
+        rate_limiter.check_limit(user_id, endpoint)
+        
+        # Track request for abuse detection
+        abuse_detector = get_abuse_detector()
+        signal = abuse_detector.track_request(user_id, endpoint, prompt_data)
+        
+        # If high-severity abuse detected, raise error
+        if signal and signal.severity == 'high':
+            logger.warning(f"Abuse detected for user {user_id}: {signal.description}")
+            raise HTTPException(
+                status_code=429,
+                detail=f"Suspicious activity detected: {signal.description}. Please slow down.",
+                headers={"Retry-After": "60"}
+            )
+        
+    except RateLimitExceeded as e:
+        # Return 429 with retry-after header
+        logger.info(f"Rate limit exceeded for user {user_id} on {endpoint}")
+        raise HTTPException(
+            status_code=429,
+            detail=str(e),
+            headers={"Retry-After": str(e.retry_after)}
+        )
+    except Exception as e:
+        # Never crash on rate limiting error - log and continue
+        logger.error(f"Rate limiting error (non-fatal): {e}")
+        # Request continues normally
 
 
 # ============================================================================
