@@ -1,10 +1,18 @@
 [
   {
-    "content": "Fix Achieve section - Change unlocked achievements card text to black",
-    "status": "completed"
+    "content": "Check existing theme configuration and color tokens",
+    "status": "in_progress"
   },
   {
-    "content": "Fix Coins section - Change bonus opportunity text to black",
-    "status": "completed"
+    "content": "Update Achieve section to use semantic color tokens",
+    "status": "pending"
+  },
+  {
+    "content": "Update Coins section to use semantic color tokens",
+    "status": "pending"
+  },
+  {
+    "content": "Verify consistency across all views and modes",
+    "status": "pending"
   }
 ]
