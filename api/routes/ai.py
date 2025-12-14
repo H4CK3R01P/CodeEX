@@ -381,6 +381,27 @@ async def generate_question(
     # Check rate limit (1/min)
     check_rate_limit("generate-question", user_id, request.topic)
     
+    # Generate cache key (domain-aware)
+    from brain.caching import generate_cache_key, is_cacheable_request
+    
+    cache_key = None
+    cached_response = None
+    
+    if is_cacheable_request("generate-question", request.dict()):
+        cache_key = generate_cache_key(
+            domain="content_generation",
+            agent="planner_agent",
+            intent="generate_question",
+            inputs=request.dict()
+        )
+        
+        # Try to get cached response
+        cached_response = get_cached_response(cache_key, "generate-question")
+        
+        if cached_response:
+            # Return cached response immediately
+            return cached_response
+    
     try:
         # Import orchestrator (lazy import to isolate failures)
         from backend.ai.orchestrator import (
