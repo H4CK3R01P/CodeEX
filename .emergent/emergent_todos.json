@@ -1,15 +1,15 @@
 [
   {
     "content": "Backup current changes documentation",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Pull latest code from GitHub repository",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Reapply semantic color tokens to globals.css",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Reapply purple backgrounds to Achieve section",
