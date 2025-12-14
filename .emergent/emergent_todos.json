@@ -1,42 +1,30 @@
 [
   {
-    "content": "Login as Industry user and capture initial workspace",
-    "status": "completed"
+    "content": "Create agent roles and permissions structure",
+    "status": "in_progress"
   },
   {
-    "content": "Verify sidebar sections for Industry role",
-    "status": "completed"
+    "content": "Define role permission maps for all agents",
+    "status": "pending"
   },
   {
-    "content": "Test assessment creation flow - all steps",
-    "status": "completed"
+    "content": "Implement permission enforcement logic",
+    "status": "pending"
   },
   {
-    "content": "Test sending invites to candidates",
-    "status": "completed"
+    "content": "Create violation detection and handling",
+    "status": "pending"
   },
   {
-    "content": "Test reviewing candidate submissions with code viewer",
-    "status": "completed"
+    "content": "Add audit logging for agent actions",
+    "status": "pending"
   },
   {
-    "content": "Test saving feedback on submissions",
-    "status": "completed"
+    "content": "Create role-based access control decorators",
+    "status": "pending"
   },
   {
-    "content": "Navigate analytics and verify hiring funnel",
-    "status": "completed"
-  },
-  {
-    "content": "Check for broken admin actions",
-    "status": "completed"
-  },
-  {
-    "content": "Verify role-based access controls",
-    "status": "completed"
-  },
-  {
-    "content": "Generate comprehensive Industry Workspace report",
-    "status": "completed"
+    "content": "Document agent roles and permissions",
+    "status": "pending"
   }
 ]
