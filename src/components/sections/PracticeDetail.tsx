@@ -398,14 +398,12 @@ export function PracticeDetail({ practice, onBack, userData }: PracticeDetailPro
       {/* Header */}
       <div className="bg-white border-b px-4 lg:px-6 py-4">
         <Button 
+          type="button"
           variant="ghost" 
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            // Use setTimeout to ensure state update happens after current render cycle
-            setTimeout(() => {
-              onBack();
-            }, 0);
+            onBack();
           }} 
           className="mb-2"
         >
