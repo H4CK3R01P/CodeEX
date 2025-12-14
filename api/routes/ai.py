@@ -593,6 +593,12 @@ async def review_solution(
     
     **Note:** This is separate from the grading system and won't affect verdicts.
     """
+    # Check rate limit (2/min)
+    # Hash code for abuse detection without logging full code
+    import hashlib
+    code_hash = hashlib.md5(request.code.encode()).hexdigest()[:16]
+    check_rate_limit("review-solution", user_id, code_hash)
+    
     try:
         from backend.ai.orchestrator import (
             CodeEXOrchestrator,
