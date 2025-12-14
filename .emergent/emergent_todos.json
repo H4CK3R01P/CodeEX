@@ -25,10 +25,10 @@
   },
   {
     "content": "Start frontend server",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Verify application is running",
-    "status": "pending"
+    "status": "completed"
   }
 ]
