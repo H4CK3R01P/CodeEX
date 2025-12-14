@@ -1,38 +1,30 @@
 [
   {
-    "content": "Analyze frontend components and extract all data requirements",
-    "status": "completed"
+    "content": "Create domain configuration structure",
+    "status": "in_progress"
   },
   {
-    "content": "Design complete database schema for all entities",
-    "status": "completed"
+    "content": "Define domain-specific constants and enums",
+    "status": "pending"
   },
   {
-    "content": "Create enhanced folder structure for backend",
-    "status": "completed"
+    "content": "Implement domain configurations for all 6 domains",
+    "status": "pending"
   },
   {
-    "content": "Implement all database models with Pydantic V2",
-    "status": "completed"
+    "content": "Create validation utilities for domain rules",
+    "status": "pending"
   },
   {
-    "content": "Create service layer for business logic",
-    "status": "completed"
+    "content": "Implement domain-specific evaluation logic",
+    "status": "pending"
   },
   {
-    "content": "Define repository layer for data access",
-    "status": "completed"
+    "content": "Create domain helper functions",
+    "status": "pending"
   },
   {
-    "content": "Stub out all API route definitions (disabled)",
-    "status": "completed"
-  },
-  {
-    "content": "Create configuration and constants",
-    "status": "completed"
-  },
-  {
-    "content": "Document backend architecture and integration guide",
-    "status": "completed"
+    "content": "Document domain configuration layer",
+    "status": "pending"
   }
 ]
