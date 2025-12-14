@@ -1,11 +1,11 @@
 [
   {
     "content": "Navigate to Social section and capture initial state",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Test creating a new post",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Test liking a post and verify interaction count updates",
