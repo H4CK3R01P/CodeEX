@@ -9,10 +9,14 @@
   },
   {
     "content": "Install frontend dependencies",
+    "status": "completed"
+  },
+  {
+    "content": "Configure backend API and create server.py",
     "status": "in_progress"
   },
   {
-    "content": "Configure environment and services",
+    "content": "Configure frontend .env file",
     "status": "pending"
   },
   {
