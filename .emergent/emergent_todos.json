@@ -1,11 +1,11 @@
 [
   {
     "content": "Check existing theme configuration and color tokens",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Update Achieve section to use semantic color tokens",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Update Coins section to use semantic color tokens",
