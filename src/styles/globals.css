@@ -140,6 +140,12 @@
   --sidebar-accent-foreground: #0a0a0f;
   --sidebar-border: rgba(124, 58, 237, 0.3);
   --sidebar-ring: #7c3aed;
+  
+  /* High Contrast Text Tokens */
+  --text-primary-dark: #000000;
+  --text-high-contrast: #000000;
+  --text-on-light: #000000;
+  --text-on-gradient-light: #000000;
 }
 
 @theme inline {
