@@ -36,6 +36,7 @@ import {
 } from '../ui/select';
 import { UserData } from '../../App';
 import { getDomainConfig } from '../../utils/domainConfig';
+import { toast } from 'sonner';
 
 interface AnalyticsProps {
   userData: UserData;
