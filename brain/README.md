@@ -232,7 +232,7 @@ When an agent attempts an unauthorized operation:
 ## 📁 File Structure
 
 ```
-backend-v2/brain/
+brain/
 ├── __init__.py                    # Package exports
 ├── controller.py                  # Master controller (CodeEX_brain)
 ├── config.py                      # Configuration settings
