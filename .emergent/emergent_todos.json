@@ -1,5 +1,6 @@
 [
   {
+<<<<<<< HEAD
     "content": "Create cache layer with domain-aware key generation",
     "status": "completed"
   },
@@ -22,5 +23,21 @@
   {
     "content": "Create documentation",
     "status": "completed"
+=======
+    "content": "Pull latest code from GitHub repository",
+    "status": "in_progress"
+  },
+  {
+    "content": "Analyze the current codebase structure",
+    "status": "pending"
+  },
+  {
+    "content": "Compare with our local changes",
+    "status": "pending"
+  },
+  {
+    "content": "Identify any conflicts or differences",
+    "status": "pending"
+>>>>>>> frontend
   }
 ]
