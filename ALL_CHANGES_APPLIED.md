@@ -369,6 +369,6 @@ All changes fully documented and tested.
 ---
 
 **Status:** ✅ All Changes Successfully Applied  
-**Application URL:** https://code-navigator-24.preview.emergentagent.com  
+**Application URL:** https://merge-wizard-1.preview.emergentagent.com  
 **Last Updated:** December 14, 2024  
 **Ready for Production:** Yes

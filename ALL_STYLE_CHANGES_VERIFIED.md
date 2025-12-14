@@ -417,6 +417,6 @@ Zero breaking changes
 
 **Status:** ✅ ALL STYLE CHANGES COMPLETE  
 **Last Verified:** December 14, 2024  
-**Application URL:** https://code-navigator-24.preview.emergentagent.com  
+**Application URL:** https://merge-wizard-1.preview.emergentagent.com  
 **Build Status:** ✅ Clean  
 **Ready for Production:** Yes
