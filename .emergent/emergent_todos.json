@@ -1,23 +1,19 @@
 [
   {
     "content": "Create rate limiter module with per-user tracking",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Create abuse detection system",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Integrate rate limiting into AI endpoints",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Add feature flag and configuration",
-    "status": "pending"
-  },
-  {
-    "content": "Test rate limiting and error responses",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Create documentation",
