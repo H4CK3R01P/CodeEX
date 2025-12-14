@@ -35,6 +35,7 @@ import { api } from '../../utils/apiClient';
 import { motion, AnimatePresence } from 'motion/react';
 import { HintDialog } from './HintDialog';
 import { SubmissionViewer } from './SubmissionViewer';
+import { SubmissionResultModal } from './SubmissionResultModal';
 
 interface ProblemDetailProps {
   problem: CodingProblem;
