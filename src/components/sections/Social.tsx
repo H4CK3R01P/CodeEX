@@ -1004,6 +1004,124 @@ export function Social({ userData }: SocialProps) {
             </CardContent>
           </Card>
         </TabsContent>
+
+        {/* Leaderboard Tab */}
+        <TabsContent value="leaderboard" className="space-y-6">
+          <Card>
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="flex items-center gap-2">
+                  <Trophy className="w-5 h-5 text-yellow-500" />
+                  Global Leaderboard
+                </CardTitle>
+                <Badge variant="outline" className="text-purple-500">
+                  Weekly Rankings
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-2">
+                {leaderboard.map((entry, index) => (
+                  <motion.div
+                    key={entry.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.05 }}
+                    className={`flex items-center justify-between p-4 rounded-xl border transition-all ${
+                      entry.isCurrentUser
+                        ? 'border-purple-500 bg-gradient-to-r from-purple-500/10 to-pink-500/10 shadow-lg shadow-purple-500/20'
+                        : 'border-border/50 bg-card/30 hover:bg-card/50'
+                    }`}
+                  >
+                    <div className="flex items-center gap-4">
+                      {/* Rank Badge */}
+                      <div
+                        className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-lg ${
+                          entry.rank === 1
+                            ? 'bg-gradient-to-br from-yellow-400 to-yellow-600 text-white shadow-lg shadow-yellow-500/50'
+                            : entry.rank === 2
+                            ? 'bg-gradient-to-br from-gray-300 to-gray-500 text-white shadow-lg shadow-gray-400/50'
+                            : entry.rank === 3
+                            ? 'bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-lg shadow-orange-500/50'
+                            : entry.isCurrentUser
+                            ? 'bg-gradient-to-br from-purple-500 to-pink-500 text-white'
+                            : 'bg-muted text-foreground'
+                        }`}
+                      >
+                        {entry.rank <= 3 ? (
+                          <Trophy className="w-6 h-6" />
+                        ) : (
+                          `#${entry.rank}`
+                        )}
+                      </div>
+
+                      {/* User Info */}
+                      <div className="flex items-center gap-3">
+                        <Avatar className={`w-10 h-10 border-2 ${entry.isCurrentUser ? 'border-purple-500' : 'border-border'}`}>
+                          <AvatarFallback className={entry.isCurrentUser ? 'bg-gradient-to-br from-purple-500 to-pink-500 text-white' : 'bg-gradient-to-br from-blue-500 to-cyan-500 text-white'}>
+                            {entry.name.split(' ').map((n) => n[0]).join('')}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <p className={`font-semibold ${entry.isCurrentUser ? 'text-purple-500' : ''}`}>
+                              {entry.name}
+                            </p>
+                            {entry.isCurrentUser && (
+                              <Badge className="bg-gradient-to-r from-purple-500 to-pink-500 text-white border-0">
+                                You
+                              </Badge>
+                            )}
+                          </div>
+                          <p className="text-sm text-muted-foreground">{entry.username}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Stats */}
+                    <div className="flex items-center gap-6">
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-purple-500">{entry.solved}</div>
+                        <div className="text-xs text-muted-foreground">Solved</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-lg font-bold text-blue-500">{entry.points}</div>
+                        <div className="text-xs text-muted-foreground">Points</div>
+                      </div>
+                      <div className="text-center min-w-[60px]">
+                        {entry.change !== 0 && (
+                          <div className={`flex items-center justify-center gap-1 ${entry.change > 0 ? 'text-green-500' : 'text-red-500'}`}>
+                            <TrendingUp className={`w-4 h-4 ${entry.change < 0 ? 'rotate-180' : ''}`} />
+                            <span className="text-sm font-bold">{Math.abs(entry.change)}</span>
+                          </div>
+                        )}
+                        {entry.change === 0 && (
+                          <div className="text-muted-foreground">
+                            <span className="text-sm">−</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Leaderboard Footer */}
+              <div className="mt-6 p-4 rounded-xl bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-semibold text-purple-500">Your Rank</p>
+                    <p className="text-xs text-muted-foreground">Top 60% globally</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-2xl font-bold text-purple-500">#{leaderboard.find(e => e.isCurrentUser)?.rank || '?'}</p>
+                    <p className="text-xs text-muted-foreground">Keep pushing!</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
       </Tabs>
     </div>
   );
