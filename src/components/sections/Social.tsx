@@ -597,7 +597,7 @@ export function Social({ userData }: SocialProps) {
       </motion.div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-4">
           <TabsTrigger value="feed">Activity Feed</TabsTrigger>
           <TabsTrigger value="friends">
             Friends
@@ -608,6 +608,10 @@ export function Social({ userData }: SocialProps) {
             {friendRequests.length > 0 && (
               <Badge className="ml-2 bg-red-500">{friendRequests.length}</Badge>
             )}
+          </TabsTrigger>
+          <TabsTrigger value="leaderboard">
+            <Trophy className="w-4 h-4 mr-1" />
+            Leaderboard
           </TabsTrigger>
         </TabsList>
 
