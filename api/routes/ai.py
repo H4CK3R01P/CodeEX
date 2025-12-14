@@ -577,6 +577,7 @@ async def generate_explanation(
 async def review_solution(
     request: SolutionReviewRequest,
     background_tasks: BackgroundTasks,
+    user_id: str = "anonymous",  # TODO: Get from auth middleware
     _: None = Depends(check_ai_enabled)
 ):
     """
@@ -587,6 +588,8 @@ async def review_solution(
     - Code quality assessment
     - Performance analysis
     - Suggestions for improvement
+    
+    **Rate Limit:** 2 requests per minute per user
     
     **Note:** This is separate from the grading system and won't affect verdicts.
     """
