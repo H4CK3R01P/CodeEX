@@ -276,24 +276,105 @@ export function Social({ userData }: SocialProps) {
 
   const handleAddFriend = (name: string) => {
     toast.success(`Friend request sent to ${name}!`);
+    // In production: API call here
   };
 
-  const handleAcceptRequest = (name: string) => {
+  const handleAcceptRequest = (id: number, name: string) => {
+    // Optimistic update: remove from requests
+    setFriendRequests(prev => prev.filter(req => req.id !== id));
     toast.success(`You are now friends with ${name}!`);
+    // In production: API call here
   };
 
-  const handleRejectRequest = (name: string) => {
+  const handleRejectRequest = (id: number, name: string) => {
+    // Optimistic update: remove from requests
+    setFriendRequests(prev => prev.filter(req => req.id !== id));
     toast.info(`Friend request from ${name} declined.`);
+    // In production: API call here
   };
 
   const handleLike = (activityId: number) => {
-    toast.success('Liked!');
+    // Optimistic update
+    setActivityFeed(prev => prev.map(activity =>
+      activity.id === activityId
+        ? {
+            ...activity,
+            likes: activity.liked ? activity.likes - 1 : activity.likes + 1,
+            liked: !activity.liked
+          }
+        : activity
+    ));
+    toast.success(activityFeed.find(a => a.id === activityId)?.liked ? 'Unliked!' : 'Liked!');
+    // In production: API call here
   };
 
-  const handleComment = () => {
-    if (!commentText.trim()) return;
+  const handleComment = (activityId: number) => {
+    const text = commentText[activityId]?.trim();
+    if (!text) return;
+
+    // Optimistic update: add comment to feed
+    const newComment: ActivityComment = {
+      id: Date.now(),
+      user: userData.name,
+      username: '@' + userData.name.toLowerCase().replace(/\s+/g, ''),
+      text: text,
+      time: 'Just now',
+    };
+
+    setActivityFeed(prev => prev.map(activity =>
+      activity.id === activityId
+        ? { ...activity, comments: [...activity.comments, newComment] }
+        : activity
+    ));
+
+    setCommentText(prev => ({ ...prev, [activityId]: '' }));
     toast.success('Comment posted!');
-    setCommentText('');
+    // In production: API call here
+  };
+
+  const toggleComments = (activityId: number) => {
+    setShowComments(prev => ({
+      ...prev,
+      [activityId]: !prev[activityId]
+    }));
+  };
+
+  const handleCreatePost = () => {
+    if (!newPostText.trim()) {
+      toast.error('Please write something!');
+      return;
+    }
+
+    // Optimistic update: add new post to feed
+    const newPost: ActivityItem = {
+      id: Date.now(),
+      user: userData.name,
+      username: '@' + userData.name.toLowerCase().replace(/\s+/g, ''),
+      action: 'posted',
+      time: 'Just now',
+      likes: 0,
+      comments: [],
+      liked: false,
+    };
+
+    setActivityFeed(prev => [newPost, ...prev]);
+    setNewPostText('');
+    setShowCreatePost(false);
+    toast.success('Post created successfully!');
+    // In production: API call here
+  };
+
+  const handleLoadMore = () => {
+    setIsLoadingMore(true);
+    // Simulate loading
+    setTimeout(() => {
+      setDisplayCount(prev => Math.min(prev + 4, activityFeed.length));
+      setIsLoadingMore(false);
+      if (displayCount + 4 >= activityFeed.length) {
+        toast.info('All posts loaded!');
+      }
+    }, 1000);
+    // In production: Fetch more data from API
   };
 
   const renderActivityCard = (activity: any) => {
