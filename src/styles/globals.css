@@ -70,6 +70,12 @@
   /* Font Weights */
   --font-weight-medium: 600;
   --font-weight-normal: 400;
+  
+  /* High Contrast Text Tokens */
+  --text-primary-dark: #000000;
+  --text-high-contrast: #000000;
+  --text-on-light: #000000;
+  --text-on-gradient-light: #000000;
 }
 
 .dark {
@@ -134,6 +140,12 @@
   --sidebar-accent-foreground: #0a0a0f;
   --sidebar-border: rgba(124, 58, 237, 0.3);
   --sidebar-ring: #7c3aed;
+  
+  /* High Contrast Text Tokens */
+  --text-primary-dark: #000000;
+  --text-high-contrast: #000000;
+  --text-on-light: #000000;
+  --text-on-gradient-light: #000000;
 }
 
 @theme inline {
@@ -180,6 +192,10 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-text-primary-dark: var(--text-primary-dark);
+  --color-text-high-contrast: var(--text-high-contrast);
+  --color-text-on-light: var(--text-on-light);
+  --color-text-on-gradient-light: var(--text-on-gradient-light);
 }
 
 @layer base {
