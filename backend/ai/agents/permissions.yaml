@@ -1,0 +1,571 @@
+# CodeEX Brain Agent Permission Matrix
+# Defines what each agent CANNOT do (Forbidden Actions)
+
+version: "1.0.0"
+last_updated: "2024-12-14"
+
+# ============================================================================
+# PERMISSION MATRIX
+# ============================================================================
+
+permission_categories:
+  # Category 1: Code Generation
+  code_generation:
+    GENERATE_FULL_SOLUTION:
+      description: "Generate complete working solution"
+      risk_level: "CRITICAL"
+      allowed_agents:
+        - CODING_AGENT
+      forbidden_agents:
+        - PLANNER_AGENT
+        - TEACHER_AGENT
+        - HINT_AGENT
+        - DEBUGGING_AGENT
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+        - RESEARCH_AGENT
+        - MEMORY_AGENT
+      requires_authorization: true
+    
+    GENERATE_PARTIAL_SOLUTION:
+      description: "Generate partial code implementation"
+      risk_level: "HIGH"
+      allowed_agents:
+        - CODING_AGENT
+      forbidden_agents:
+        - PLANNER_AGENT
+        - TEACHER_AGENT
+        - HINT_AGENT
+        - DEBUGGING_AGENT
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+        - RESEARCH_AGENT
+        - MEMORY_AGENT
+    
+    GENERATE_BOILERPLATE:
+      description: "Generate code templates/boilerplate"
+      risk_level: "MEDIUM"
+      allowed_agents:
+        - CODING_AGENT
+      forbidden_agents:
+        - PLANNER_AGENT
+        - TEACHER_AGENT
+        - HINT_AGENT
+        - DEBUGGING_AGENT
+        - PROJECT_INSPECTOR_AGENT
+        - RESEARCH_AGENT
+        - MEMORY_AGENT
+  
+  # Category 2: Hints & Guidance
+  hints:
+    PROVIDE_ALGORITHM_HINT:
+      description: "Suggest algorithmic approach"
+      risk_level: "LOW"
+      allowed_agents:
+        - HINT_AGENT
+        - TEACHER_AGENT
+        - PLANNER_AGENT
+      forbidden_agents:
+        - CODING_AGENT
+        - DEBUGGING_AGENT
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+        - RESEARCH_AGENT
+        - MEMORY_AGENT
+    
+    PROVIDE_SYNTAX_HINT:
+      description: "Provide syntax-level hints"
+      risk_level: "LOW"
+      allowed_agents:
+        - HINT_AGENT
+      forbidden_agents:
+        - PLANNER_AGENT
+        - TEACHER_AGENT
+        - CODING_AGENT
+        - DEBUGGING_AGENT
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+        - RESEARCH_AGENT
+        - MEMORY_AGENT
+    
+    PROVIDE_EDGE_CASE_HINT:
+      description: "Hint at edge cases"
+      risk_level: "LOW"
+      allowed_agents:
+        - HINT_AGENT
+        - DEBUGGING_AGENT
+      forbidden_agents:
+        - PLANNER_AGENT
+        - TEACHER_AGENT
+        - CODING_AGENT
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+        - RESEARCH_AGENT
+        - MEMORY_AGENT
+  
+  # Category 3: Educational Content
+  education:
+    EXPLAIN_CONCEPT:
+      description: "Explain algorithmic concepts"
+      risk_level: "LOW"
+      allowed_agents:
+        - TEACHER_AGENT
+      forbidden_agents:
+        - PLANNER_AGENT
+        - HINT_AGENT
+        - CODING_AGENT
+        - DEBUGGING_AGENT
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+        - RESEARCH_AGENT
+        - MEMORY_AGENT
+    
+    EXPLAIN_ALGORITHM:
+      description: "Explain how algorithms work"
+      risk_level: "LOW"
+      allowed_agents:
+        - TEACHER_AGENT
+        - PLANNER_AGENT
+      forbidden_agents:
+        - HINT_AGENT
+        - CODING_AGENT
+        - DEBUGGING_AGENT
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+        - RESEARCH_AGENT
+        - MEMORY_AGENT
+    
+    EXPLAIN_COMPLEXITY:
+      description: "Explain time/space complexity"
+      risk_level: "LOW"
+      allowed_agents:
+        - TEACHER_AGENT
+        - PLANNER_AGENT
+      forbidden_agents:
+        - HINT_AGENT
+        - CODING_AGENT
+        - DEBUGGING_AGENT
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+        - RESEARCH_AGENT
+        - MEMORY_AGENT
+  
+  # Category 4: Code Analysis
+  analysis:
+    ANALYZE_CODE_QUALITY:
+      description: "Assess code quality"
+      risk_level: "LOW"
+      allowed_agents:
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+      forbidden_agents:
+        - PLANNER_AGENT
+        - TEACHER_AGENT
+        - HINT_AGENT
+        - CODING_AGENT
+        - DEBUGGING_AGENT
+        - RESEARCH_AGENT
+        - MEMORY_AGENT
+    
+    ANALYZE_BUGS:
+      description: "Identify and analyze bugs"
+      risk_level: "MEDIUM"
+      allowed_agents:
+        - DEBUGGING_AGENT
+      forbidden_agents:
+        - PLANNER_AGENT
+        - TEACHER_AGENT
+        - HINT_AGENT
+        - CODING_AGENT
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+        - RESEARCH_AGENT
+        - MEMORY_AGENT
+    
+    ANALYZE_PERFORMANCE:
+      description: "Analyze code performance"
+      risk_level: "LOW"
+      allowed_agents:
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+      forbidden_agents:
+        - PLANNER_AGENT
+        - TEACHER_AGENT
+        - HINT_AGENT
+        - CODING_AGENT
+        - DEBUGGING_AGENT
+        - RESEARCH_AGENT
+        - MEMORY_AGENT
+  
+  # Category 5: Context & Memory
+  memory:
+    STORE_CONTEXT:
+      description: "Store conversation context"
+      risk_level: "MEDIUM"
+      allowed_agents:
+        - MEMORY_AGENT
+      forbidden_agents:
+        - PLANNER_AGENT
+        - TEACHER_AGENT
+        - HINT_AGENT
+        - CODING_AGENT
+        - DEBUGGING_AGENT
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+        - RESEARCH_AGENT
+    
+    RETRIEVE_CONTEXT:
+      description: "Retrieve stored context"
+      risk_level: "MEDIUM"
+      allowed_agents:
+        - MEMORY_AGENT
+      forbidden_agents:
+        - PLANNER_AGENT
+        - TEACHER_AGENT
+        - HINT_AGENT
+        - CODING_AGENT
+        - DEBUGGING_AGENT
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+        - RESEARCH_AGENT
+    
+    DELETE_CONTEXT:
+      description: "Delete stored context"
+      risk_level: "CRITICAL"
+      allowed_agents:
+        - MEMORY_AGENT
+      forbidden_agents:
+        - PLANNER_AGENT
+        - TEACHER_AGENT
+        - HINT_AGENT
+        - CODING_AGENT
+        - DEBUGGING_AGENT
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+        - RESEARCH_AGENT
+      requires_authorization: true
+  
+  # Category 6: Research & Discovery
+  research:
+    SEARCH_SIMILAR_PROBLEMS:
+      description: "Find similar problems"
+      risk_level: "LOW"
+      allowed_agents:
+        - RESEARCH_AGENT
+      forbidden_agents:
+        - PLANNER_AGENT
+        - TEACHER_AGENT
+        - HINT_AGENT
+        - CODING_AGENT
+        - DEBUGGING_AGENT
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+        - MEMORY_AGENT
+    
+    GATHER_CONTEXT:
+      description: "Gather problem context"
+      risk_level: "LOW"
+      allowed_agents:
+        - RESEARCH_AGENT
+        - PLANNER_AGENT
+      forbidden_agents:
+        - TEACHER_AGENT
+        - HINT_AGENT
+        - CODING_AGENT
+        - DEBUGGING_AGENT
+        - REFACTOR_AGENT
+        - PROJECT_INSPECTOR_AGENT
+        - MEMORY_AGENT
+
+# ============================================================================
+# FORBIDDEN ACTIONS (What agents MUST NOT do)
+# ============================================================================
+
+forbidden_actions:
+  # HINT_AGENT Restrictions
+  HINT_AGENT:
+    strictly_forbidden:
+      - action: "provide_full_solution"
+        reason: "Defeats learning purpose"
+        severity: "CRITICAL"
+      
+      - action: "provide_working_code"
+        reason: "Must guide, not solve"
+        severity: "CRITICAL"
+      
+      - action: "reveal_test_case_outputs"
+        reason: "User must discover"
+        severity: "HIGH"
+      
+      - action: "give_step_by_step_implementation"
+        reason: "Too much information"
+        severity: "HIGH"
+    
+    alternative_actions:
+      - "Ask guiding questions"
+      - "Suggest algorithm category"
+      - "Hint at data structure"
+      - "Provide conceptual direction"
+  
+  # TEACHER_AGENT Restrictions
+  TEACHER_AGENT:
+    strictly_forbidden:
+      - action: "solve_specific_problem"
+        reason: "Must teach concepts, not solve"
+        severity: "CRITICAL"
+      
+      - action: "provide_problem_solution"
+        reason: "Educational context only"
+        severity: "CRITICAL"
+      
+      - action: "debug_user_code"
+        reason: "Outside teaching scope"
+        severity: "MEDIUM"
+    
+    alternative_actions:
+      - "Explain general concepts"
+      - "Provide generic examples"
+      - "Teach algorithmic patterns"
+      - "Explain theory"
+  
+  # PLANNER_AGENT Restrictions
+  PLANNER_AGENT:
+    strictly_forbidden:
+      - action: "write_actual_code"
+        reason: "Planning only, not coding"
+        severity: "CRITICAL"
+      
+      - action: "provide_implementation_details"
+        reason: "High-level planning only"
+        severity: "HIGH"
+      
+      - action: "solve_problem_completely"
+        reason: "Guide planning, not solve"
+        severity: "CRITICAL"
+    
+    alternative_actions:
+      - "Break down into subproblems"
+      - "Suggest approach outline"
+      - "Identify constraints"
+      - "Recommend data structures"
+  
+  # CODING_AGENT Restrictions
+  CODING_AGENT:
+    strictly_forbidden:
+      - action: "generate_solution_without_authorization"
+        reason: "Requires explicit approval"
+        severity: "CRITICAL"
+      
+      - action: "provide_solutions_during_contests"
+        reason: "Violates integrity"
+        severity: "CRITICAL"
+      
+      - action: "generate_code_for_first_attempt"
+        reason: "User must try first"
+        severity: "HIGH"
+    
+    authorization_required:
+      - "User attempted 3+ times"
+      - "Practice mode only"
+      - "Educational context"
+      - "Not in contest mode"
+  
+  # DEBUGGING_AGENT Restrictions
+  DEBUGGING_AGENT:
+    strictly_forbidden:
+      - action: "rewrite_entire_solution"
+        reason: "Fix bugs, don't replace"
+        severity: "HIGH"
+      
+      - action: "provide_full_correct_code"
+        reason: "Guide fixing, not solve"
+        severity: "HIGH"
+      
+      - action: "optimize_working_code"
+        reason: "Outside debugging scope"
+        severity: "MEDIUM"
+    
+    alternative_actions:
+      - "Identify bug location"
+      - "Explain error cause"
+      - "Suggest targeted fix"
+      - "Provide test case revealing bug"
+  
+  # REFACTOR_AGENT Restrictions
+  REFACTOR_AGENT:
+    strictly_forbidden:
+      - action: "refactor_broken_code"
+        reason: "Must be working first"
+        severity: "HIGH"
+      
+      - action: "change_algorithm_fundamentally"
+        reason: "Improve, don't replace"
+        severity: "MEDIUM"
+      
+      - action: "fix_bugs"
+        reason: "Refactor only, not debug"
+        severity: "MEDIUM"
+    
+    alternative_actions:
+      - "Improve readability"
+      - "Optimize performance"
+      - "Apply design patterns"
+      - "Improve variable names"
+  
+  # PROJECT_INSPECTOR_AGENT Restrictions
+  PROJECT_INSPECTOR_AGENT:
+    strictly_forbidden:
+      - action: "modify_code"
+        reason: "Inspect only, don't change"
+        severity: "HIGH"
+      
+      - action: "implement_solutions"
+        reason: "Analyze, don't implement"
+        severity: "HIGH"
+      
+      - action: "access_sensitive_data"
+        reason: "Analysis only"
+        severity: "CRITICAL"
+    
+    alternative_actions:
+      - "Analyze structure"
+      - "Assess quality"
+      - "Identify issues"
+      - "Recommend improvements"
+  
+  # RESEARCH_AGENT Restrictions
+  RESEARCH_AGENT:
+    strictly_forbidden:
+      - action: "provide_direct_solutions"
+        reason: "Research, not solve"
+        severity: "CRITICAL"
+      
+      - action: "copy_solutions_from_references"
+        reason: "Guide to resources, don't plagiarize"
+        severity: "CRITICAL"
+      
+      - action: "implement_found_solutions"
+        reason: "Find references, don't implement"
+        severity: "HIGH"
+    
+    alternative_actions:
+      - "Find similar problems"
+      - "Provide reference links"
+      - "Suggest learning resources"
+      - "Gather context"
+  
+  # MEMORY_AGENT Restrictions
+  MEMORY_AGENT:
+    strictly_forbidden:
+      - action: "delete_context_without_authorization"
+        reason: "Data protection"
+        severity: "CRITICAL"
+      
+      - action: "access_other_user_data"
+        reason: "Privacy violation"
+        severity: "CRITICAL"
+      
+      - action: "modify_context_maliciously"
+        reason: "Data integrity"
+        severity: "CRITICAL"
+      
+      - action: "store_sensitive_data"
+        reason: "Security risk"
+        severity: "CRITICAL"
+    
+    alternative_actions:
+      - "Store with user consent"
+      - "Retrieve own user data only"
+      - "Update with validation"
+      - "Delete with authorization"
+
+# ============================================================================
+# UNIVERSAL RESTRICTIONS (Apply to ALL agents)
+# ============================================================================
+
+universal_restrictions:
+  data_access:
+    forbidden:
+      - "Direct database queries"
+      - "Access to test case solutions"
+      - "Access to other users' data"
+      - "Access to system credentials"
+      - "Bypass input sanitization"
+  
+  output_restrictions:
+    forbidden:
+      - "Output sensitive user data"
+      - "Output test case solutions"
+      - "Output system information"
+      - "Output unvalidated content"
+      - "Exceed output size limits"
+  
+  behavioral_restrictions:
+    forbidden:
+      - "Call other agents directly"
+      - "Escalate privileges"
+      - "Bypass authorization checks"
+      - "Modify agent permissions"
+      - "Execute arbitrary code"
+  
+  ethical_restrictions:
+    forbidden:
+      - "Encourage cheating"
+      - "Provide contest solutions"
+      - "Plagiarize content"
+      - "Discriminate users"
+      - "Mislead users"
+
+# ============================================================================
+# ENFORCEMENT RULES
+# ============================================================================
+
+enforcement:
+  violation_handling:
+    severity_levels:
+      CRITICAL:
+        action: "IMMEDIATE_BLOCK"
+        log: true
+        alert: true
+        retry_allowed: false
+      
+      HIGH:
+        action: "BLOCK_AND_LOG"
+        log: true
+        alert: true
+        retry_allowed: false
+      
+      MEDIUM:
+        action: "BLOCK_AND_WARN"
+        log: true
+        alert: false
+        retry_allowed: true
+      
+      LOW:
+        action: "WARN_ONLY"
+        log: true
+        alert: false
+        retry_allowed: true
+  
+  audit_trail:
+    required_fields:
+      - timestamp
+      - agent_id
+      - action_attempted
+      - permission_required
+      - authorization_status
+      - violation_severity
+      - blocked_reason
+    
+    retention_period: "90_days"
+    
+  authorization_gates:
+    high_risk_operations:
+      - GENERATE_FULL_SOLUTION
+      - DELETE_CONTEXT
+    
+    authorization_criteria:
+      - user_consent: true
+      - attempt_count: ">=3"
+      - context: "educational"
+      - not_in_contest: true

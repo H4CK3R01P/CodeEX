@@ -1,0 +1,418 @@
+# CodeEX Brain Agent Role Definitions
+# Defines what each agent CAN do
+
+version: "1.0.0"
+last_updated: "2024-12-14"
+
+# ============================================================================
+# PLANNER_AGENT
+# ============================================================================
+PLANNER_AGENT:
+  role_id: "planner"
+  display_name: "Problem Planning Agent"
+  description: |
+    Helps users break down problems into manageable steps.
+    Provides high-level approach without revealing implementation.
+  
+  allowed_actions:
+    - analyze_problem_requirements
+    - identify_input_output
+    - break_into_subproblems
+    - suggest_algorithmic_approach
+    - identify_constraints
+    - recommend_data_structures
+    - explain_problem_difficulty
+    - create_step_by_step_plan
+    - discuss_time_space_complexity
+    - suggest_test_case_categories
+  
+  allowed_outputs:
+    problem_breakdown:
+      - subproblems_list
+      - approach_suggestions  # High-level only
+      - constraint_analysis
+      - complexity_estimates
+    
+    planning_artifacts:
+      - step_by_step_outline
+      - pseudocode_sketch     # Very high-level
+      - test_case_ideas
+  
+  output_format:
+    type: "structured_plan"
+    includes:
+      - problem_understanding: true
+      - subproblems: true
+      - approach_outline: true
+      - pseudocode: "high_level_only"  # No actual code
+      - test_strategy: true
+
+# ============================================================================
+# TEACHER_AGENT
+# ============================================================================
+TEACHER_AGENT:
+  role_id: "teacher"
+  display_name: "Teaching & Explanation Agent"
+  description: |
+    Explains concepts, algorithms, and techniques in educational manner.
+    Focuses on understanding, not on solving specific problems.
+  
+  allowed_actions:
+    - explain_algorithms
+    - explain_data_structures
+    - explain_complexity_analysis
+    - explain_design_patterns
+    - provide_conceptual_examples
+    - explain_best_practices
+    - clarify_terminology
+    - draw_analogies
+    - explain_tradeoffs
+    - recommend_learning_resources
+  
+  allowed_outputs:
+    educational_content:
+      - concept_explanations
+      - algorithm_descriptions
+      - visualization_suggestions
+      - analogies_examples
+      - learning_path_guidance
+    
+    teaching_artifacts:
+      - concept_diagrams
+      - example_walkthroughs  # Generic, not problem-specific
+      - complexity_analysis
+      - best_practice_tips
+  
+  output_format:
+    type: "educational_explanation"
+    includes:
+      - concept_name: true
+      - detailed_explanation: true
+      - examples: "generic_only"  # Not problem solutions
+      - analogies: true
+      - learning_resources: true
+
+# ============================================================================
+# HINT_AGENT
+# ============================================================================
+HINT_AGENT:
+  role_id: "hint"
+  display_name: "Progressive Hint Agent"
+  description: |
+    Provides progressive hints without revealing full solution.
+    Guides thinking process, never gives away answers.
+  
+  allowed_actions:
+    - provide_algorithm_hints
+    - suggest_data_structure_hints
+    - hint_at_edge_cases
+    - provide_syntax_hints
+    - suggest_optimization_direction
+    - hint_at_approach
+    - ask_guiding_questions
+    - provide_partial_patterns
+  
+  allowed_outputs:
+    hint_levels:
+      level_1_gentle:
+        - algorithmic_category  # "Think about sorting"
+        - data_structure_suggestion  # "Consider using a hash map"
+        - guiding_questions
+      
+      level_2_moderate:
+        - approach_direction  # "Try two-pointer technique"
+        - partial_logic  # "You'll need to track something"
+        - edge_case_hints
+      
+      level_3_strong:
+        - algorithmic_steps  # "1. Sort, 2. Search, 3. Compare"
+        - specific_technique  # "Use sliding window"
+        - code_structure_hint  # "You'll need nested loops"
+  
+  output_format:
+    type: "progressive_hint"
+    includes:
+      - hint_level: true
+      - hint_text: true
+      - next_steps_suggestion: true
+      - code_snippet: false  # NEVER include code
+      - full_solution: false  # NEVER
+
+# ============================================================================
+# CODING_AGENT
+# ============================================================================
+CODING_AGENT:
+  role_id: "coding"
+  display_name: "Code Generation Agent"
+  description: |
+    Generates code solutions for problems.
+    HIGHEST PRIVILEGE - requires explicit authorization.
+  
+  allowed_actions:
+    - generate_full_solution
+    - generate_partial_solution
+    - generate_boilerplate_code
+    - generate_helper_functions
+    - implement_algorithm
+    - write_test_cases
+    - generate_code_templates
+    - suggest_code_patterns
+  
+  allowed_outputs:
+    code_artifacts:
+      - full_solution_code
+      - partial_implementation
+      - function_signatures
+      - boilerplate_templates
+      - helper_functions
+      - test_cases
+    
+    code_metadata:
+      - language_used
+      - complexity_analysis
+      - approach_explanation
+  
+  output_format:
+    type: "code_generation"
+    includes:
+      - source_code: true
+      - explanation: true
+      - complexity: true
+      - test_cases: true
+  
+  authorization_required:
+    full_solution: true  # Requires explicit approval
+    reasons:
+      - user_attempted_multiple_times
+      - educational_context
+      - practice_mode_only
+
+# ============================================================================
+# DEBUGGING_AGENT
+# ============================================================================
+DEBUGGING_AGENT:
+  role_id: "debugging"
+  display_name: "Debugging Assistant Agent"
+  description: |
+    Helps identify and fix bugs in user's code.
+    Analyzes errors, suggests fixes, explains issues.
+  
+  allowed_actions:
+    - analyze_error_messages
+    - identify_bug_type
+    - suggest_fixes
+    - explain_error_cause
+    - provide_test_case_for_bug
+    - trace_execution_flow
+    - identify_edge_case_failures
+    - suggest_debugging_steps
+  
+  allowed_outputs:
+    debugging_info:
+      - error_analysis
+      - bug_identification
+      - suggested_fix  # Targeted fix, not full rewrite
+      - explanation_of_issue
+      - test_case_revealing_bug
+    
+    debugging_guidance:
+      - debugging_steps
+      - print_statement_suggestions
+      - breakpoint_suggestions
+  
+  output_format:
+    type: "debugging_assistance"
+    includes:
+      - error_type: true
+      - root_cause: true
+      - suggested_fix: "targeted_only"  # Not full solution
+      - explanation: true
+      - test_case: true
+
+# ============================================================================
+# REFACTOR_AGENT
+# ============================================================================
+REFACTOR_AGENT:
+  role_id: "refactor"
+  display_name: "Code Refactoring Agent"
+  description: |
+    Improves existing working code.
+    Focuses on readability, performance, and best practices.
+  
+  allowed_actions:
+    - improve_code_readability
+    - optimize_performance
+    - suggest_better_patterns
+    - improve_variable_names
+    - add_comments
+    - extract_functions
+    - reduce_complexity
+    - apply_design_patterns
+  
+  allowed_outputs:
+    refactoring_suggestions:
+      - improved_code
+      - optimization_suggestions
+      - readability_improvements
+      - pattern_recommendations
+    
+    refactoring_analysis:
+      - code_quality_metrics
+      - before_after_comparison
+      - performance_improvements
+  
+  output_format:
+    type: "code_refactoring"
+    includes:
+      - original_code: true
+      - refactored_code: true
+      - improvements_list: true
+      - performance_impact: true
+
+# ============================================================================
+# PROJECT_INSPECTOR_AGENT
+# ============================================================================
+PROJECT_INSPECTOR_AGENT:
+  role_id: "project_inspector"
+  display_name: "Project Analysis Agent"
+  description: |
+    Analyzes project structure, dependencies, and architecture.
+    Provides high-level insights about codebase.
+  
+  allowed_actions:
+    - analyze_project_structure
+    - identify_dependencies
+    - assess_code_quality
+    - detect_anti_patterns
+    - analyze_architecture
+    - suggest_project_improvements
+    - identify_security_issues
+    - analyze_test_coverage
+  
+  allowed_outputs:
+    project_analysis:
+      - structure_overview
+      - dependency_graph
+      - quality_metrics
+      - architecture_assessment
+      - improvement_suggestions
+    
+    inspection_reports:
+      - code_quality_report
+      - security_audit
+      - performance_analysis
+      - best_practice_violations
+  
+  output_format:
+    type: "project_inspection_report"
+    includes:
+      - structure_analysis: true
+      - quality_metrics: true
+      - recommendations: true
+      - priority_issues: true
+
+# ============================================================================
+# RESEARCH_AGENT
+# ============================================================================
+RESEARCH_AGENT:
+  role_id: "research"
+  display_name: "Research & Context Agent"
+  description: |
+    Gathers context, finds similar problems, and provides references.
+    Helps users learn from existing solutions and patterns.
+  
+  allowed_actions:
+    - search_similar_problems
+    - find_algorithm_references
+    - gather_learning_resources
+    - find_documentation
+    - search_design_patterns
+    - find_related_concepts
+    - gather_examples
+    - research_best_practices
+  
+  allowed_outputs:
+    research_results:
+      - similar_problems_list
+      - reference_links
+      - learning_resources
+      - documentation_links
+      - related_concepts
+    
+    context_gathering:
+      - problem_category
+      - common_approaches
+      - real_world_applications
+  
+  output_format:
+    type: "research_findings"
+    includes:
+      - similar_problems: true
+      - references: true
+      - learning_resources: true
+      - context_information: true
+
+# ============================================================================
+# MEMORY_AGENT
+# ============================================================================
+MEMORY_AGENT:
+  role_id: "memory"
+  display_name: "Context Memory Agent"
+  description: |
+    Stores and retrieves conversation context.
+    Maintains user progress and learning history.
+  
+  allowed_actions:
+    - store_conversation_context
+    - retrieve_past_context
+    - update_user_progress
+    - track_attempted_problems
+    - store_user_preferences
+    - retrieve_learning_history
+    - update_context
+    - delete_context  # With authorization
+  
+  allowed_outputs:
+    memory_operations:
+      - stored_context
+      - retrieved_context
+      - updated_progress
+      - user_history
+    
+    memory_metadata:
+      - storage_timestamp
+      - context_relevance
+      - retention_period
+  
+  output_format:
+    type: "memory_operation_result"
+    includes:
+      - operation_type: true
+      - success_status: true
+      - data_retrieved: true
+      - timestamp: true
+  
+  authorization_required:
+    delete_context: true  # Requires explicit approval
+
+# ============================================================================
+# GLOBAL RULES (Apply to ALL agents)
+# ============================================================================
+global_rules:
+  data_access:
+    - no_direct_database_access
+    - no_test_case_solutions_access
+    - no_other_user_data_access
+    - sanitized_inputs_only
+  
+  output_restrictions:
+    - no_sensitive_data_leakage
+    - no_unauthorized_information
+    - schema_validation_required
+    - output_size_limits
+  
+  agent_interaction:
+    - no_direct_agent_to_agent_calls
+    - all_communication_via_controller
+    - no_privilege_escalation
+    - audit_all_operations
