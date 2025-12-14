@@ -123,9 +123,9 @@ export function CodeEditor({
   };
 
   return (
-    <div className={`flex flex-col ${isFullscreen ? 'fixed inset-0 z-50 bg-background' : ''}`}>
+    <div className={`flex flex-col h-full ${isFullscreen ? 'fixed inset-0 z-50 bg-background' : ''}`}>
       {/* Toolbar */}
-      <div className="flex items-center justify-between gap-2 p-3 border-b border-border bg-card/50 backdrop-blur-sm">
+      <div className="flex items-center justify-between gap-2 p-3 border-b border-border bg-card/50 backdrop-blur-sm flex-shrink-0">
         <div className="flex items-center gap-2">
           <Select
             value={selectedLanguage}
