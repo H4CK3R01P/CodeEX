@@ -1,10 +1,10 @@
 [
   {
     "content": "Fix Achieve section - Change unlocked achievements card text to black",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Fix Coins section - Change bonus opportunity text to black",
-    "status": "pending"
+    "status": "in_progress"
   }
 ]
