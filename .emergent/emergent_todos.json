@@ -13,14 +13,14 @@
   },
   {
     "content": "Create admin metrics endpoint",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Add safety checks for sensitive data",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Create documentation and examples",
-    "status": "pending"
+    "status": "completed"
   }
 ]
