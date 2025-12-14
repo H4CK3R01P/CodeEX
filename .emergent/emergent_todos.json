@@ -13,7 +13,7 @@
   },
   {
     "content": "Implement mock AI provider (no real calls)",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Create AI configuration and constants",
@@ -25,6 +25,6 @@
   },
   {
     "content": "Document AI interface layer",
-    "status": "pending"
+    "status": "completed"
   }
 ]
