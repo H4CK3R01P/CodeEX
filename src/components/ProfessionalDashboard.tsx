@@ -43,6 +43,24 @@ export function ProfessionalDashboard({ userData }: ProfessionalDashboardProps) 
   const [showUserMenu, setShowUserMenu] = useState(false);
   const [notifications, setNotifications] = useState(2);
 
+  // Handle logout - clear session and reload page
+  const handleLogout = () => {
+    setShowUserMenu(false);
+    if (typeof window !== 'undefined') {
+      sessionStorage.clear();
+      localStorage.removeItem('userData');
+      setTimeout(() => {
+        window.location.reload();
+      }, 300);
+    }
+  };
+
+  // Handle settings navigation
+  const handleSettings = () => {
+    setShowUserMenu(false);
+    alert('Settings feature coming soon! You can change your preferences here.');
+  };
+
   const navItems = [
     { id: 'skill-gap' as Section, label: 'Skill Gap', icon: <Target className="w-4 h-4" />, gradient: 'from-red-500 to-orange-500' },
     { id: 'roadmap' as Section, label: 'Roadmap', icon: <TrendingUp className="w-4 h-4" />, gradient: 'from-purple-500 to-pink-500' },
