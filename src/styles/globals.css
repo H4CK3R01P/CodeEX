@@ -192,6 +192,10 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-text-primary-dark: var(--text-primary-dark);
+  --color-text-high-contrast: var(--text-high-contrast);
+  --color-text-on-light: var(--text-on-light);
+  --color-text-on-gradient-light: var(--text-on-gradient-light);
 }
 
 @layer base {
