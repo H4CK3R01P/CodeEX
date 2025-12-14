@@ -1,23 +1,11 @@
 [
   {
-    "content": "Navigate to Analytics section and capture initial state",
-    "status": "completed"
-  },
-  {
-    "content": "Test time range filter and chart updates",
-    "status": "completed"
-  },
-  {
-    "content": "Test chart hover interactions and tooltips",
-    "status": "completed"
-  },
-  {
     "content": "Test download/export report functionality",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Check for chart rendering issues",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Verify data consistency across charts",
