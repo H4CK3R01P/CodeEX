@@ -654,3 +654,202 @@ def _generate_fallback_id() -> str:
     """Generate fallback request ID"""
     import uuid
     return f"req_fallback_{uuid.uuid4().hex[:8]}"
+
+
+
+# ============================================================================
+# OBSERVABILITY ENDPOINTS (Admin Only)
+# ============================================================================
+
+def verify_admin_token(authorization: Optional[str] = None) -> bool:
+    """Verify admin authorization token.
+    
+    Args:
+        authorization: Authorization header value
+        
+    Returns:
+        True if authorized, False otherwise
+    """
+    # TODO: Implement proper admin authentication
+    # For now, check for a simple admin token from environment
+    admin_token = os.getenv('CODEX_ADMIN_TOKEN', 'admin-secret-token')
+    
+    if not authorization:
+        return False
+    
+    # Expected format: "Bearer <token>"
+    parts = authorization.split(' ')
+    if len(parts) != 2 or parts[0] != 'Bearer':
+        return False
+    
+    return parts[1] == admin_token
+
+
+@router.get(
+    "/metrics",
+    summary="Get AI Metrics (Admin Only)",
+    description="Returns aggregated AI metrics - no raw logs or sensitive data",
+    response_model=Dict[str, Any],
+    responses={
+        200: {"description": "Metrics retrieved successfully"},
+        401: {"description": "Unauthorized - Admin access required"},
+        503: {"description": "Metrics service unavailable"}
+    }
+)
+async def get_ai_metrics(
+    authorization: Optional[str] = None,
+    agent: Optional[str] = None,
+    domain: Optional[str] = None
+) -> Dict[str, Any]:
+    """Get aggregated AI metrics (Admin only).
+    
+    Returns metrics without raw logs or sensitive data.
+    
+    Query Parameters:
+    - agent: Filter by specific agent name (optional)
+    - domain: Filter by specific domain (optional)
+    
+    Returns:
+    - summary: Overall statistics
+    - by_agent: Per-agent metrics
+    - by_domain: Per-domain metrics
+    - by_endpoint: Per-endpoint call counts
+    - recent_failures: Recent failure summaries (no sensitive data)
+    - hourly_volume: Request volume per hour
+    """
+    # Check admin authorization
+    if not verify_admin_token(authorization):
+        raise HTTPException(
+            status_code=401,
+            detail="Unauthorized: Admin access required"
+        )
+    
+    try:
+        # Import metrics instance
+        from brain.observability import get_metrics_instance
+        
+        metrics = get_metrics_instance()
+        
+        # Get all metrics
+        response = {
+            "version": "v1",
+            "timestamp": datetime.utcnow().isoformat(),
+            "summary": metrics.get_summary(),
+            "by_agent": metrics.get_agent_stats(),
+            "by_domain": metrics.get_domain_stats(),
+            "by_endpoint": metrics.get_endpoint_stats(),
+            "recent_failures": metrics.get_recent_failures(limit=20),
+            "hourly_volume": metrics.get_hourly_volume(hours=24),
+        }
+        
+        # Filter by agent if specified
+        if agent:
+            if agent in response["by_agent"]:
+                response["by_agent"] = {agent: response["by_agent"][agent]}
+            else:
+                response["by_agent"] = {}
+        
+        # Filter by domain if specified
+        if domain:
+            if domain in response["by_domain"]:
+                response["by_domain"] = {domain: response["by_domain"][domain]}
+            else:
+                response["by_domain"] = {}
+        
+        return response
+        
+    except Exception as e:
+        logger.error(f"Failed to retrieve metrics: {e}")
+        raise HTTPException(
+            status_code=503,
+            detail="Metrics service temporarily unavailable"
+        )
+
+
+@router.post(
+    "/metrics/reset",
+    summary="Reset AI Metrics (Admin Only)",
+    description="Reset all metrics counters",
+    responses={
+        200: {"description": "Metrics reset successfully"},
+        401: {"description": "Unauthorized - Admin access required"}
+    }
+)
+async def reset_ai_metrics(
+    authorization: Optional[str] = None
+) -> Dict[str, Any]:
+    """Reset all AI metrics (Admin only).
+    
+    USE WITH CAUTION: This will clear all metrics data.
+    """
+    # Check admin authorization
+    if not verify_admin_token(authorization):
+        raise HTTPException(
+            status_code=401,
+            detail="Unauthorized: Admin access required"
+        )
+    
+    try:
+        # Import metrics instance
+        from brain.observability import get_metrics_instance
+        
+        metrics = get_metrics_instance()
+        metrics.reset()
+        
+        return {
+            "success": True,
+            "message": "All metrics have been reset",
+            "timestamp": datetime.utcnow().isoformat()
+        }
+        
+    except Exception as e:
+        logger.error(f"Failed to reset metrics: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to reset metrics"
+        )
+
+
+@router.get(
+    "/health",
+    summary="AI Service Health Check",
+    description="Check if AI service is operational",
+    responses={
+        200: {"description": "Service is healthy"},
+        503: {"description": "Service is unavailable"}
+    }
+)
+async def ai_health_check() -> Dict[str, Any]:
+    """Health check for AI service.
+    
+    Returns service status and basic information.
+    Does not require authentication.
+    """
+    if not AI_ENABLED:
+        raise HTTPException(
+            status_code=503,
+            detail="AI service is disabled"
+        )
+    
+    try:
+        from brain.observability import get_metrics_instance
+        
+        metrics = get_metrics_instance()
+        summary = metrics.get_summary()
+        
+        return {
+            "status": "healthy",
+            "ai_enabled": AI_ENABLED,
+            "timestamp": datetime.utcnow().isoformat(),
+            "uptime_hours": summary.get("uptime_hours", 0),
+            "total_requests": summary.get("total_requests", 0),
+            "version": "v1"
+        }
+        
+    except Exception as e:
+        logger.error(f"Health check failed: {e}")
+        raise HTTPException(
+            status_code=503,
+            detail="AI service health check failed"
+        )
+
