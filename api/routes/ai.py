@@ -483,7 +483,7 @@ async def generate_hint(
         result = await orchestrator.process_request(orch_request)
         
         if result.status == OrchestrationStatus.SUCCESS:
-            return HintResponse(
+            response = HintResponse(
                 success=True,
                 hint=result.output,
                 hint_level=request.hint_level,
@@ -494,6 +494,21 @@ async def generate_hint(
                 },
                 request_id=result.request_id
             )
+            
+            # Cache successful response
+            if cache_key:
+                set_cached_response(
+                    cache_key,
+                    "generate-hint",
+                    response.dict(),
+                    metadata={
+                        'hint_level': request.hint_level,
+                        'problem_id': request.problem_id,
+                        'generation_time_ms': result.total_time_ms
+                    }
+                )
+            
+            return response
         else:
             logger.warning(f"Hint generation failed: {result.status}")
             
