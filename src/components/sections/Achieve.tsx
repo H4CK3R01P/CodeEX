@@ -97,21 +97,21 @@ export function Achieve({ userData }: AchieveProps) {
           <h3 className="text-gray-900 mb-4">Unlocked Achievements</h3>
           <div className="grid md:grid-cols-2 gap-4">
             {unlockedAchievements.map((achievement) => (
-              <Card key={achievement.id} className="bg-gradient-to-br from-yellow-50 to-orange-50 border-yellow-200">
+              <Card key={achievement.id} className="bg-gradient-to-br from-purple-600 to-purple-700 border-purple-500 hover:from-purple-700 hover:to-purple-800 active:from-purple-800 active:to-purple-900 transition-all duration-200 shadow-lg hover:shadow-xl">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-3xl shadow-lg">
+                    <div className="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full flex items-center justify-center text-3xl shadow-lg">
                       {achievement.icon}
                     </div>
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-2">
-                        <h4 className="text-text-primary-dark font-bold">{achievement.name}</h4>
-                        <Badge variant="secondary" className="bg-yellow-600 text-white font-semibold">
+                        <h4 className="text-white font-bold">{achievement.name}</h4>
+                        <Badge variant="secondary" className="bg-white/20 text-white font-semibold backdrop-blur-sm">
                           +50 XP
                         </Badge>
                       </div>
-                      <p className="text-sm text-text-on-gradient-light mb-3">{achievement.description}</p>
-                      <div className="flex items-center gap-2 text-xs text-green-700 font-semibold">
+                      <p className="text-sm text-white/90 mb-3">{achievement.description}</p>
+                      <div className="flex items-center gap-2 text-xs text-emerald-300 font-semibold">
                         <Award className="w-4 h-4" />
                         <span>Unlocked</span>
                       </div>
