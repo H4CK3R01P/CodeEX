@@ -392,6 +392,7 @@ async def generate_question(
 async def generate_hint(
     request: HintRequest,
     background_tasks: BackgroundTasks,
+    user_id: str = "anonymous",  # TODO: Get from auth middleware
     _: None = Depends(check_ai_enabled)
 ):
     """
@@ -402,8 +403,14 @@ async def generate_hint(
     - Level 2: Moderate hint (approach direction, data structures)
     - Level 3: Strong hint (algorithm steps, specific techniques)
     
+    **Rate Limit:** 5 requests per minute per user
+    
     **Note:** Hints are verified to not reveal the full solution.
     """
+    # Check rate limit (5/min)
+    prompt_hash = f"{request.problem_id}:{request.hint_level}"
+    check_rate_limit("generate-hint", user_id, prompt_hash)
+    
     try:
         from backend.ai.orchestrator import (
             CodeEXOrchestrator,
