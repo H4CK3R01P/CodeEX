@@ -21,11 +21,11 @@
   },
   {
     "content": "Start backend server",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Start frontend server",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Verify application is running",
