@@ -1,34 +1,18 @@
 [
   {
-    "content": "Backup current changes documentation",
-    "status": "completed"
+    "content": "Check and apply Question Navigator visibility fix (QuestionPractice.tsx)",
+    "status": "in_progress"
   },
   {
-    "content": "Pull latest code from GitHub repository",
-    "status": "completed"
+    "content": "Check and apply Compete Section stats cards gradients",
+    "status": "pending"
   },
   {
-    "content": "Reapply semantic color tokens to globals.css",
-    "status": "completed"
+    "content": "Check and apply all other style changes",
+    "status": "pending"
   },
   {
-    "content": "Reapply purple backgrounds to Achieve section",
-    "status": "completed"
-  },
-  {
-    "content": "Reapply purple backgrounds to Coins section",
-    "status": "completed"
-  },
-  {
-    "content": "Reapply white text to Test Instructions",
-    "status": "completed"
-  },
-  {
-    "content": "Reapply readability fixes to TestTaking component",
-    "status": "completed"
-  },
-  {
-    "content": "Verify all changes and test application",
-    "status": "completed"
+    "content": "Verify all changes are applied",
+    "status": "pending"
   }
 ]
