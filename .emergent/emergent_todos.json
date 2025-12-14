@@ -1,19 +1,19 @@
 [
   {
     "content": "Update Achieve section unlocked achievements to purple background",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Update Coins section balance and bonus cards to purple background",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Add hover and active states for interactive cards",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Ensure text contrast on purple backgrounds",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Test visual consistency and responsiveness",
