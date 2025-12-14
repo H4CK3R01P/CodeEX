@@ -5,7 +5,7 @@
   },
   {
     "content": "Update Coins section balance and bonus cards to purple background",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Add hover and active states for interactive cards",
@@ -17,6 +17,6 @@
   },
   {
     "content": "Test visual consistency and responsiveness",
-    "status": "pending"
+    "status": "in_progress"
   }
 ]
