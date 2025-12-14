@@ -7,6 +7,7 @@ Orchestrates all agents with input sanitization and verification.
 import logging
 from typing import Dict, Any, Optional
 from datetime import datetime
+import time
 
 from .core.permissions import AgentRole, Permission
 from .core.agent_base import AgentBase
@@ -22,6 +23,7 @@ from .agents import (
     ResearchAgent,
     MemoryAgent,
 )
+from .observability import log_ai_request, get_metrics_instance
 
 
 logger = logging.getLogger("codex_brain.controller")
