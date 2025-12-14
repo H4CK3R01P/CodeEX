@@ -13,14 +13,18 @@
   },
   {
     "content": "Configure backend API and create server.py",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Configure frontend .env file",
-    "status": "pending"
+    "status": "completed"
   },
   {
-    "content": "Start backend and frontend servers",
+    "content": "Start backend server",
+    "status": "in_progress"
+  },
+  {
+    "content": "Start frontend server",
     "status": "pending"
   },
   {
