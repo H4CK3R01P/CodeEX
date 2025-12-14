@@ -933,7 +933,7 @@ export function Social({ userData }: SocialProps) {
                       <Button
                         size="sm"
                         className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
-                        onClick={() => handleAcceptRequest(request.name)}
+                        onClick={() => handleAcceptRequest(request.id, request.name)}
                       >
                         <UserCheck className="w-4 h-4 mr-1" />
                         Accept
@@ -941,7 +941,7 @@ export function Social({ userData }: SocialProps) {
                       <Button
                         variant="outline"
                         size="sm"
-                        onClick={() => handleRejectRequest(request.name)}
+                        onClick={() => handleRejectRequest(request.id, request.name)}
                       >
                         <UserX className="w-4 h-4 mr-1" />
                         Decline
