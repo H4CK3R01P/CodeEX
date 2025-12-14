@@ -307,11 +307,16 @@ def get_cached_response(cache_key: str, endpoint: str) -> Optional[Dict]:
         cached = cache_manager.get(cache_key, endpoint)
         
         if cached:
-            logger.info(f\"Cache HIT for {endpoint}: {cache_key[:16]}...\")\n            return cached
+            logger.info(f"Cache HIT for {endpoint}: {cache_key[:16]}...")
+            return cached
         
-        logger.debug(f\"Cache MISS for {endpoint}: {cache_key[:16]}...\")\n        return None
+        logger.debug(f"Cache MISS for {endpoint}: {cache_key[:16]}...")
+        return None
         
-    except Exception as e:\n        # Never crash on cache error - log and continue\n        logger.error(f\"Cache retrieval error (non-fatal): {e}\")\n        return None\n\n\ndef set_cached_response(\n    cache_key: str,\n    endpoint: str,\n    response: Dict,\n    metadata: Optional[Dict] = None\n) -> None:\n    \"\"\"Cache AI response.\n    \n    Args:\n        cache_key: Cache key\n        endpoint: Endpoint name\n        response: Response to cache\n        metadata: Optional metadata\n    \"\"\"\n    from brain.caching import get_cache_manager\n    \n    try:\n        cache_manager = get_cache_manager()\n        \n        # Add endpoint to metadata for invalidation\n        if metadata is None:\n            metadata = {}\n        metadata['endpoint'] = endpoint\n        \n        success = cache_manager.set(cache_key, response, endpoint, metadata)\n        \n        if success:\n            logger.info(f\"Cached response for {endpoint}: {cache_key[:16]}...\")\n        \n    except Exception as e:\n        # Never crash on cache error - log and continue\n        logger.error(f\"Cache storage error (non-fatal): {e}\")
+    except Exception as e:
+        # Never crash on cache error - log and continue
+        logger.error(f"Cache retrieval error (non-fatal): {e}")
+        return None\n\n\ndef set_cached_response(\n    cache_key: str,\n    endpoint: str,\n    response: Dict,\n    metadata: Optional[Dict] = None\n) -> None:\n    \"\"\"Cache AI response.\n    \n    Args:\n        cache_key: Cache key\n        endpoint: Endpoint name\n        response: Response to cache\n        metadata: Optional metadata\n    \"\"\"\n    from brain.caching import get_cache_manager\n    \n    try:\n        cache_manager = get_cache_manager()\n        \n        # Add endpoint to metadata for invalidation\n        if metadata is None:\n            metadata = {}\n        metadata['endpoint'] = endpoint\n        \n        success = cache_manager.set(cache_key, response, endpoint, metadata)\n        \n        if success:\n            logger.info(f\"Cached response for {endpoint}: {cache_key[:16]}...\")\n        \n    except Exception as e:\n        # Never crash on cache error - log and continue\n        logger.error(f\"Cache storage error (non-fatal): {e}\")
 
 
 # ============================================================================
