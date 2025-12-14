@@ -1,42 +1,42 @@
 [
   {
     "content": "Login as Industry user and capture initial workspace",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Verify sidebar sections for Industry role",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Test assessment creation flow - all steps",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Test sending invites to candidates",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Test reviewing candidate submissions with code viewer",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Test saving feedback on submissions",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Navigate analytics and verify hiring funnel",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Check for broken admin actions",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Verify role-based access controls",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Generate comprehensive Industry Workspace report",
-    "status": "pending"
+    "status": "completed"
   }
 ]
