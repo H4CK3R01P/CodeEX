@@ -57,7 +57,7 @@ def example_2_enforce_and_block():
     allowed = enforcer.enforce(
         agent_role=AgentRole.HINT,
         permission=Permission.GENERATE_FULL_SOLUTION,
-        action_name=\"generate_solution\"
+        action_name="generate_solution"
     )
     
     if allowed:
