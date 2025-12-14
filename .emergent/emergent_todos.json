@@ -13,11 +13,11 @@
   },
   {
     "content": "Fix Achieve Section numeric values visibility",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Fix Achieve Section Unlocked Achievements text contrast",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Test all contrast fixes and verify accessibility",
