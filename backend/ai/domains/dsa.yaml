@@ -1,0 +1,259 @@
+# Data Structures & Algorithms Domain Configuration
+# For learning-focused DSA practice (educational, not competitive)
+
+domain_name: "Data Structures & Algorithms"
+domain_id: "dsa"
+version: "1.0.0"
+last_updated: "2024-12-14"
+
+# Description
+description: |
+  Educational DSA domain focuses on learning core data structures and algorithms
+  with comprehensive explanations, visualizations, and step-by-step guidance.
+
+# Difficulty Levels
+difficulty_levels:
+  beginner:
+    label: "Beginner"
+    score_range: [0, 25]
+    time_multiplier: 2.0
+    hints_allowed: 5
+    test_cases_shown: 3
+    explanation_depth: "comprehensive"
+    
+  intermediate:
+    label: "Intermediate"
+    score_range: [26, 60]
+    time_multiplier: 1.5
+    hints_allowed: 3
+    test_cases_shown: 2
+    explanation_depth: "detailed"
+    
+  advanced:
+    label: "Advanced"
+    score_range: [61, 85]
+    time_multiplier: 1.2
+    hints_allowed: 2
+    test_cases_shown: 1
+    explanation_depth: "moderate"
+    
+  expert:
+    label: "Expert"
+    score_range: [86, 100]
+    time_multiplier: 1.0
+    hints_allowed: 1
+    test_cases_shown: 0
+    explanation_depth: "minimal"
+
+# Allowed Languages
+allowed_languages:
+  - python:
+      version: "3.11+"
+      time_limit_multiplier: 2.5
+      memory_limit_multiplier: 2.0
+      recommended_for_beginners: true
+      starter_template: |
+        # Implement your solution below
+        class Solution:
+            def solve(self, input_data):
+                # Your code here
+                pass
+      
+  - cpp:
+      version: "C++17"
+      time_limit_multiplier: 1.0
+      memory_limit_multiplier: 1.0
+      recommended_for_beginners: false
+      starter_template: |
+        #include <iostream>
+        #include <vector>
+        using namespace std;
+        
+        class Solution {
+        public:
+            void solve() {
+                // Your code here
+            }
+        };
+      
+  - java:
+      version: "17+"
+      time_limit_multiplier: 2.0
+      memory_limit_multiplier: 2.0
+      recommended_for_beginners: true
+      starter_template: |
+        import java.util.*;
+        
+        class Solution {
+            public void solve() {
+                // Your code here
+            }
+        }
+
+# Execution Constraints
+constraints:
+  time_limit:
+    default_ms: 3000
+    min_ms: 1000
+    max_ms: 10000
+    strict_enforcement: false  # More lenient for learning
+    
+  memory_limit:
+    default_kb: 524288  # 512 MB
+    min_kb: 262144      # 256 MB
+    max_kb: 1048576     # 1 GB
+    strict_enforcement: false
+    
+  code_size:
+    max_bytes: 50000
+    warn_at_bytes: 25000
+    
+  test_cases:
+    min_count: 3
+    max_count: 20
+    hidden_percentage: 0.3  # Show more test cases for learning
+    
+  submissions:
+    max_per_hour: 100
+    cooldown_seconds: 0  # No cooldown for learning
+
+# Expected Output Format
+expected_output_format:
+  type: "flexible"
+  rules:
+    - whitespace_handling: "trim"  # More lenient
+    - case_sensitive: true
+    - trailing_newline: "ignore"
+    - number_precision: 6
+    - array_format: "flexible"
+    
+  validation:
+    - check_order: true
+    - allow_extra_output: false
+    - empty_output_valid: false
+
+# Accuracy Rules
+accuracy_rules:
+  verdict_priority:
+    - "CE"
+    - "RE"
+    - "TLE"
+    - "MLE"
+    - "WA"
+    - "AC"
+    
+  partial_credit:
+    enabled: true
+    per_test_case: true
+    pass_threshold: 0.6  # 60% test cases
+    
+  scoring:
+    ac_points: 100
+    partial_credit_multiplier: 0.5
+    wa_penalty: 0
+    tle_penalty: 0
+    show_score_breakdown: true
+    
+  comparison:
+    method: "token_based"  # More forgiving
+    float_epsilon: 1e-5
+    ignore_trailing_spaces: true
+    ignore_blank_lines: true
+
+# Explanation Depth
+explanation_depth:
+  minimal:
+    include_algorithm_name: true
+    include_complexity: true
+    include_approach: true
+    include_code_walkthrough: false
+    include_edge_cases: false
+    include_optimization_tips: true
+    
+  moderate:
+    include_algorithm_name: true
+    include_complexity: true
+    include_approach: true
+    include_code_walkthrough: true
+    include_edge_cases: true
+    include_optimization_tips: true
+    include_visualizations: true
+    
+  detailed:
+    include_algorithm_name: true
+    include_complexity: true
+    include_approach: true
+    include_code_walkthrough: true
+    include_edge_cases: true
+    include_optimization_tips: true
+    include_visualizations: true
+    include_similar_problems: true
+    
+  comprehensive:
+    include_algorithm_name: true
+    include_complexity: true
+    include_approach: true
+    include_code_walkthrough: true
+    include_edge_cases: true
+    include_optimization_tips: true
+    include_visualizations: true
+    include_similar_problems: true
+    include_learning_resources: true
+    include_real_world_applications: true
+    include_common_mistakes: true
+
+# Topic Categories
+topic_categories:
+  data_structures:
+    - arrays
+    - linked_lists
+    - stacks
+    - queues
+    - trees
+    - graphs
+    - heaps
+    - hash_tables
+    - sets
+    - tries
+    
+  algorithms:
+    - sorting
+    - searching
+    - recursion
+    - dynamic_programming
+    - greedy
+    - backtracking
+    - divide_and_conquer
+    - graph_algorithms
+    - string_algorithms
+    - bit_manipulation
+
+# AI Assistant Behavior
+ai_assistant:
+  hint_strategy: "socratic"  # Guide through questions
+  max_hints_per_problem: 5
+  reveal_solution_after_attempts: 0  # Never auto-reveal
+  explanation_style: "educational"
+  code_review_depth: "comprehensive"
+  provide_visualizations: true
+  suggest_related_concepts: true
+  
+# Learning Path Settings
+learning_path:
+  enabled: true
+  prerequisite_checking: true
+  recommended_order: true
+  mastery_threshold: 0.8  # 80% to mark as mastered
+  spaced_repetition: true
+  
+# Feature Flags
+features:
+  custom_test_cases: true
+  solution_templates: true
+  editorial_access: true
+  discussion_forum: true
+  code_comparison: true
+  plagiarism_detection: false  # Learning-focused
+  visualizations: true
+  interactive_debugger: true
+  step_by_step_execution: true

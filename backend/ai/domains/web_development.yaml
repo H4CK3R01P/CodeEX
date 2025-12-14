@@ -1,0 +1,250 @@
+# Web Development Domain Configuration
+# For HTML, CSS, JavaScript, React, Node.js challenges
+
+domain_name: "Web Development"
+domain_id: "web_development"
+version: "1.0.0"
+last_updated: "2024-12-14"
+
+# Description
+description: |
+  Web development domain focuses on frontend, backend, and full-stack
+  development challenges including UI/UX implementation, API design,
+  and modern web technologies.
+
+# Difficulty Levels
+difficulty_levels:
+  basic:
+    label: "Basic"
+    score_range: [0, 30]
+    time_multiplier: 2.0
+    hints_allowed: 5
+    test_cases_shown: 3
+    explanation_depth: "detailed"
+    
+  intermediate:
+    label: "Intermediate"
+    score_range: [31, 65]
+    time_multiplier: 1.5
+    hints_allowed: 3
+    test_cases_shown: 2
+    explanation_depth: "moderate"
+    
+  advanced:
+    label: "Advanced"
+    score_range: [66, 100]
+    time_multiplier: 1.2
+    hints_allowed: 2
+    test_cases_shown: 1
+    explanation_depth: "minimal"
+
+# Allowed Languages & Technologies
+allowed_languages:
+  - html:
+      version: "HTML5"
+      validation: "w3c"
+      semantic_required: true
+      accessibility_checks: true
+      
+  - css:
+      version: "CSS3"
+      preprocessors: ["scss", "sass", "less"]
+      frameworks: ["tailwind", "bootstrap"]
+      validation: "w3c"
+      
+  - javascript:
+      version: "ES6+"
+      runtime: "node20"
+      time_limit_multiplier: 2.0
+      frameworks: ["react", "vue", "angular"]
+      linting: "eslint"
+      
+  - typescript:
+      version: "5.0+"
+      strict_mode: true
+      time_limit_multiplier: 2.5
+      
+  - python:
+      version: "3.11+"
+      frameworks: ["flask", "fastapi", "django"]
+      time_limit_multiplier: 2.0
+      
+  - node:
+      version: "20+"
+      package_manager: "npm"
+      frameworks: ["express", "nestjs"]
+
+# Execution Constraints
+constraints:
+  time_limit:
+    default_ms: 5000
+    min_ms: 1000
+    max_ms: 30000  # Longer for integration tests
+    strict_enforcement: false
+    
+  memory_limit:
+    default_kb: 524288  # 512 MB
+    min_kb: 262144
+    max_kb: 1048576
+    strict_enforcement: false
+    
+  code_size:
+    max_bytes: 200000  # 200 KB (larger for web projects)
+    warn_at_bytes: 100000
+    
+  test_cases:
+    min_count: 3
+    max_count: 15
+    hidden_percentage: 0.4
+    include_visual_tests: true
+    include_accessibility_tests: true
+    
+  submissions:
+    max_per_hour: 50
+    cooldown_seconds: 10
+    
+  dependencies:
+    allow_npm_packages: true
+    allow_cdn_imports: true
+    whitelist_only: false
+
+# Expected Output Format
+expected_output_format:
+  type: "flexible"
+  rules:
+    - whitespace_handling: "ignore"
+    - case_sensitive: false
+    - trailing_newline: "ignore"
+    - html_minification: "optional"
+    - css_minification: "optional"
+    
+  validation:
+    - check_html_structure: true
+    - check_css_syntax: true
+    - check_js_errors: true
+    - check_accessibility: true
+    - check_responsive_design: true
+    - check_cross_browser: false
+
+# Accuracy Rules
+accuracy_rules:
+  verdict_priority:
+    - "CE"   # Compilation/Syntax Error
+    - "RE"   # Runtime Error
+    - "TLE"  # Time Limit Exceeded
+    - "VE"   # Validation Error (HTML/CSS)
+    - "AE"   # Accessibility Error
+    - "WA"   # Wrong Answer/Incorrect Implementation
+    - "AC"   # Accepted
+    
+  partial_credit:
+    enabled: true
+    per_test_case: true
+    per_feature: true
+    pass_threshold: 0.7
+    
+  scoring:
+    ac_points: 100
+    functionality_weight: 0.6
+    design_weight: 0.2
+    accessibility_weight: 0.1
+    performance_weight: 0.1
+    show_score_breakdown: true
+    
+  comparison:
+    method: "functional"  # Test functionality, not exact match
+    dom_comparison: true
+    visual_regression: false
+    api_response_comparison: true
+
+# Explanation Depth
+explanation_depth:
+  minimal:
+    include_technology_used: true
+    include_best_practices: true
+    include_code_structure: false
+    include_design_patterns: false
+    include_accessibility_tips: false
+    
+  moderate:
+    include_technology_used: true
+    include_best_practices: true
+    include_code_structure: true
+    include_design_patterns: true
+    include_accessibility_tips: true
+    include_performance_tips: true
+    
+  detailed:
+    include_technology_used: true
+    include_best_practices: true
+    include_code_structure: true
+    include_design_patterns: true
+    include_accessibility_tips: true
+    include_performance_tips: true
+    include_browser_compatibility: true
+    include_seo_considerations: true
+    include_security_considerations: true
+
+# Topic Categories
+topic_categories:
+  frontend:
+    - html_basics
+    - css_styling
+    - responsive_design
+    - javascript_dom
+    - react_components
+    - state_management
+    - routing
+    - forms_validation
+    - animations
+    - accessibility
+    
+  backend:
+    - rest_api
+    - graphql
+    - authentication
+    - database_integration
+    - middleware
+    - error_handling
+    - file_upload
+    - caching
+    - websockets
+    
+  full_stack:
+    - crud_operations
+    - authentication_flow
+    - real_time_features
+    - deployment
+    - testing
+
+# AI Assistant Behavior
+ai_assistant:
+  hint_strategy: "progressive"
+  max_hints_per_problem: 4
+  reveal_solution_after_attempts: 0
+  explanation_style: "practical"
+  code_review_depth: "comprehensive"
+  suggest_best_practices: true
+  suggest_modern_alternatives: true
+  
+# Testing Configuration
+testing:
+  unit_tests: true
+  integration_tests: true
+  e2e_tests: false
+  visual_regression: false
+  accessibility_tests: true
+  performance_tests: true
+  
+# Feature Flags
+features:
+  custom_test_cases: true
+  solution_templates: true
+  editorial_access: true
+  discussion_forum: true
+  code_comparison: true
+  plagiarism_detection: false
+  live_preview: true
+  browser_console: true
+  network_tab: true
+  responsive_preview: true

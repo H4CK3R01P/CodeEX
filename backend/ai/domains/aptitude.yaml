@@ -1,0 +1,256 @@
+# Aptitude Domain Configuration
+# For quantitative aptitude, logical reasoning, and puzzle solving
+
+domain_name: "Aptitude & Reasoning"
+domain_id: "aptitude"
+version: "1.0.0"
+last_updated: "2024-12-14"
+
+# Description
+description: |
+  Aptitude domain focuses on quantitative aptitude, logical reasoning,
+  analytical ability, and problem-solving skills commonly tested in
+  placement exams and competitive exams.
+
+# Difficulty Levels
+difficulty_levels:
+  easy:
+    label: "Easy"
+    score_range: [0, 30]
+    time_multiplier: 1.5
+    hints_allowed: 3
+    test_cases_shown: 2
+    explanation_depth: "detailed"
+    steps_shown: true
+    
+  medium:
+    label: "Medium"
+    score_range: [31, 65]
+    time_multiplier: 1.2
+    hints_allowed: 2
+    test_cases_shown: 1
+    explanation_depth: "moderate"
+    steps_shown: true
+    
+  hard:
+    label: "Hard"
+    score_range: [66, 100]
+    time_multiplier: 1.0
+    hints_allowed: 1
+    test_cases_shown: 0
+    explanation_depth: "minimal"
+    steps_shown: false
+
+# Allowed Languages
+allowed_languages:
+  - python:
+      version: "3.11+"
+      use_case: "computational_problems"
+      time_limit_multiplier: 2.0
+      math_libraries: ["math", "statistics", "fractions", "decimal"]
+      
+  - mathematical_notation:
+      type: "symbolic"
+      use_case: "formula_based_problems"
+      
+  - text_answer:
+      type: "natural_language"
+      use_case: "reasoning_problems"
+      validation: "semantic"
+
+# Execution Constraints
+constraints:
+  time_limit:
+    default_ms: 2000
+    min_ms: 500
+    max_ms: 5000
+    per_question_seconds: 60  # Time to solve per question
+    strict_enforcement: true
+    
+  memory_limit:
+    default_kb: 131072  # 128 MB
+    min_kb: 65536
+    max_kb: 262144
+    strict_enforcement: false
+    
+  code_size:
+    max_bytes: 10000
+    warn_at_bytes: 5000
+    
+  test_cases:
+    min_count: 5
+    max_count: 20
+    hidden_percentage: 0.5
+    
+  submissions:
+    max_per_hour: 100
+    cooldown_seconds: 0
+    max_attempts_per_question: 3
+
+# Expected Output Format
+expected_output_format:
+  type: "strict"
+  answer_types:
+    - numeric:
+        precision: 2
+        units_required: false
+        scientific_notation: false
+        
+    - text:
+        case_sensitive: false
+        exact_match: false
+        semantic_matching: true
+        
+    - multiple_choice:
+        format: "single_letter"
+        options: ["A", "B", "C", "D", "E"]
+        
+    - boolean:
+        format: ["true/false", "yes/no"]
+        case_insensitive: true
+        
+  validation:
+    - check_format: true
+    - check_units: false
+    - allow_equivalent_forms: true  # e.g., 0.5 = 1/2
+
+# Accuracy Rules
+accuracy_rules:
+  verdict_priority:
+    - "CE"   # Calculation Error
+    - "RE"   # Reasoning Error
+    - "FE"   # Format Error
+    - "WA"   # Wrong Answer
+    - "AC"   # Accepted
+    
+  partial_credit:
+    enabled: true
+    per_step: true  # If steps are shown
+    methodology_credit: 0.5  # Credit for correct approach
+    pass_threshold: 1.0  # Must be exactly correct
+    
+  scoring:
+    ac_points: 100
+    partial_credit_for_method: true
+    negative_marking: true
+    negative_marking_penalty: -25  # -25% for wrong answer
+    show_score_breakdown: true
+    
+  comparison:
+    method: "numeric_tolerance"  # For numerical answers
+    absolute_tolerance: 0.01
+    relative_tolerance: 0.001
+    string_similarity_threshold: 0.9  # For text answers
+
+# Explanation Depth
+explanation_depth:
+  minimal:
+    include_answer: true
+    include_formula: true
+    include_steps: false
+    include_alternative_methods: false
+    include_concept_explanation: false
+    
+  moderate:
+    include_answer: true
+    include_formula: true
+    include_steps: true
+    include_alternative_methods: false
+    include_concept_explanation: true
+    include_shortcuts: true
+    
+  detailed:
+    include_answer: true
+    include_formula: true
+    include_steps: true
+    include_alternative_methods: true
+    include_concept_explanation: true
+    include_shortcuts: true
+    include_common_mistakes: true
+    include_related_concepts: true
+
+# Topic Categories
+topic_categories:
+  quantitative:
+    - arithmetic
+    - algebra
+    - geometry
+    - trigonometry
+    - percentages
+    - profit_loss
+    - time_work
+    - speed_distance
+    - ratio_proportion
+    - permutation_combination
+    - probability
+    - statistics
+    - number_systems
+    - simplification
+    
+  logical_reasoning:
+    - series_patterns
+    - analogies
+    - coding_decoding
+    - blood_relations
+    - direction_sense
+    - syllogisms
+    - logical_deductions
+    - statement_conclusions
+    - puzzles
+    - seating_arrangements
+    - data_sufficiency
+    
+  analytical:
+    - data_interpretation
+    - graphs_charts
+    - tables
+    - venn_diagrams
+    - critical_reasoning
+    - assumptions
+    - inferences
+
+# AI Assistant Behavior
+ai_assistant:
+  hint_strategy: "progressive"  # Start with concept, then approach
+  max_hints_per_problem: 3
+  reveal_solution_after_attempts: 3
+  explanation_style: "step_by_step"
+  code_review_depth: "logical"  # Focus on logic, not code style
+  provide_formulas: true
+  provide_shortcuts: true
+  explain_concepts: true
+  
+# Practice Mode Settings
+practice_mode:
+  enabled: true
+  show_answers_immediately: false
+  show_explanation_after_attempt: true
+  track_weak_areas: true
+  adaptive_difficulty: true
+  
+# Test Mode Settings
+test_mode:
+  enabled: true
+  timed: true
+  negative_marking: true
+  no_hints: true
+  no_explanations_during_test: true
+  show_report_after_completion: true
+  sectional_timing: true
+  
+# Feature Flags
+features:
+  custom_test_cases: false
+  solution_templates: false
+  editorial_access: true
+  discussion_forum: true
+  code_comparison: false
+  plagiarism_detection: false
+  formula_sheet: true
+  calculator: true
+  scratch_pad: true
+  timer: true
+  bookmarks: true
+  review_mode: true
+  performance_analytics: true
+  weakness_analysis: true

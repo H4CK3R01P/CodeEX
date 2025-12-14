@@ -1,0 +1,285 @@
+# System Design Domain Configuration
+# For architecture, scalability, and design challenges
+
+domain_name: "System Design"
+domain_id: "system_design"
+version: "1.0.0"
+last_updated: "2024-12-14"
+
+# Description
+description: |
+  System design domain focuses on architectural decisions, scalability,
+  distributed systems, database design, and high-level system architecture.
+  Emphasizes design trade-offs and real-world constraints.
+
+# Difficulty Levels
+difficulty_levels:
+  junior:
+    label: "Junior Level"
+    score_range: [0, 35]
+    time_multiplier: 3.0
+    hints_allowed: 5
+    test_cases_shown: 3
+    explanation_depth: "comprehensive"
+    complexity: "single_service"
+    
+  mid_level:
+    label: "Mid Level"
+    score_range: [36, 65]
+    time_multiplier: 2.0
+    hints_allowed: 3
+    test_cases_shown: 2
+    explanation_depth: "detailed"
+    complexity: "multi_service"
+    
+  senior:
+    label: "Senior Level"
+    score_range: [66, 85]
+    time_multiplier: 1.5
+    hints_allowed: 2
+    test_cases_shown: 1
+    explanation_depth: "moderate"
+    complexity: "distributed_system"
+    
+  principal:
+    label: "Principal Level"
+    score_range: [86, 100]
+    time_multiplier: 1.0
+    hints_allowed: 1
+    test_cases_shown: 0
+    explanation_depth: "minimal"
+    complexity: "large_scale_system"
+
+# Allowed Languages (for implementation)
+allowed_languages:
+  - python:
+      version: "3.11+"
+      use_case: "prototyping"
+      
+  - java:
+      version: "17+"
+      use_case: "enterprise_systems"
+      
+  - go:
+      version: "1.21+"
+      use_case: "microservices"
+      
+  - javascript:
+      version: "ES6+"
+      use_case: "nodejs_services"
+      
+  - diagram:
+      type: "visual"
+      formats: ["mermaid", "plantuml", "draw.io"]
+      use_case: "architecture_diagrams"
+
+# Execution Constraints
+constraints:
+  time_limit:
+    default_ms: 30000  # 30 seconds for design evaluation
+    min_ms: 10000
+    max_ms: 120000     # 2 minutes
+    strict_enforcement: false
+    
+  memory_limit:
+    default_kb: 1048576  # 1 GB
+    min_kb: 524288
+    max_kb: 2097152      # 2 GB
+    strict_enforcement: false
+    
+  design_complexity:
+    max_components: 20
+    max_services: 10
+    max_databases: 5
+    max_external_apis: 5
+    
+  documentation:
+    min_sections: 3
+    required_diagrams: 1
+    
+  submissions:
+    max_per_hour: 10
+    cooldown_seconds: 60
+
+# Expected Output Format
+expected_output_format:
+  type: "structured"
+  required_sections:
+    - requirements_analysis
+    - high_level_design
+    - component_design
+    - data_model
+    - api_design
+    - scalability_considerations
+    - trade_offs
+    
+  optional_sections:
+    - detailed_design
+    - technology_choices
+    - deployment_strategy
+    - monitoring_alerting
+    - cost_estimation
+    
+  diagram_format:
+    - format: ["mermaid", "ascii", "description"]
+    - required: true
+    
+  validation:
+    - check_completeness: true
+    - check_consistency: true
+    - check_scalability_analysis: true
+    - check_trade_offs_discussion: true
+
+# Accuracy Rules
+accuracy_rules:
+  verdict_priority:
+    - "IE"   # Incomplete (missing required sections)
+    - "IC"   # Inconsistent (contradictory design)
+    - "IS"   # Insufficient Scalability
+    - "NF"   # Non-Functional Requirements Not Met
+    - "PA"   # Partially Acceptable
+    - "AC"   # Accepted
+    
+  partial_credit:
+    enabled: true
+    per_section: true
+    per_requirement: true
+    pass_threshold: 0.65
+    
+  scoring:
+    requirements_weight: 0.15
+    architecture_weight: 0.25
+    scalability_weight: 0.20
+    data_design_weight: 0.15
+    api_design_weight: 0.10
+    trade_offs_weight: 0.10
+    innovation_weight: 0.05
+    show_score_breakdown: true
+    
+  evaluation_criteria:
+    - correctness: 0.30
+    - scalability: 0.25
+    - maintainability: 0.15
+    - performance: 0.15
+    - cost_efficiency: 0.10
+    - innovation: 0.05
+
+# Explanation Depth
+explanation_depth:
+  minimal:
+    include_architecture_overview: true
+    include_key_components: true
+    include_data_flow: false
+    include_scalability_tips: false
+    include_alternative_approaches: false
+    
+  moderate:
+    include_architecture_overview: true
+    include_key_components: true
+    include_data_flow: true
+    include_scalability_tips: true
+    include_alternative_approaches: true
+    include_trade_offs: true
+    
+  detailed:
+    include_architecture_overview: true
+    include_key_components: true
+    include_data_flow: true
+    include_scalability_tips: true
+    include_alternative_approaches: true
+    include_trade_offs: true
+    include_technology_choices: true
+    include_real_world_examples: true
+    
+  comprehensive:
+    include_architecture_overview: true
+    include_key_components: true
+    include_data_flow: true
+    include_scalability_tips: true
+    include_alternative_approaches: true
+    include_trade_offs: true
+    include_technology_choices: true
+    include_real_world_examples: true
+    include_capacity_planning: true
+    include_failure_scenarios: true
+    include_monitoring_strategy: true
+
+# Topic Categories
+topic_categories:
+  architecture:
+    - monolithic
+    - microservices
+    - serverless
+    - event_driven
+    - layered_architecture
+    
+  scalability:
+    - horizontal_scaling
+    - vertical_scaling
+    - load_balancing
+    - caching
+    - cdn
+    - database_sharding
+    - replication
+    
+  storage:
+    - sql_databases
+    - nosql_databases
+    - object_storage
+    - file_systems
+    - data_warehousing
+    
+  distributed_systems:
+    - consistency_models
+    - consensus_algorithms
+    - distributed_transactions
+    - message_queues
+    - service_mesh
+    
+  reliability:
+    - fault_tolerance
+    - disaster_recovery
+    - monitoring
+    - alerting
+    - circuit_breakers
+    
+  security:
+    - authentication
+    - authorization
+    - encryption
+    - api_security
+    - network_security
+
+# AI Assistant Behavior
+ai_assistant:
+  hint_strategy: "socratic"  # Ask probing questions
+  max_hints_per_problem: 5
+  reveal_solution_after_attempts: 0
+  explanation_style: "architectural"
+  code_review_depth: "design_focused"
+  suggest_alternatives: true
+  discuss_trade_offs: true
+  provide_real_world_examples: true
+  
+# Interview Simulation
+interview_simulation:
+  enabled: true
+  clarifying_questions: true
+  requirements_gathering: true
+  back_and_forth_allowed: true
+  time_limited: true
+  whiteboard_mode: true
+  
+# Feature Flags
+features:
+  custom_test_cases: false
+  solution_templates: true
+  editorial_access: true
+  discussion_forum: true
+  code_comparison: false
+  plagiarism_detection: false
+  diagram_editor: true
+  collaborative_design: true
+  real_time_feedback: true
+  capacity_calculator: true
+  cost_estimator: true

@@ -1,0 +1,219 @@
+# Competitive Programming Domain Configuration
+# For platforms like Codeforces, LeetCode, CodeChef, AtCoder
+
+domain_name: "Competitive Programming"
+domain_id: "competitive_programming"
+version: "1.0.0"
+last_updated: "2024-12-14"
+
+# Description
+description: |
+  Competitive programming domain focuses on algorithmic problem solving,
+  optimization, time/space complexity, and contest-style challenges.
+
+# Difficulty Levels
+difficulty_levels:
+  easy:
+    label: "Easy"
+    score_range: [0, 33]
+    time_multiplier: 1.0
+    hints_allowed: 3
+    test_cases_shown: 2
+    explanation_depth: "detailed"
+    
+  medium:
+    label: "Medium"
+    score_range: [34, 66]
+    time_multiplier: 1.5
+    hints_allowed: 2
+    test_cases_shown: 1
+    explanation_depth: "moderate"
+    
+  hard:
+    label: "Hard"
+    score_range: [67, 100]
+    time_multiplier: 2.0
+    hints_allowed: 1
+    test_cases_shown: 0
+    explanation_depth: "minimal"
+
+# Allowed Languages
+allowed_languages:
+  - python:
+      version: "3.11+"
+      time_limit_multiplier: 2.0
+      memory_limit_multiplier: 2.0
+      starter_template: |
+        def solve():
+            # Your code here
+            pass
+        
+        if __name__ == "__main__":
+            solve()
+      
+  - cpp:
+      version: "C++17"
+      time_limit_multiplier: 1.0
+      memory_limit_multiplier: 1.0
+      starter_template: |
+        #include <iostream>
+        #include <vector>
+        #include <algorithm>
+        using namespace std;
+        
+        int main() {
+            // Your code here
+            return 0;
+        }
+      
+  - java:
+      version: "17+"
+      time_limit_multiplier: 2.5
+      memory_limit_multiplier: 2.5
+      starter_template: |
+        import java.util.*;
+        
+        public class Solution {
+            public static void main(String[] args) {
+                // Your code here
+            }
+        }
+
+# Execution Constraints
+constraints:
+  time_limit:
+    default_ms: 2000
+    min_ms: 1000
+    max_ms: 5000
+    strict_enforcement: true
+    
+  memory_limit:
+    default_kb: 262144  # 256 MB
+    min_kb: 131072      # 128 MB
+    max_kb: 524288      # 512 MB
+    strict_enforcement: true
+    
+  code_size:
+    max_bytes: 100000  # 100 KB
+    warn_at_bytes: 50000
+    
+  test_cases:
+    min_count: 5
+    max_count: 50
+    hidden_percentage: 0.7
+    
+  submissions:
+    max_per_hour: 50
+    cooldown_seconds: 5
+
+# Expected Output Format
+expected_output_format:
+  type: "strict"
+  rules:
+    - whitespace_handling: "strict"  # "strict", "trim", "ignore"
+    - case_sensitive: true
+    - trailing_newline: "optional"
+    - number_precision: 6  # for floating point
+    - array_format: "space_separated"
+    
+  validation:
+    - check_order: true
+    - allow_extra_output: false
+    - empty_output_valid: false
+
+# Accuracy Rules
+accuracy_rules:
+  verdict_priority:
+    - "CE"   # Compilation Error (highest priority)
+    - "RE"   # Runtime Error
+    - "TLE"  # Time Limit Exceeded
+    - "MLE"  # Memory Limit Exceeded
+    - "WA"   # Wrong Answer
+    - "AC"   # Accepted (lowest priority)
+    
+  partial_credit:
+    enabled: false
+    per_test_case: false
+    
+  scoring:
+    ac_points: 100
+    wa_penalty: 0
+    tle_penalty: 0
+    show_score_breakdown: true
+    
+  comparison:
+    method: "exact_match"  # "exact_match", "token_based", "float_epsilon"
+    float_epsilon: 1e-6
+    ignore_trailing_spaces: true
+    ignore_blank_lines: false
+
+# Explanation Depth
+explanation_depth:
+  minimal:
+    include_algorithm_name: true
+    include_complexity: true
+    include_approach: false
+    include_code_walkthrough: false
+    include_edge_cases: false
+    include_optimization_tips: false
+    
+  moderate:
+    include_algorithm_name: true
+    include_complexity: true
+    include_approach: true
+    include_code_walkthrough: true
+    include_edge_cases: false
+    include_optimization_tips: true
+    
+  detailed:
+    include_algorithm_name: true
+    include_complexity: true
+    include_approach: true
+    include_code_walkthrough: true
+    include_edge_cases: true
+    include_optimization_tips: true
+    include_similar_problems: true
+    include_learning_resources: true
+
+# Topic Categories
+topic_categories:
+  - arrays
+  - strings
+  - linked_lists
+  - stacks_queues
+  - trees
+  - graphs
+  - dynamic_programming
+  - greedy
+  - backtracking
+  - sorting_searching
+  - bit_manipulation
+  - math
+  - number_theory
+  - combinatorics
+  - geometry
+
+# AI Assistant Behavior
+ai_assistant:
+  hint_strategy: "progressive"  # "progressive", "direct", "socratic"
+  max_hints_per_problem: 3
+  reveal_solution_after_attempts: 5
+  explanation_style: "concise"
+  code_review_depth: "algorithmic"  # "syntax", "algorithmic", "comprehensive"
+  
+# Contest Mode Settings
+contest_mode:
+  enabled: true
+  freeze_hints: true
+  freeze_explanations: true
+  show_leaderboard: true
+  penalty_per_wrong_submission: 10  # minutes
+  
+# Feature Flags
+features:
+  custom_test_cases: true
+  solution_templates: true
+  editorial_access: true
+  discussion_forum: true
+  code_comparison: true
+  plagiarism_detection: true
