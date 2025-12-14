@@ -9,15 +9,15 @@
   },
   {
     "content": "Create enhanced folder structure for backend",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Implement all database models with Pydantic V2",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Create service layer for business logic",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Define repository layer for data access",
