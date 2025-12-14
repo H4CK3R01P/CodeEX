@@ -1,30 +1,30 @@
 [
   {
-    "content": "Create domain configuration structure",
-    "status": "completed"
+    "content": "Create AI interface structure and base files",
+    "status": "in_progress"
   },
   {
-    "content": "Define domain-specific constants and enums",
-    "status": "completed"
+    "content": "Define AI request/response schemas with strict validation",
+    "status": "pending"
   },
   {
-    "content": "Implement domain configurations for all 6 domains",
-    "status": "completed"
+    "content": "Create AI interface protocols and abstract classes",
+    "status": "pending"
   },
   {
-    "content": "Create validation utilities for domain rules",
-    "status": "completed"
+    "content": "Implement mock AI provider (no real calls)",
+    "status": "pending"
   },
   {
-    "content": "Implement domain-specific evaluation logic",
-    "status": "completed"
+    "content": "Create AI configuration and constants",
+    "status": "pending"
   },
   {
-    "content": "Create domain helper functions",
-    "status": "completed"
+    "content": "Add validation utilities for AI data",
+    "status": "pending"
   },
   {
-    "content": "Document domain configuration layer",
-    "status": "completed"
+    "content": "Document AI interface layer",
+    "status": "pending"
   }
 ]
