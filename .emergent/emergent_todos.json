@@ -1,14 +1,30 @@
 [
   {
-    "content": "Add Leaderboard tab with user rankings",
-    "status": "completed"
-  },
-  {
-    "content": "Fix friend request state management",
-    "status": "completed"
-  },
-  {
-    "content": "Test all fixed features",
+    "content": "Navigate to Analytics section and capture initial state",
     "status": "in_progress"
+  },
+  {
+    "content": "Test time range filter and chart updates",
+    "status": "pending"
+  },
+  {
+    "content": "Test chart hover interactions and tooltips",
+    "status": "pending"
+  },
+  {
+    "content": "Test download/export report functionality",
+    "status": "pending"
+  },
+  {
+    "content": "Check for chart rendering issues",
+    "status": "pending"
+  },
+  {
+    "content": "Verify data consistency across charts",
+    "status": "pending"
+  },
+  {
+    "content": "Generate Analytics test report",
+    "status": "pending"
   }
 ]
