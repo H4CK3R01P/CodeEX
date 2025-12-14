@@ -1074,6 +1074,158 @@ async def ai_health_check() -> Dict[str, Any]:
             "ai_enabled": AI_ENABLED,
             "timestamp": datetime.utcnow().isoformat(),
             "uptime_hours": summary.get("uptime_hours", 0),
+
+
+
+# ============================================================================
+# CACHE MANAGEMENT ENDPOINTS (Admin Only)
+# ============================================================================
+
+@router.get(
+    "/cache/stats",
+    summary="Get Cache Statistics (Admin Only)",
+    description="Returns cache performance metrics and statistics",
+    responses={
+        200: {"description": "Cache stats retrieved successfully"},
+        401: {"description": "Unauthorized - Admin access required"}
+    }
+)
+async def get_cache_stats(
+    authorization: Optional[str] = None
+) -> Dict[str, Any]:
+    """Get cache statistics (Admin only).
+    
+    Returns hit rate, miss rate, savings, and cache policies.
+    """
+    # Check admin authorization
+    if not verify_admin_token(authorization):
+        raise HTTPException(
+            status_code=401,
+            detail="Unauthorized: Admin access required"
+        )
+    
+    try:
+        from brain.caching import get_cache_manager
+        
+        cache_manager = get_cache_manager()
+        
+        return {
+            "version": "v1",
+            "timestamp": datetime.utcnow().isoformat(),
+            "cache_stats": cache_manager.get_stats(),
+            "entry_stats": cache_manager.get_entry_stats(),
+        }
+        
+    except Exception as e:
+        logger.error(f"Failed to retrieve cache stats: {e}")
+        raise HTTPException(
+            status_code=503,
+            detail="Cache stats service temporarily unavailable"
+        )
+
+
+@router.post(
+    "/cache/invalidate",
+    summary="Invalidate Cache Entries (Admin Only)",
+    description="Clear specific or all cache entries",
+    responses={
+        200: {"description": "Cache invalidated successfully"},
+        401: {"description": "Unauthorized - Admin access required"}
+    }
+)
+async def invalidate_cache(
+    authorization: Optional[str] = None,
+    key: Optional[str] = None,
+    endpoint: Optional[str] = None,
+    clear_all: bool = False
+) -> Dict[str, Any]:
+    """Invalidate cache entries (Admin only).
+    
+    Query Parameters:
+    - key: Specific cache key to invalidate
+    - endpoint: Invalidate all entries for endpoint
+    - clear_all: Clear entire cache (use with caution)
+    """
+    # Check admin authorization
+    if not verify_admin_token(authorization):
+        raise HTTPException(
+            status_code=401,
+            detail="Unauthorized: Admin access required"
+        )
+    
+    try:
+        from brain.caching import get_cache_manager
+        
+        cache_manager = get_cache_manager()
+        
+        if clear_all:
+            cache_manager.clear()
+            return {
+                "success": True,
+                "message": "All cache entries cleared",
+                "entries_invalidated": "all",
+                "timestamp": datetime.utcnow().isoformat()
+            }
+        
+        count = cache_manager.invalidate(key=key, endpoint=endpoint)
+        
+        return {
+            "success": True,
+            "message": f"Invalidated {count} cache entries",
+            "entries_invalidated": count,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+        
+    except Exception as e:
+        logger.error(f"Failed to invalidate cache: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to invalidate cache"
+        )
+
+
+@router.post(
+    "/cache/reset-metrics",
+    summary="Reset Cache Metrics (Admin Only)",
+    description="Reset cache hit/miss counters",
+    responses={
+        200: {"description": "Metrics reset successfully"},
+        401: {"description": "Unauthorized - Admin access required"}
+    }
+)
+async def reset_cache_metrics(
+    authorization: Optional[str] = None
+) -> Dict[str, Any]:
+    """Reset cache metrics (Admin only).
+    
+    Resets hit/miss counters without clearing cached entries.
+    """
+    # Check admin authorization
+    if not verify_admin_token(authorization):
+        raise HTTPException(
+            status_code=401,
+            detail="Unauthorized: Admin access required"
+        )
+    
+    try:
+        from brain.caching import get_cache_manager
+        
+        cache_manager = get_cache_manager()
+        cache_manager.reset_metrics()
+        
+        return {
+            "success": True,
+            "message": "Cache metrics have been reset",
+            "timestamp": datetime.utcnow().isoformat()
+        }
+        
+    except Exception as e:
+        logger.error(f"Failed to reset cache metrics: {e}")
+        raise HTTPException(
+            status_code=500,
+            detail="Failed to reset cache metrics"
+        )
+
             "total_requests": summary.get("total_requests", 0),
             "version": "v1"
         }
