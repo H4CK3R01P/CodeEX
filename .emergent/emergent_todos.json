@@ -1,30 +1,34 @@
 [
   {
-    "content": "Create AI interface structure and base files",
-    "status": "completed"
+    "content": "Create verification pipeline structure and base classes",
+    "status": "in_progress"
   },
   {
-    "content": "Define AI request/response schemas with strict validation",
-    "status": "completed"
+    "content": "Define verification result schemas",
+    "status": "pending"
   },
   {
-    "content": "Create AI interface protocols and abstract classes",
-    "status": "completed"
+    "content": "Implement question verification pipeline",
+    "status": "pending"
   },
   {
-    "content": "Implement mock AI provider (no real calls)",
-    "status": "completed"
+    "content": "Implement solution verification pipeline",
+    "status": "pending"
   },
   {
-    "content": "Create AI configuration and constants",
-    "status": "completed"
+    "content": "Implement explanation verification pipeline",
+    "status": "pending"
   },
   {
-    "content": "Add validation utilities for AI data",
-    "status": "completed"
+    "content": "Add domain-specific verification rules",
+    "status": "pending"
   },
   {
-    "content": "Document AI interface layer",
-    "status": "completed"
+    "content": "Create verification utilities and helpers",
+    "status": "pending"
+  },
+  {
+    "content": "Document verification pipelines",
+    "status": "pending"
   }
 ]
