@@ -1,18 +1,22 @@
 [
   {
-    "content": "Locate and view TestInstructions component",
-    "status": "completed"
+    "content": "Analyze screenshot to identify readability issues",
+    "status": "in_progress"
   },
   {
-    "content": "Update all text colors to white in instructions card",
-    "status": "completed"
+    "content": "Locate question/option rendering component",
+    "status": "pending"
   },
   {
-    "content": "Ensure color inheritance for nested elements",
-    "status": "completed"
+    "content": "Update question text color for readability",
+    "status": "pending"
   },
   {
-    "content": "Verify consistency across all states",
-    "status": "completed"
+    "content": "Update option text colors for readability",
+    "status": "pending"
+  },
+  {
+    "content": "Test and verify all text is readable",
+    "status": "pending"
   }
 ]
