@@ -1,34 +1,30 @@
 [
   {
-    "content": "Create verification pipeline structure and base classes",
-    "status": "completed"
+    "content": "Create agent roles and permissions structure",
+    "status": "in_progress"
   },
   {
-    "content": "Define verification result schemas",
-    "status": "completed"
+    "content": "Define role permission maps for all agents",
+    "status": "pending"
   },
   {
-    "content": "Implement question verification pipeline",
-    "status": "completed"
+    "content": "Implement permission enforcement logic",
+    "status": "pending"
   },
   {
-    "content": "Implement solution verification pipeline",
-    "status": "completed"
+    "content": "Create violation detection and handling",
+    "status": "pending"
   },
   {
-    "content": "Implement explanation verification pipeline",
-    "status": "completed"
+    "content": "Add audit logging for agent actions",
+    "status": "pending"
   },
   {
-    "content": "Add domain-specific verification rules",
-    "status": "completed"
+    "content": "Create role-based access control decorators",
+    "status": "pending"
   },
   {
-    "content": "Create verification utilities and helpers",
-    "status": "completed"
-  },
-  {
-    "content": "Document verification pipelines",
-    "status": "completed"
+    "content": "Document agent roles and permissions",
+    "status": "pending"
   }
 ]
