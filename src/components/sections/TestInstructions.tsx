@@ -100,10 +100,10 @@ export function TestInstructions({ test, onBack, onBegin }: TestInstructionsProp
                   <div className="space-y-6">
                     {officialInstructions.map((section, idx) => (
                       <div key={idx}>
-                        <h4 className="text-gray-900 mb-3">{section.section}</h4>
+                        <h4 className="text-gray-900 font-semibold mb-3">{section.section}</h4>
                         <ol className="list-decimal list-inside space-y-2">
                           {section.items.map((item, itemIdx) => (
-                            <li key={itemIdx} className="text-sm text-gray-700 leading-relaxed">
+                            <li key={itemIdx} className="text-sm text-gray-900 leading-relaxed">
                               {item}
                             </li>
                           ))}
