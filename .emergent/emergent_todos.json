@@ -1,22 +1,18 @@
 [
   {
-    "content": "Check git status and identify conflicts",
+    "content": "Pull latest code from GitHub repository",
     "status": "in_progress"
   },
   {
-    "content": "Review conflicting files",
+    "content": "Analyze the current codebase structure",
     "status": "pending"
   },
   {
-    "content": "Resolve merge conflicts",
+    "content": "Compare with our local changes",
     "status": "pending"
   },
   {
-    "content": "Test after conflict resolution",
-    "status": "pending"
-  },
-  {
-    "content": "Prepare for clean push",
+    "content": "Identify any conflicts or differences",
     "status": "pending"
   }
 ]
