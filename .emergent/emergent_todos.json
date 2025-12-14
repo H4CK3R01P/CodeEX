@@ -1,22 +1,18 @@
 [
   {
-    "content": "Update Achieve section unlocked achievements to purple background",
-    "status": "completed"
+    "content": "Locate and view TestInstructions component",
+    "status": "in_progress"
   },
   {
-    "content": "Update Coins section balance and bonus cards to purple background",
-    "status": "completed"
+    "content": "Update all text colors to white in instructions card",
+    "status": "pending"
   },
   {
-    "content": "Add hover and active states for interactive cards",
-    "status": "completed"
+    "content": "Ensure color inheritance for nested elements",
+    "status": "pending"
   },
   {
-    "content": "Ensure text contrast on purple backgrounds",
-    "status": "completed"
-  },
-  {
-    "content": "Test visual consistency and responsiveness",
-    "status": "completed"
+    "content": "Verify consistency across all states",
+    "status": "pending"
   }
 ]
