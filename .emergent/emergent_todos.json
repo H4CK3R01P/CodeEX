@@ -1,18 +1,42 @@
 [
   {
-    "content": "Test download/export report functionality",
-    "status": "completed"
-  },
-  {
-    "content": "Check for chart rendering issues",
+    "content": "Login as Industry user and capture initial workspace",
     "status": "in_progress"
   },
   {
-    "content": "Verify data consistency across charts",
+    "content": "Verify sidebar sections for Industry role",
     "status": "pending"
   },
   {
-    "content": "Generate Analytics test report",
+    "content": "Test assessment creation flow - all steps",
+    "status": "pending"
+  },
+  {
+    "content": "Test sending invites to candidates",
+    "status": "pending"
+  },
+  {
+    "content": "Test reviewing candidate submissions with code viewer",
+    "status": "pending"
+  },
+  {
+    "content": "Test saving feedback on submissions",
+    "status": "pending"
+  },
+  {
+    "content": "Navigate analytics and verify hiring funnel",
+    "status": "pending"
+  },
+  {
+    "content": "Check for broken admin actions",
+    "status": "pending"
+  },
+  {
+    "content": "Verify role-based access controls",
+    "status": "pending"
+  },
+  {
+    "content": "Generate comprehensive Industry Workspace report",
     "status": "pending"
   }
 ]
