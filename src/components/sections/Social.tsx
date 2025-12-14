@@ -482,29 +482,99 @@ export function Social({ userData }: SocialProps) {
             <Button
               variant="ghost"
               size="sm"
-              className="text-muted-foreground hover:text-pink-500 transition-colors"
+              className={`transition-colors ${activity.liked ? 'text-pink-500' : 'text-muted-foreground hover:text-pink-500'}`}
               onClick={() => handleLike(activity.id)}
             >
-              <Heart className="w-4 h-4 mr-1" />
+              <Heart className={`w-4 h-4 mr-1 ${activity.liked ? 'fill-pink-500' : ''}`} />
               {activity.likes}
             </Button>
             <Button
               variant="ghost"
               size="sm"
               className="text-muted-foreground hover:text-blue-500 transition-colors"
+              onClick={() => toggleComments(activity.id)}
             >
               <MessageSquare className="w-4 h-4 mr-1" />
-              {activity.comments}
+              {activity.comments.length}
             </Button>
             <Button
               variant="ghost"
               size="sm"
               className="text-muted-foreground hover:text-green-500 transition-colors"
+              onClick={() => toast.info('Share feature coming soon!')}
             >
               <Share2 className="w-4 h-4 mr-1" />
               Share
             </Button>
           </div>
+
+          {/* Comments Section */}
+          <AnimatePresence>
+            {showComments[activity.id] && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="pl-[52px] space-y-3 border-t border-border/30 pt-3 mt-3"
+              >
+                {/* Existing Comments */}
+                {activity.comments.length > 0 && (
+                  <div className="space-y-2">
+                    {activity.comments.map((comment) => (
+                      <div key={comment.id} className="flex gap-2">
+                        <Avatar className="w-7 h-7 border border-purple-500/30">
+                          <AvatarFallback className="bg-gradient-to-br from-blue-500 to-cyan-500 text-white text-xs">
+                            {comment.user.split(' ').map((n: string) => n[0]).join('')}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1 bg-muted/50 rounded-lg p-2">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-sm font-semibold">{comment.user}</span>
+                            <span className="text-xs text-muted-foreground">{comment.time}</span>
+                          </div>
+                          <p className="text-sm">{comment.text}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Comment Input */}
+                <div className="flex gap-2">
+                  <Avatar className="w-8 h-8 border-2 border-purple-500/50">
+                    <AvatarFallback className="bg-gradient-to-br from-purple-500 to-pink-500 text-white text-xs">
+                      {userData.name.split(' ').map((n: string) => n[0]).join('')}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div className="flex-1 flex gap-2">
+                    <Input
+                      placeholder="Write a comment..."
+                      value={commentText[activity.id] || ''}
+                      onChange={(e) => setCommentText(prev => ({
+                        ...prev,
+                        [activity.id]: e.target.value
+                      }))}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' && !e.shiftKey) {
+                          e.preventDefault();
+                          handleComment(activity.id);
+                        }
+                      }}
+                      className="flex-1"
+                    />
+                    <Button
+                      size="sm"
+                      onClick={() => handleComment(activity.id)}
+                      disabled={!commentText[activity.id]?.trim()}
+                      className="bg-gradient-to-r from-purple-500 to-blue-500"
+                    >
+                      <Send className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </motion.div>
     );
