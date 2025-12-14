@@ -603,6 +603,27 @@ async def generate_explanation(
     prompt_hash = f"{request.topic}:{request.detail_level}"
     check_rate_limit("generate-explanation", user_id, prompt_hash)
     
+    # Generate cache key (domain-aware)
+    from brain.caching import generate_cache_key, is_cacheable_request
+    
+    cache_key = None
+    cached_response = None
+    
+    if is_cacheable_request("generate-explanation", request.dict()):
+        cache_key = generate_cache_key(
+            domain="education",
+            agent="teacher_agent",
+            intent="generate_explanation",
+            inputs=request.dict()
+        )
+        
+        # Try to get cached response
+        cached_response = get_cached_response(cache_key, "generate-explanation")
+        
+        if cached_response:
+            # Return cached response immediately
+            return cached_response
+    
     try:
         from backend.ai.orchestrator import (
             CodeEXOrchestrator,
