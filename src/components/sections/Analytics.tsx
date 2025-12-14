@@ -122,6 +122,78 @@ export function Analytics({ userData }: AnalyticsProps) {
     return null;
   };
 
+  const handleExportCSV = () => {
+    // Generate CSV data
+    const csvData = [
+      ['Analytics Report', `${userData.name}`],
+      ['Time Range', timeRange === '7d' ? 'Last 7 days' : timeRange === '30d' ? 'Last 30 days' : timeRange === '90d' ? 'Last 90 days' : 'All time'],
+      ['Generated', new Date().toLocaleDateString()],
+      [],
+      ['Overview Statistics'],
+      ['Metric', 'Value', 'Change'],
+      ['Problems Solved', analytics.overview.totalSolved, analytics.overview.solvedChange],
+      ['Accuracy', `${analytics.overview.accuracy}%`, analytics.overview.accuracyChange],
+      ['Current Streak', `${analytics.overview.streak} days`, analytics.overview.streakChange],
+      ['Global Rank', analytics.overview.rank, analytics.overview.rankChange],
+      [],
+      ['Problem Difficulty Breakdown'],
+      ['Difficulty', 'Solved', 'Total', 'Percentage'],
+      ['Easy', analytics.problemStats.easy.solved, analytics.problemStats.easy.total, `${((analytics.problemStats.easy.solved / analytics.problemStats.easy.total) * 100).toFixed(1)}%`],
+      ['Medium', analytics.problemStats.medium.solved, analytics.problemStats.medium.total, `${((analytics.problemStats.medium.solved / analytics.problemStats.medium.total) * 100).toFixed(1)}%`],
+      ['Hard', analytics.problemStats.hard.solved, analytics.problemStats.hard.total, `${((analytics.problemStats.hard.solved / analytics.problemStats.hard.total) * 100).toFixed(1)}%`],
+      [],
+      ['Category Performance'],
+      ['Category', 'Solved', 'Total', 'Accuracy'],
+      ...analytics.categoryBreakdown.map(cat => [cat.name, cat.solved, cat.total, `${cat.accuracy}%`]),
+      [],
+      ['Language Statistics'],
+      ['Language', 'Problems', 'Percentage'],
+      ...analytics.languageStats.map(lang => [lang.language, lang.problems, `${lang.percentage}%`]),
+      [],
+      ['Strengths'],
+      ...analytics.strengths.map(s => [s]),
+      [],
+      ['Areas to Improve'],
+      ...analytics.weaknesses.map(w => [w]),
+    ];
+
+    const csvContent = csvData.map(row => row.join(',')).join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `analytics_report_${Date.now()}.csv`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    toast.success('Analytics report downloaded successfully!');
+  };
+
+  const handleExportJSON = () => {
+    // Generate JSON export
+    const exportData = {
+      user: userData.name,
+      timeRange,
+      generated: new Date().toISOString(),
+      analytics: analytics,
+    };
+
+    const jsonContent = JSON.stringify(exportData, null, 2);
+    const blob = new Blob([jsonContent], { type: 'application/json' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.setAttribute('href', url);
+    link.setAttribute('download', `analytics_data_${Date.now()}.json`);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    toast.success('Analytics data exported successfully!');
+  };
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[500px]">
