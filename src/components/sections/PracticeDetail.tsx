@@ -402,7 +402,10 @@ export function PracticeDetail({ practice, onBack, userData }: PracticeDetailPro
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            onBack();
+            // Use setTimeout to ensure state update happens after current render cycle
+            setTimeout(() => {
+              onBack();
+            }, 0);
           }} 
           className="mb-2"
         >
