@@ -1,23 +1,23 @@
 [
   {
     "content": "Implement optimistic like functionality with state updates",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Add comment input UI and comment thread display",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Create post creation dialog with form",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Add Leaderboard tab with user rankings",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Implement infinite scroll with load more",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Fix friend request state management",
@@ -25,7 +25,7 @@
   },
   {
     "content": "Add visual feedback for all interactions",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Test all fixed features",
