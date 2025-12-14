@@ -105,13 +105,13 @@ export function Achieve({ userData }: AchieveProps) {
                     </div>
                     <div className="flex-1">
                       <div className="flex items-start justify-between mb-2">
-                        <h4 className="text-gray-900">{achievement.name}</h4>
-                        <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">
+                        <h4 className="text-gray-900 font-bold">{achievement.name}</h4>
+                        <Badge variant="secondary" className="bg-yellow-600 text-white font-semibold">
                           +50 XP
                         </Badge>
                       </div>
-                      <p className="text-sm text-gray-600 mb-3">{achievement.description}</p>
-                      <div className="flex items-center gap-2 text-xs text-green-600">
+                      <p className="text-sm text-gray-900 mb-3">{achievement.description}</p>
+                      <div className="flex items-center gap-2 text-xs text-green-700 font-semibold">
                         <Award className="w-4 h-4" />
                         <span>Unlocked</span>
                       </div>
