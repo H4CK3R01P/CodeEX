@@ -139,7 +139,8 @@ export function Social({ userData }: SocialProps) {
     },
   ]);
 
-  const [activityFeed] = useState([
+  // Activity feed with proper state management
+  const [activityFeed, setActivityFeed] = useState<ActivityItem[]>([
     {
       id: 1,
       user: 'Alex Johnson',
@@ -149,8 +150,9 @@ export function Social({ userData }: SocialProps) {
       difficulty: 'Easy',
       time: '5m ago',
       likes: 12,
-      comments: 3,
+      comments: [],
       language: 'JavaScript',
+      liked: false,
     },
     {
       id: 2,
@@ -160,7 +162,8 @@ export function Social({ userData }: SocialProps) {
       achievement: '100 Day Streak',
       time: '15m ago',
       likes: 45,
-      comments: 8,
+      comments: [],
+      liked: false,
     },
     {
       id: 3,
@@ -171,8 +174,9 @@ export function Social({ userData }: SocialProps) {
       difficulty: 'Medium',
       time: '1h ago',
       likes: 23,
-      comments: 5,
+      comments: [],
       language: 'Python',
+      liked: false,
     },
     {
       id: 4,
@@ -183,13 +187,78 @@ export function Social({ userData }: SocialProps) {
       rank: 234,
       time: '2h ago',
       likes: 18,
-      comments: 2,
+      comments: [],
+      liked: false,
+    },
+    // Additional mock data for infinite scroll
+    {
+      id: 5,
+      user: 'Alex Johnson',
+      username: '@alexj',
+      action: 'solved',
+      problem: 'Binary Search',
+      difficulty: 'Easy',
+      time: '3h ago',
+      likes: 8,
+      comments: [],
+      language: 'Java',
+      liked: false,
+    },
+    {
+      id: 6,
+      user: 'Mike Wilson',
+      username: '@mikew',
+      action: 'achieved',
+      achievement: '50 Problems Solved',
+      time: '4h ago',
+      likes: 32,
+      comments: [],
+      liked: false,
+    },
+    {
+      id: 7,
+      user: 'Sarah Chen',
+      username: '@sarach',
+      action: 'solved',
+      problem: 'Merge K Sorted Lists',
+      difficulty: 'Hard',
+      time: '5h ago',
+      likes: 67,
+      comments: [],
+      language: 'C++',
+      liked: false,
+    },
+    {
+      id: 8,
+      user: 'Emma Davis',
+      username: '@emmad',
+      action: 'ranked',
+      contest: 'Weekly Contest 371',
+      rank: 189,
+      time: '6h ago',
+      likes: 25,
+      comments: [],
+      liked: false,
     },
   ]);
 
-  const [friendRequests] = useState([
+  const [friendRequests, setFriendRequests] = useState([
     { id: 1, name: 'John Doe', username: '@johnd', mutualFriends: 3 },
     { id: 2, name: 'Jane Smith', username: '@janes', mutualFriends: 5 },
+  ]);
+
+  // Leaderboard data
+  const [leaderboard] = useState([
+    { id: 1, rank: 1, name: 'Code Master', username: '@codemaster', solved: 1245, points: 15670, change: 0 },
+    { id: 2, rank: 2, name: 'Algorithm Pro', username: '@algopro', solved: 1189, points: 14890, change: 1 },
+    { id: 3, rank: 3, name: 'Mike Wilson', username: '@mikew', solved: 312, points: 4560, change: -1 },
+    { id: 4, rank: 4, name: 'Data Wizard', username: '@datawiz', solved: 298, points: 4321, change: 2 },
+    { id: 5, rank: 5, name: 'Alex Johnson', username: '@alexj', solved: 234, points: 3890, change: 0 },
+    { id: 6, rank: 6, name: userData.name, username: '@' + userData.name.toLowerCase().replace(/\s+/g, ''), solved: 156, points: 2340, change: 3, isCurrentUser: true },
+    { id: 7, rank: 7, name: 'Sarah Chen', username: '@sarach', solved: 189, points: 2890, change: -2 },
+    { id: 8, rank: 8, name: 'Emma Davis', username: '@emmad', solved: 156, points: 2340, change: 1 },
+    { id: 9, rank: 9, name: 'Tech Ninja', username: '@techninja', solved: 145, points: 2156, change: 0 },
+    { id: 10, rank: 10, name: 'Code Warrior', username: '@codewar', solved: 134, points: 2045, change: -1 },
   ]);
 
   const getDifficultyColor = (difficulty: string) => {
