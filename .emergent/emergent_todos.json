@@ -21,11 +21,11 @@
   },
   {
     "content": "Reapply white text to Test Instructions",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Reapply readability fixes to TestTaking component",
-    "status": "pending"
+    "status": "in_progress"
   },
   {
     "content": "Verify all changes and test application",
