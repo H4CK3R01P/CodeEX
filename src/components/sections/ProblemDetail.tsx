@@ -83,6 +83,8 @@ export function ProblemDetail({ problem, onBack, domainId }: ProblemDetailProps)
   const [selectedHint, setSelectedHint] = useState<{ hint: string; number: number } | null>(null);
   const [selectedSubmission, setSelectedSubmission] = useState<Submission | null>(null);
   const [showSubmissionViewer, setShowSubmissionViewer] = useState(false);
+  const [showResultModal, setShowResultModal] = useState(false);
+  const [coinsEarned, setCoinsEarned] = useState(0);
 
   // Load saved code and language from localStorage on mount
   useEffect(() => {
