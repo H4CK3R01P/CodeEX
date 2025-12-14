@@ -9,14 +9,14 @@
   },
   {
     "content": "Update question text color for readability",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Update option text colors for readability",
-    "status": "pending"
+    "status": "completed"
   },
   {
     "content": "Test and verify all text is readable",
-    "status": "pending"
+    "status": "in_progress"
   }
 ]
