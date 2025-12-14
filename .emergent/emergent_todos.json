@@ -9,10 +9,10 @@
   },
   {
     "content": "Update Coins section to use semantic color tokens",
-    "status": "in_progress"
+    "status": "completed"
   },
   {
     "content": "Verify consistency across all views and modes",
-    "status": "pending"
+    "status": "in_progress"
   }
 ]
