@@ -20,6 +20,7 @@ import { generateDomainPractice } from '../../utils/domainContentGenerator';
 
 interface PracticeProps {
   userData: UserData;
+  onStartPractice?: (problemId: string) => void;
 }
 
 interface PracticeTest {
@@ -222,7 +223,7 @@ function generateDomainPracticeContent(domainId: string) {
   return { latestPractice, practiceSections, subjects, terminology, config };
 }
 
-export function Practice({ userData }: PracticeProps) {
+export function Practice({ userData, onStartPractice }: PracticeProps) {
   const domainId = userData.domain || 'competitive-programming';
   const { latestPractice, practiceSections, subjects, terminology, config } = generateDomainPracticeContent(domainId);
   
@@ -247,6 +248,7 @@ export function Practice({ userData }: PracticeProps) {
         practice={selectedPractice}
         onBack={() => setSelectedPractice(null)}
         userData={userData}
+        onStartPractice={onStartPractice}
       />
     );
   }

@@ -1074,6 +1074,12 @@ async def ai_health_check() -> Dict[str, Any]:
             "ai_enabled": AI_ENABLED,
             "timestamp": datetime.utcnow().isoformat(),
             "uptime_hours": summary.get("uptime_hours", 0),
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Health check failed: {str(e)}"
+        )
 
 
 
@@ -1224,16 +1230,5 @@ async def reset_cache_metrics(
         raise HTTPException(
             status_code=500,
             detail="Failed to reset cache metrics"
-        )
-
-            "total_requests": summary.get("total_requests", 0),
-            "version": "v1"
-        }
-        
-    except Exception as e:
-        logger.error(f"Health check failed: {e}")
-        raise HTTPException(
-            status_code=503,
-            detail="AI service health check failed"
         )
 

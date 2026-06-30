@@ -21,6 +21,7 @@ from runner import DockerExecutor, LocalExecutor
 from grader import AutoGrader, VerdictEngine
 from models import TestCase, Verdict
 from config import settings
+from api.routes import ai as ai_router
 
 app = FastAPI(
     title="CodeEX Auto-Grader API",
@@ -36,6 +37,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include Routers
+app.include_router(ai_router.router)
 
 # Initialize components
 if settings.DOCKER_ENABLED:

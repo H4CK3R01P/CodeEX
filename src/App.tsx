@@ -12,9 +12,10 @@ import { IndustryDashboard } from './components/industry/IndustryDashboard';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Toaster } from './components/ui/sonner';
 import { StatusIndicator } from './components/StatusIndicator';
+import { PracticeIDE } from './components/ide/PracticeIDE';
 import { motion, AnimatePresence } from 'motion/react';
 
-export type OnboardingStep = 'login' | 'otp' | 'profile' | 'domain' | 'industry-type' | 'professional-domain' | 'professional-role' | 'dashboard';
+export type OnboardingStep = 'login' | 'otp' | 'profile' | 'domain' | 'industry-type' | 'professional-domain' | 'professional-role' | 'dashboard' | 'practice-ide';
 export type ProfileType = 'student' | 'professional' | 'industry';
 
 export interface UserData {
@@ -31,6 +32,7 @@ export interface UserData {
 
 function AppContent() {
   const [currentStep, setCurrentStep] = useState<OnboardingStep>('login');
+  const [selectedProblemId, setSelectedProblemId] = useState<string>('two-sum');
   const [userData, setUserData] = useState<UserData>({
     name: '',
     contact: '',
@@ -193,8 +195,29 @@ function AppContent() {
             ) : userData.profileType === 'professional' ? (
               <ProfessionalDashboard userData={userData} />
             ) : (
-              <Dashboard userData={userData} />
+              <Dashboard 
+                userData={userData} 
+                onStartPractice={(problemId) => {
+                  setSelectedProblemId(problemId);
+                  setCurrentStep('practice-ide');
+                }} 
+              />
             )}
+          </motion.div>
+        )}
+        {currentStep === 'practice-ide' && (
+          <motion.div
+            key="practice-ide"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-50 bg-background"
+          >
+            <PracticeIDE 
+              problemId={selectedProblemId} 
+              onBack={() => setCurrentStep('dashboard')} 
+            />
           </motion.div>
         )}
       </AnimatePresence>

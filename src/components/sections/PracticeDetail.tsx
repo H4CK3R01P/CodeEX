@@ -38,6 +38,7 @@ interface PracticeDetailProps {
   practice: PracticeTest;
   onBack: () => void;
   userData: UserData;
+  onStartPractice?: (problemId: string) => void;
 }
 
 type TabType = 'topics' | 'progress' | 'points' | 'books' | 'learning' | 'tests';
@@ -115,7 +116,7 @@ const pointsToRemember = [
   'Take short breaks during long practice sessions to maintain focus',
 ];
 
-export function PracticeDetail({ practice, onBack, userData }: PracticeDetailProps) {
+export function PracticeDetail({ practice, onBack, userData, onStartPractice }: PracticeDetailProps) {
   const [activeTab, setActiveTab] = useState<TabType>('topics');
   const [startedPractice, setStartedPractice] = useState(false);
 
@@ -187,6 +188,7 @@ export function PracticeDetail({ practice, onBack, userData }: PracticeDetailPro
                       size="sm" 
                       variant={topic.completed ? 'outline' : 'default'}
                       className={!topic.completed ? 'bg-indigo-600 hover:bg-indigo-700' : ''}
+                      onClick={() => onStartPractice ? onStartPractice(practice.id) : setStartedPractice(true)}
                     >
                       {topic.completed ? 'Retry' : 'Start'}
                     </Button>
@@ -458,7 +460,10 @@ export function PracticeDetail({ practice, onBack, userData }: PracticeDetailPro
 
               <p className="text-sm text-gray-600 mb-4">{practice.description}</p>
 
-              <Button className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700" onClick={() => setStartedPractice(true)}>
+              <Button 
+                className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700" 
+                onClick={() => onStartPractice ? onStartPractice(practice.id) : setStartedPractice(true)}
+              >
                 <Play className="w-4 h-4 mr-2" />
                 Practice Now
               </Button>

@@ -45,11 +45,12 @@ import { getDomainConfig, getDomainTerminology } from '../utils/domainConfig';
 
 interface DashboardProps {
   userData: UserData;
+  onStartPractice?: (problemId: string) => void;
 }
 
 type Section = 'dashboard' | 'learn' | 'practice' | 'problems' | 'compete' | 'test' | 'achieve' | 'coins' | 'analytics' | 'social' | 'daily' | 'collab';
 
-export function Dashboard({ userData }: DashboardProps) {
+export function Dashboard({ userData, onStartPractice }: DashboardProps) {
   const [activeSection, setActiveSection] = useState<Section>('dashboard');
   const [userCoins, setUserCoins] = useState(250);
   const [showUserMenu, setShowUserMenu] = useState(false);
@@ -120,7 +121,7 @@ export function Dashboard({ userData }: DashboardProps) {
       case 'problems':
         return <ProblemsLibrary userData={userData} />;
       case 'practice':
-        return <Practice userData={userData} />;
+        return <Practice userData={userData} onStartPractice={onStartPractice} />;
       case 'compete':
         return <Compete userData={userData} />;
       case 'test':
